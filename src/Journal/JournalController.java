@@ -1,0 +1,181 @@
+package Journal;
+
+import Media.*;
+
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class JournalController {
+    private Journal journal;
+
+    public JournalController(Journal jornal){
+        this.journal = jornal;
+    }
+
+    public void registerBook(String name, int year, String genre, String isbn,
+                             String author, String publisher, boolean owned){
+        // Criando o objeto Book com os atributos nao modificaveis
+        Book book = new Book(name, year, genre, isbn, author, publisher, owned);
+        journal.addBook(book);
+    }
+
+    public void registerMovie(String name, int year, String genre, String[] castBuffer,
+                              Duration duration, String direction, String script,
+                              String originalTitle, String[] whereToWatchBuffer){
+
+        ArrayList<String> cast = new ArrayList<>(Arrays.asList(castBuffer));//add todos os nomes na lista
+        ArrayList<String> whereToWatch = new ArrayList<>(Arrays.asList(whereToWatchBuffer));
+
+        Movie movie = new Movie(name, year, genre, cast, duration, direction,
+                script, originalTitle, whereToWatch);
+
+        journal.addMovie(movie);
+    }
+
+    public void registerSeries(String name, int year, String genre, int yearOfEnding,
+                               String[] castBuffer, String originalTitle, String[] whereToWatchBuffer,
+                               int seasonNumber){
+
+        ArrayList<String> cast = new ArrayList<>(Arrays.asList(castBuffer));
+        ArrayList<String> whereToWatch = new ArrayList<>(Arrays.asList(whereToWatchBuffer));
+
+        Season season = new Season(seasonNumber);
+
+        Series series = new Series(name, year, genre, yearOfEnding, cast,
+                originalTitle, whereToWatch);
+
+        series.addSeason(season);
+        journal.addSeries(series);
+    }
+
+    public boolean rateMedia(String name, double rating){
+        Media media = findMedia(name);
+
+        if(media == null)
+            return false;
+
+        media.setSeen(true);
+        media.setRating(rating);
+        return true;
+    }
+
+    public boolean rateSeason(String name, int seasonNumber, double rating){
+        Series serie = findSeries(name);
+
+        if(serie == null)
+            return false;
+
+        for(Season season: serie.getSeasons()){
+            if(seasonNumber == season.getSeasonNumber()){
+                season.setRating(rating);
+                return true;
+            }
+
+        }
+        return false;
+
+    }
+
+    public boolean writeReview(String name, String review){
+        Media media = findMedia(name);
+
+        if(media==null)
+            return false;
+
+        media.setSeen(true);  //TODO: VERIFICAO DEPOIS
+        media.setReview(review);
+        return true;
+
+    }
+
+    private Media findMedia(String name){
+
+        Media media = findBook(name);
+
+        if(media == null)
+            media = findMovie(name);
+
+        if(media == null)
+            media = findSeries(name);
+
+        return media;
+    }
+
+    private Book findBook(String name){
+        String lowerName = name.toLowerCase();
+
+        for(Book book:journal.getBookList()) {
+            if (lowerName.equals(book.getTitle().toLowerCase()))
+                return book;
+        }
+        return null;
+    }
+
+    private Movie findMovie(String name){
+        String lowerName = name.toLowerCase();
+
+        for(Movie movie:journal.getMovieList()) {
+            if (lowerName.equals(movie.getTitle().toLowerCase()))
+                return movie;
+        }
+        return null;
+    }
+
+    private Series findSeries(String name){
+        String lowerName = name.toLowerCase();
+
+        for(Series series:journal.getSeriesList()) {
+            if (lowerName.equals(series.getTitle().toLowerCase()))
+                return series;
+        }
+        return null;
+    }
+
+    public String readReview(String name){
+
+        Media media = findBook(name);
+
+        if(media == null)
+            media = findMovie(name);
+
+        if(media == null)
+            media = findSeries(name);
+
+        if(media == null)
+            return "Midia nao encontrada";  //TODO: GRAMATICA
+
+        return "Review: " + ((media.getReview().isBlank())?
+                "Voce ainda nao escreveu uma review" : media.getReview());
+
+    }
+
+    public String showRating(String name){
+
+        Media media = findBook(name);
+
+        if(media == null)    //se nao existe um livro com este nome
+            media = findMovie(name);
+
+        if(media == null)    //se nao existe livro nem filme
+            media = findSeries(name);
+
+        if(media == null)
+            return "Midia nao encontrada"; //TODO: GRAMATICA
+
+        return "Nota: " + media.getRating();
+
+    }
+
+    public ArrayList<Book> allBooks(){
+        return journal.getBookList();
+    }
+
+    public ArrayList<Movie> allMovies(){
+        return journal.getMovieList();
+    }
+
+    public ArrayList<Series> allSeries(){
+        return journal.getSeriesList();
+    }
+}
