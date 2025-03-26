@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class AskInput {
 
     public static String askForTitle(Scanner scanner) {
-        System.out.print("Digite o nome da obra: ");
+        System.out.print("Digite o título da obra: ");
         return Validate.validateString(scanner);
     }
     
