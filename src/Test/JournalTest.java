@@ -1,11 +1,13 @@
 package Test;
-import Journal.*;
+
+import Journal.Journal;
+import Journal.JournalController;
 import Media.Book;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-public class JournalTest{
+public class JournalTest {
 
 
     @Test

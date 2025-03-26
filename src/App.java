@@ -1,4 +1,5 @@
-import Journal.*;
+import Journal.Journal;
+import Journal.JournalController;
 import Menus.MainMenu;
 
 public class App {
