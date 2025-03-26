@@ -53,10 +53,10 @@ public class Validate {
         while (true) {
             String input = scanner.nextLine().trim().toLowerCase();
 
-            if (input.equals("true")) {
+            if (input.equals("s") || input.equals("sim") || input.equals("true")){
                 return true;
 
-            } else if (input.equals("false")) {
+            } else if (input.equals("n") || input.equals("nao") || input.equals("false")){
                 return false;
             }
 

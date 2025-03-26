@@ -49,7 +49,7 @@ public class AskInput {
     }
     
     public static boolean askForOwned(Scanner scanner){
-        System.out.print("Você já leu este livro? (true/false) ");
+        System.out.print("Você já leu este livro? (S/N): ");
         return Validate.validateBoolean(scanner);
     }
     
