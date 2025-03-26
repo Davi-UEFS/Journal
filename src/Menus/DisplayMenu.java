@@ -15,6 +15,7 @@ public class DisplayMenu {
 
     public DisplayMenu(JournalController journalController, Scanner scanner) {
         this.journalController = journalController;
+        
         this.scanner = scanner;
     }
 

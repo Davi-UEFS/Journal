@@ -10,14 +10,18 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainMenu {
-    
+
     private Scanner scanner = new Scanner(System.in);  //TODO: FINAL?
     private JournalController journalController;
-    private RegisterMenu registerMenu = new RegisterMenu(journalController, scanner);
-    private RateMenu rateMenu = new RateMenu(journalController, scanner);
+    private DisplayMenu displayMenu;
+    private RegisterMenu registerMenu;
+    private RateMenu rateMenu;
     
     public MainMenu(JournalController journalController) {
         this.journalController = journalController;
+        this.displayMenu = new DisplayMenu(journalController, scanner);
+        this.rateMenu = new RateMenu(journalController, scanner);
+        this.registerMenu = new RegisterMenu(journalController, scanner);
     }
 
     public void showMenu(){
@@ -75,9 +79,10 @@ public class MainMenu {
                 break;
 
             case 2:
-                printAllBooks();
+                /*printAllBooks();
                 printAllMovies();
-                printAllSeries();
+                printAllSeries();*/
+                System.out.println("Coming soon!");
                 break;
 
             default:

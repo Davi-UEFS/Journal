@@ -145,7 +145,7 @@ public class JournalController {
         if(media == null)
             return "Midia nao encontrada";  //TODO: GRAMATICA
 
-        return "Review: " + ((media.getReview().isBlank())?
+        return "Review: " + ((media.getReview() == null)?
                 "Voce ainda nao escreveu uma review" : media.getReview());
 
     }

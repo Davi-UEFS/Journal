@@ -28,7 +28,7 @@ public class RateMenu {
 
             switch (option) {
                 case 1:
-                    String title = Validate.validateString(scanner);
+                    String title = Inputs.AskInput.askForTitle(scanner);
                     double rating = Inputs.AskInput.askForRate(scanner);
 
                     boolean sucess = journalController.rateMedia(title, rating);
