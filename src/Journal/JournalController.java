@@ -5,6 +5,7 @@ import Media.*;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class JournalController {
     private Journal journal;
@@ -75,6 +76,24 @@ public class JournalController {
         }
         return false;
 
+    }
+
+    public List<Book> searchBook(String title){
+        String titleLower = title.toLowerCase().trim();
+        List<Book> bookList = journal.getBookList();
+        return bookList.stream().filter(book -> book.getTitle().toLowerCase().contains(titleLower)).toList(); //TODO GUARDAR NOME DO LIVRO EM LOWERCASE
+    }
+
+    public List<Movie> searchMovie(String title){
+        String titleLower = title.toLowerCase().trim();
+        List<Movie> movieList = journal.getMovieList();
+        return movieList.stream().filter(movie -> movie.getTitle().toLowerCase().contains(titleLower)).toList();
+    }
+
+    public List<Series> searchSeries(String title){
+        String titleLower = title.toLowerCase().trim();
+        List<Series> seriesList = journal.getSeriesList();
+        return seriesList.stream().filter(series -> series.getTitle().toLowerCase().contains(titleLower)).toList();
     }
 
     public boolean writeReview(String name, String review){
