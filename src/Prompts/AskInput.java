@@ -1,4 +1,4 @@
-package Inputs;
+package Prompts;
 
 import java.time.Duration;
 import java.util.Scanner;

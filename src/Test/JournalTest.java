@@ -1,6 +1,6 @@
 package Test;
 
-import Journal.Journal;
+import Journal.JournalModel;
 import Journal.JournalController;
 import Media.Book;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,7 @@ public class JournalTest {
 
     @Test
     public void testAddBook(){
-        Journal journal = new Journal();
+        JournalModel journal = new JournalModel();
         JournalController journalController = new JournalController(journal);
         journalController.registerBook("Alpha", 2025, "Scifi", "12345",
                 "Davi", "PBL Books", true);

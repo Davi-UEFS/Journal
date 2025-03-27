@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import Media.*;
 
-public class Journal{
+public class JournalModel {
     private ArrayList<Book> bookList;
     private ArrayList<Movie> movieList;
     private ArrayList<Series> seriesList;
     private Scanner scanner = new Scanner(System.in);
 
-    public Journal(){
+    public JournalModel(){
         this.bookList = new ArrayList<>();
         this.movieList = new ArrayList<>();
         this.seriesList = new ArrayList<>();

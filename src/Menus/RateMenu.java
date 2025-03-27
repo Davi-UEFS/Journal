@@ -1,6 +1,6 @@
 package Menus;
 
-import Inputs.*;
+import Prompts.*;
 import Journal.JournalController;
 import java.util.Scanner;
 
@@ -18,23 +18,23 @@ public class RateMenu {
         int option;
 
         do {
-            System.out.println(Inputs.Colors.blue + "--== MENU DE AVALIAÇÃO ==--" + Inputs.Colors.rst);
+            System.out.println(Prompts.Colors.blue + "--== MENU DE AVALIAÇÃO ==--" + Prompts.Colors.rst);
             System.out.println("1 - Avaliar obra");
             System.out.println("2 - Escrever review");
             System.out.println("3 - Escrever review (temporada)"); //TODO: TEMP
-            System.out.println(Inputs.Colors.red + "4 - Voltar" + Inputs.Colors.rst);
+            System.out.println(Prompts.Colors.red + "4 - Voltar" + Prompts.Colors.rst);
 
-            option = Inputs.Validate.validateInt(scanner);
+            option = Prompts.Validate.validateInt(scanner);
 
             switch (option) {
                 case 1:
-                    String title = Inputs.AskInput.askForTitle(scanner);
-                    double rating = Inputs.AskInput.askForRate(scanner);
+                    String title = Prompts.AskInput.askForTitle(scanner);
+                    double rating = Prompts.AskInput.askForRate(scanner);
 
                     boolean sucess = journalController.rateMedia(title, rating);
 
-                    System.out.println((sucess) ? (Inputs.Colors.green + "Avaliação salva com sucesso!"+ Inputs.Colors.rst) :
-                            (Inputs.Colors.red + "Não foi possível salvar a avaliação!" + Inputs.Colors.rst));
+                    System.out.println((sucess) ? (Prompts.Colors.green + "Avaliação salva com sucesso!"+ Prompts.Colors.rst) :
+                            (Prompts.Colors.red + "Não foi possível salvar a avaliação!" + Prompts.Colors.rst));
                     break;
 
                 case 2:
@@ -43,8 +43,8 @@ public class RateMenu {
 
                     boolean sucess2 = journalController.writeReview(title2, review);
 
-                    System.out.println((sucess2)? (Inputs.Colors.red + "Review salvo com sucesso!"+ Inputs.Colors.rst) :
-                            (Inputs.Colors.red + "Não foi possível salvar a review!" + Inputs.Colors.rst));
+                    System.out.println((sucess2)? (Prompts.Colors.red + "Review salvo com sucesso!"+ Prompts.Colors.rst) :
+                            (Prompts.Colors.red + "Não foi possível salvar a review!" + Prompts.Colors.rst));
                     break;
 
                 case 3:

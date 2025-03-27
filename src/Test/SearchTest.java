@@ -12,7 +12,7 @@ public class SearchTest {
 
     @Test
     public void TestSearch() {
-        Journal journal = new Journal();
+        JournalModel journal = new JournalModel();
         JournalController journalController = new JournalController(journal);
         journalController.registerBook("2050 Classes", 2025, "Educação",
                 "12345", "Davi", "PBL Books", true);

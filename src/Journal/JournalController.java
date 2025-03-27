@@ -8,9 +8,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class JournalController {
-    private Journal journal;
+    private JournalModel journal;
 
-    public JournalController(Journal jornal){
+    public JournalController(JournalModel jornal){
         this.journal = jornal;
     }
 

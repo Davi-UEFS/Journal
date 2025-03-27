@@ -1,12 +1,7 @@
 package Menus;
 
 import Journal.JournalController;
-import Media.Book;
-import Media.Movie;
-import Media.Season;
-import Media.Series;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainMenu {
@@ -28,13 +23,13 @@ public class MainMenu {
         int option;
 
         do{
-            System.out.println(Inputs.Colors.cyan + "--== DIÁRIO CULTURAL ==--" + Inputs.Colors.rst);
+            System.out.println(Prompts.Colors.cyan + "--== DIÁRIO CULTURAL ==--" + Prompts.Colors.rst);
             System.out.println("1 - Registrar ");
             System.out.println("2 - Avaliar ");
             System.out.println("3 - Ver");
-            System.out.println(Inputs.Colors.red + "4 - Encerrar " + Inputs.Colors.rst);
+            System.out.println(Prompts.Colors.red + "4 - Encerrar " + Prompts.Colors.rst);
 
-            option = Inputs.Validate.validateInt(scanner);
+            option = Prompts.Validate.validateInt(scanner);
 
             switch (option) {
                 case 1:
