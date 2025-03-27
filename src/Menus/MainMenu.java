@@ -46,7 +46,7 @@ public class MainMenu {
                     break;
 
                 case 3:
-                    viewMiniMenu();
+                    displayMenu.displayMiniMenu();
                     break;
 
                 case 4:
@@ -59,37 +59,6 @@ public class MainMenu {
             
         }while(option != 4);
         scanner.close();
-    }
-
-    private void viewMiniMenu(){
-        System.out.println("1 - Ver avaliacoes");
-        System.out.println("2 - Ver livros cadastrados");
-        System.out.println("3 - Ver filmes cadastrados");
-        System.out.println("4 - Ver series cadastradas"); //TODO GRAM
-
-        int option = Inputs.Validate.validateInt(scanner);
-
-        switch (option){
-            case 1:
-                System.out.print("Obra desejada: ");
-                String name = Inputs.Validate.validateString(scanner);
-                System.out.println(journalController.readReview(name));
-                //TODO JUNTAR METODOS
-                System.out.println(journalController.showRating(name));
-                break;
-
-            case 2:
-                /*printAllBooks();
-                printAllMovies();
-                printAllSeries();*/
-                System.out.println("Coming soon!");
-                break;
-
-            default:
-                System.out.println("Opcao invalida"); //TODO GRAM
-                break;
-        }
-
     }
 
 

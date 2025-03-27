@@ -1,12 +1,10 @@
 package Menus;
 
 import Journal.JournalController;
-import Media.Book;
-import Media.Movie;
-import Media.Season;
-import Media.Series;
+import Media.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class DisplayMenu {
@@ -20,23 +18,28 @@ public class DisplayMenu {
     }
 
 
-    private void displayMiniMenu() {
+    public void displayMiniMenu() {
 
         int option;
+        String title;
 
         do{
             System.out.println("1 - Ver avaliacoes");
             System.out.println("2 - Ver livros cadastrados");
             System.out.println("3 - Ver filmes cadastrados");
             System.out.println("4 - Ver series cadastradas"); //TODO GRAM
-            System.out.println("5 - Voltar");
+            System.out.println("5 - Buscar livros");
+            System.out.println("6 - Buscar filmes");
+            System.out.println("7 - Buscar series");
+            System.out.println("8 - Voltar");
 
             option = Inputs.Validate.validateInt(scanner);
 
             switch (option) {
+
                 case 1:
                     System.out.print("Obra desejada: ");
-                    String title = Inputs.Validate.validateString(scanner);
+                    title = Inputs.Validate.validateString(scanner);
 
                     System.out.println(journalController.readReview(title));
                     //TODO JUNTAR METODOS?
@@ -44,15 +47,33 @@ public class DisplayMenu {
                     break;
 
                 case 2:
-                    printAllBooks();
+                    printBookList(journalController.allBooks());
                     break;
 
                 case 3:
-                    printAllMovies();
+                    printMovieList(journalController.allMovies());
                     break;
 
                 case 4:
-                    printAllSeries();
+                    printSeriesList(journalController.allSeries());
+                    break;
+
+                case 5:
+                    title = Inputs.AskInput.askForTitle(scanner);
+                    List<Book> bookList = journalController.searchBook(title);
+                    printBookList(bookList);
+                    break;
+
+                case 6:
+                    title = Inputs.AskInput.askForTitle(scanner);
+                    List<Movie> movieList = journalController.searchMovie(title);
+                    printMovieList(movieList);
+                    break;
+
+                case 7:
+                    title = Inputs.AskInput.askForTitle(scanner);
+                    List<Series> seriesList = journalController.searchSeries(title);
+                    printSeriesList(seriesList);
                     break;
 
                 default:
@@ -60,33 +81,35 @@ public class DisplayMenu {
                     break;
 
             }
-        }while (option!=5);
+        }while (option!=8);
     }
 
-    private void printAllBooks(){
-        ArrayList<Book> bookList = journalController.allBooks();
+    private void printBookList(List<Book> bookList) {
         for(Book book: bookList)
-            System.out.printf("Titulo: %s (%d) \n ", book.getTitle(), book.getYear());
+            System.out.printf("Titulo: %s (%d)\n", book.getTitle(), book.getYear());
 
     }
 
-    private void printAllMovies(){
-        ArrayList<Movie> movieList = journalController.allMovies();
-
+    private void printMovieList(List<Movie> movieList) {
         for(Movie movie: movieList)
-            System.out.printf("Titulo: %s (%d) \n", movie.getTitle(), movie.getYear());
+            System.out.printf("Titulo: %s (%d)\n", movie.getTitle(), movie.getYear());
 
     }
 
-    private void printAllSeries(){
-        ArrayList<Series> seriesList = journalController.allSeries();
-
+    private void printSeriesList(List<Series> seriesList) {
         for(Series series: seriesList){
-            System.out.printf("Titulo: %s (%d) \n", series.getTitle(), series.getYear());
-            System.out.print("\t");
-            for(Season season: series.getSeasons())
+            System.out.printf("Titulo: %s (%d-%d)\n", series.getTitle(), series.getYear(), series.getYearOfEnding());
+            for(Season season: series.getSeasons()) {
+                System.out.print("\t");
                 System.out.printf("Temporada: %d \n", season.getSeasonNumber());
+            }
 
+        }
+    }
+
+    private void printMediaList(ArrayList<Media> mediaList){
+        for(Media media: mediaList){
+            System.out.printf("Titulo: %s (%d) \n", media.getTitle(), media.getYear());
         }
     }
 }
