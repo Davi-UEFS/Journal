@@ -28,10 +28,11 @@ public class MainMenu {
         int option;
 
         do{
+            System.out.println(Inputs.Colors.cyan + "--== DIÁRIO CULTURAL ==--" + Inputs.Colors.rst);
             System.out.println("1 - Registrar ");
             System.out.println("2 - Avaliar ");
             System.out.println("3 - Ver");
-            System.out.println("4 - Encerrar ");
+            System.out.println(Inputs.Colors.red + "4 - Encerrar " + Inputs.Colors.rst);
 
             option = Inputs.Validate.validateInt(scanner);
 

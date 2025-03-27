@@ -24,22 +24,23 @@ public class DisplayMenu {
         String title;
 
         do{
-            System.out.println("1 - Ver avaliacoes");
+            System.out.println(Inputs.Colors.green + "--== MENU DE DISPLAY ==--" + Inputs.Colors.rst);
+            System.out.println("1 - Ver avaliações");
             System.out.println("2 - Ver livros cadastrados");
             System.out.println("3 - Ver filmes cadastrados");
-            System.out.println("4 - Ver series cadastradas"); //TODO GRAM
+            System.out.println("4 - Ver series cadastradas");
             System.out.println("5 - Buscar livros");
             System.out.println("6 - Buscar filmes");
             System.out.println("7 - Buscar series");
-            System.out.println("8 - Voltar");
+            System.out.println(Inputs.Colors.red + "8 - Voltar" + Inputs.Colors.rst);
 
             option = Inputs.Validate.validateInt(scanner);
 
             switch (option) {
 
                 case 1:
-                    System.out.print("Obra desejada: ");
-                    title = Inputs.Validate.validateString(scanner);
+
+                    title = Inputs.AskInput.askForTitle(scanner);
 
                     System.out.println(journalController.readReview(title));
                     //TODO JUNTAR METODOS?
@@ -77,7 +78,7 @@ public class DisplayMenu {
                     break;
 
                 default:
-                    System.out.println("Opcao invalida"); //TODO GRAM
+                    System.out.println(Inputs.Colors.red + "Opção inválida" + Inputs.Colors.rst);
                     break;
 
             }

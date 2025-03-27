@@ -18,11 +18,11 @@ public class RateMenu {
         int option;
 
         do {
-
+            System.out.println(Inputs.Colors.blue + "--== MENU DE AVALIAÇÃO ==--" + Inputs.Colors.rst);
             System.out.println("1 - Avaliar obra");
             System.out.println("2 - Escrever review");
             System.out.println("3 - Escrever review (temporada)"); //TODO: TEMP
-            System.out.println("4 - Voltar");
+            System.out.println(Inputs.Colors.red + "4 - Voltar" + Inputs.Colors.rst);
 
             option = Inputs.Validate.validateInt(scanner);
 
@@ -33,8 +33,8 @@ public class RateMenu {
 
                     boolean sucess = journalController.rateMedia(title, rating);
 
-                    System.out.println((sucess) ? "Avaliacao salva com sucesso" :
-                            "Nao foi possivel salvar a avaliacao"); //TODO: GRAM
+                    System.out.println((sucess) ? (Inputs.Colors.green + "Avaliação salva com sucesso!"+ Inputs.Colors.rst) :
+                            (Inputs.Colors.red + "Não foi possível salvar a avaliação!" + Inputs.Colors.rst));
                     break;
 
                 case 2:
@@ -43,8 +43,8 @@ public class RateMenu {
 
                     boolean sucess2 = journalController.writeReview(title2, review);
 
-                    System.out.println((sucess2)? "Review salvo com sucesso" :
-                            "Nao foi possivel salvar a review"); //TODO: GRAM
+                    System.out.println((sucess2)? (Inputs.Colors.red + "Review salvo com sucesso!"+ Inputs.Colors.rst) :
+                            (Inputs.Colors.red + "Não foi possível salvar a review!" + Inputs.Colors.rst));
                     break;
 
                 case 3:

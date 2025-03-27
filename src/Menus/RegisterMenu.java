@@ -6,6 +6,7 @@ import Journal.JournalController;
 import java.time.Duration;
 import java.util.Scanner;
 
+
 public class RegisterMenu {
     private Scanner scanner;
     private JournalController journalController;
@@ -20,15 +21,16 @@ public class RegisterMenu {
         int option;
 
         do {
-
+            System.out.println(Inputs.Colors.purple + "--== MENU DE REGISTRO ==--" + Inputs.Colors.rst);
             System.out.println("1 - Registrar livro");
             System.out.println("2 - Registrar filme");
             System.out.println("3 - Registrar série");
-            System.out.println("4 - Voltar");
+            System.out.println(Inputs.Colors.red + "4 - Voltar" + Inputs.Colors.rst);
             option = Inputs.Validate.validateInt(scanner);
 
             switch (option) {
                 case 1:
+
                     String bTitle = AskInput.askForTitle(scanner);
                     int bYear = AskInput.askForYear(scanner);
                     String bGenre = AskInput.askForGenre(scanner);
@@ -39,7 +41,7 @@ public class RegisterMenu {
 
                     journalController.registerBook(bTitle, bYear, bGenre, bIsbn, bAuthor,
                             bPublisher, bOwned);
-                    System.out.println("Livro registrado com sucesso!");
+                    System.out.println(Inputs.Colors.green + "Livro registrado com sucesso!" + Inputs.Colors.rst);
 
                     break;
 
@@ -56,7 +58,7 @@ public class RegisterMenu {
 
                     journalController.registerMovie(mTitle, mYear, mGenre, mcastBuffer,
                             mDuration, mDirector, mScript, mOriginalTitle, mWhereToWatch);
-                    System.out.println("Filme registrado com sucesso!");
+                    System.out.println(Inputs.Colors.green + "Filme registrado com sucesso!" + Inputs.Colors.rst);
 
                     break;
 
@@ -72,7 +74,7 @@ public class RegisterMenu {
 
                     journalController.registerSeries(sTitle, sYear, sGenre, sYearOfEnding,
                             sCastBuffer, sOriginalTitle, sWhereToWatch, seasonNumber);
-                    System.out.println("Série registrada com sucesso!");
+                    System.out.println(Inputs.Colors.green + "Série registrada com sucesso!" + Inputs.Colors.rst);
 
                     break;
 
@@ -81,7 +83,7 @@ public class RegisterMenu {
                     break;
 
                 default:
-                    System.out.println("Opção inválida ");
+                    System.out.println(Inputs.Colors.red + "Opção inválida " + Inputs.Colors.rst);
                     break;
 
             }
