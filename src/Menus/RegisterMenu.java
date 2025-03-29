@@ -33,7 +33,7 @@ public class RegisterMenu {
 
                     String bTitle = AskInput.askForTitle(scanner);
                     int bYear = AskInput.askForYear(scanner);
-                    String bGenre = AskInput.askForGenre(scanner);
+                    String bGenre = AskInput.askForGenre(scanner, journalController.availableGenres());
                     String bIsbn = AskInput.askForISBN(scanner);
                     String bAuthor = AskInput.askForAuthor(scanner);
                     String bPublisher = AskInput.askForPublisher(scanner);
@@ -48,7 +48,7 @@ public class RegisterMenu {
                 case 2:
                     String mTitle = AskInput.askForTitle(scanner);
                     int mYear = AskInput.askForYear(scanner);
-                    String mGenre = AskInput.askForGenre(scanner);
+                    String mGenre = AskInput.askForGenre(scanner, journalController.availableGenres());
                     String[] mcastBuffer = AskInput.askForCast(scanner);
                     Duration mDuration = AskInput.askForDuration(scanner);
                     String mDirector = AskInput.askForDirector(scanner);
@@ -65,7 +65,7 @@ public class RegisterMenu {
                 case 3:
                     String sTitle = AskInput.askForTitle(scanner);
                     int sYear = AskInput.askForYear(scanner);
-                    String sGenre = AskInput.askForGenre(scanner);
+                    String sGenre = AskInput.askForGenre(scanner, journalController.availableGenres());
                     int sYearOfEnding = AskInput.askForYearOfEnding(scanner);
                     String[] sCastBuffer = AskInput.askForCast(scanner);
                     String sOriginalTitle = AskInput.askForOriginalTitle(scanner);

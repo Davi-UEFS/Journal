@@ -1,6 +1,7 @@
 package Prompts;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AskInput {
@@ -43,16 +44,12 @@ public class AskInput {
         return Validate.validateInt(scanner); // Convertendo para int
     }
 
-    public static String askForGenre(Scanner scanner) {
-        System.out.print("Digite o gênero da obra: ");
-        return Validate.validateString(scanner);
-    }
-    
+
     public static boolean askForOwned(Scanner scanner){
         System.out.print("Você já leu este livro? (S/N): ");
         return Validate.validateBoolean(scanner);
     }
-    
+
     public static String[] askForCast(Scanner scanner) {
         System.out.println("Digite o elenco da obra: (Fulano, Ciclano, ...)");
         return Validate.validateString(scanner).split(", ");
@@ -67,15 +64,28 @@ public class AskInput {
         System.out.println("Digite a sinopse do filme: ");
         return Validate.validateString(scanner);
     }
-    
+
     public static String[] askForWhereToWatch(Scanner scanner) {
         System.out.println("Digite as plataformas onde a obra está disponível: (Streaming1, Streaming2, ...)");
         return Validate.validateString(scanner).split(", ");
     }
-    
+
     public static int askForSeasonNumber(Scanner scanner){
         System.out.print("Digite o número da temporada: ");
         return Validate.validateInt(scanner); // Convertendo para int
+    }
+    public static String askForGenre(Scanner scanner, ArrayList<String> genres) {
+        genres.forEach(genre-> System.out.printf("\t %s \n", genre));
+        System.out.print("Digite um dos gêneros acima: ");
+        String wantedGenre = Validate.validateString(scanner);
+
+        for(String genre:genres){
+            if(wantedGenre.equals(genre))
+                return wantedGenre;
+
+        }
+
+        return askForGenre(scanner, genres);
     }
 
     public static double askForRate(Scanner scanner){

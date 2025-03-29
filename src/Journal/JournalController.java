@@ -186,6 +186,10 @@ public class JournalController {
 
     }
 
+    public ArrayList<String> availableGenres(){
+        return journal.getGenresList();
+    }
+
     public ArrayList<Book> allBooks(){
         return journal.getBookList();
     }
