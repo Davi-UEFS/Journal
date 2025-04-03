@@ -17,6 +17,8 @@ public class JournalTest {
         journalController.register("Alpha", 2025, 4,"12345",
                 "Davi", "PBL Books", true);
 
+        assert(journal.getBookList().getFirst().getTitle().equals("Alpha"));
+
         printAllBooks(journalController);
     }
 

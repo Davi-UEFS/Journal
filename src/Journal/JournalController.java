@@ -16,7 +16,7 @@ public class JournalController {
 
     public void register(String name, int year, int genre, String isbn,
                              String author, String publisher, boolean owned){
-        // Criando o objeto Book com os atributos nao modificaveis
+
         Book book = new Book(name, year, genre, isbn, author, publisher, owned);
         journal.addBook(book);
     }
