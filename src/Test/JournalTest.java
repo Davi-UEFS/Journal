@@ -14,7 +14,7 @@ public class JournalTest {
     public void testAddBook(){
         JournalModel journal = new JournalModel();
         JournalController journalController = new JournalController(journal);
-        journalController.registerBook("Alpha", 2025, "Scifi", "12345",
+        journalController.register("Alpha", 2025, 4,"12345",
                 "Davi", "PBL Books", true);
 
         printAllBooks(journalController);

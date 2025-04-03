@@ -1,23 +1,18 @@
 package Journal;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import Media.*;
 
 public class JournalModel {
     private final ArrayList<Book> bookList;
     private final ArrayList<Movie> movieList;
     private final ArrayList<Series> seriesList;
-    private final ArrayList<String> genresList;
 
     public JournalModel(){
         this.bookList = new ArrayList<>();
         this.movieList = new ArrayList<>();
         this.seriesList = new ArrayList<>();
-        this.genresList = new ArrayList<>(Arrays.asList("Terror", "Suspense",
-                "Romance", "Aventura", "Outros"));
+
     }
 
     public void addBook(Book book){
@@ -44,7 +39,6 @@ public class JournalModel {
         return movieList;
     }
 
-    public ArrayList<String> getGenresList() {
-        return genresList;
-    }
 }
+
+

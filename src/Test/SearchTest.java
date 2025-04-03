@@ -14,10 +14,10 @@ public class SearchTest {
     public void TestSearch() {
         JournalModel journal = new JournalModel();
         JournalController journalController = new JournalController(journal);
-        journalController.registerBook("2050 Classes", 2025, "Educação",
+        journalController.register("2050 Classes", 2025, 5,
                 "12345", "Davi", "PBL Books", true);
 
-        journalController.registerBook("Cavalos 2050", 2023, "Educação",
+        journalController.register("Cavalos 2050", 2023, 2,
                 "12345", "Davi", "PBL Books", true);
         List<Book> bookList = journalController.searchBook("2050");
         printBookList(bookList);
@@ -27,11 +27,10 @@ public class SearchTest {
         String[] cast = {"Carlinhos", "Dalva", "Davi"};
         String[] where = {"Metflix", "Matagal"};
 
-        journalController.registerSeries("As Aventuras de Carlinhos", 2020, "Pornô", 2050,
+        journalController.register("As Aventuras de Carlinhos", 2020, 6, 2050,
                 cast, "Ocolast 2", where, 1);
-        journalController.registerSeries("As Aventuras de Nycolas", 2013, "Ação", 2020,
-                cast, "2 Girls 1 Cup", where, 1);
-
+        journalController.register("As Aventuras de Nycolas", 2013, 3, 2020,
+                cast, "Tomar no teus inferno", where, 1);
 
         Season season = new Season(2);
         journalController.allSeries().getFirst().addSeason(season);
