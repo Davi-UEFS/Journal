@@ -1,8 +1,8 @@
 package Prompts;
 
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.Scanner;
+import Journal.JournalController;
 
 public class AskInput {
 
@@ -72,20 +72,18 @@ public class AskInput {
 
     public static int askForSeasonNumber(Scanner scanner){
         System.out.print("Digite o número da temporada: ");
-        return Validate.validateInt(scanner); // Convertendo para int
+        return Validate.validateInt(scanner);
     }
-    public static String askForGenre(Scanner scanner, ArrayList<String> genres) {
-        genres.forEach(genre-> System.out.printf("\t %s \n", genre));
+    public static int askForGenre(Scanner scanner) {
+        JournalController.showGenres();
         System.out.print("Digite um dos gêneros acima: ");
-        String wantedGenre = Validate.validateString(scanner);
-
-        for(String genre:genres){
-            if(wantedGenre.equals(genre))
-                return wantedGenre;
-
+        int wantedGenre = Validate.validateInt(scanner);
+        while(wantedGenre < 1 || wantedGenre > 12){
+            wantedGenre = Validate.validateInt(scanner);
+            System.out.print("Opção inválida! Digite novamente: ");
         }
 
-        return askForGenre(scanner, genres);
+        return wantedGenre;
     }
 
     public static double askForRate(Scanner scanner){
