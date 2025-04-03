@@ -12,7 +12,7 @@ public class Movie extends Media {
     private List<String> whereToWatch;
 
     
-    public Movie(String name, int year, String genre, List<String> cast, Duration duration, String direction,
+    public Movie(String name, int year, int genre, List<String> cast, Duration duration, String direction,
             String script, String originalTitle, List<String> whereToWatch) {
         super(name, year, genre);
         this.cast = cast;

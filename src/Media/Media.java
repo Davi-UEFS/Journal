@@ -3,13 +3,13 @@ package Media;
 public abstract class Media {
     private String title;  //TODO: FINAL?
     private int year;
-    private String genre;
+    private int genre;
     private double rating;
     private boolean seen = false;
     private String review;
 
 
-    public Media(String name, int year, String genre) {
+    public Media(String name, int year, int genre) {
         this.title = name;
         this.year = year;
         this.genre = genre;
@@ -31,7 +31,7 @@ public abstract class Media {
         return year;
     }
 
-    public String getGenre() {
+    public int getGenre() {
         return genre;
     }
 
@@ -50,6 +50,7 @@ public abstract class Media {
     public void setReview(String review) {
         this.review = review;
     }
+
 
     
 

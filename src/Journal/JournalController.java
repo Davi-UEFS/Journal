@@ -8,22 +8,22 @@ import java.util.Arrays;
 import java.util.List;
 
 public class JournalController {
-    private JournalModel journal;
+    private final JournalModel journal;
 
     public JournalController(JournalModel jornal){
         this.journal = jornal;
     }
 
-    public void registerBook(String name, int year, String genre, String isbn,
+    public void register(String name, int year, int genre, String isbn,
                              String author, String publisher, boolean owned){
         // Criando o objeto Book com os atributos nao modificaveis
         Book book = new Book(name, year, genre, isbn, author, publisher, owned);
         journal.addBook(book);
     }
 
-    public void registerMovie(String name, int year, String genre, String[] castBuffer,
-                              Duration duration, String direction, String script,
-                              String originalTitle, String[] whereToWatchBuffer){
+    public void register(String name, int year, int genre, String[] castBuffer,
+                         Duration duration, String direction, String script,
+                         String originalTitle, String[] whereToWatchBuffer){
 
         ArrayList<String> cast = new ArrayList<>(Arrays.asList(castBuffer));//add todos os nomes na lista
         ArrayList<String> whereToWatch = new ArrayList<>(Arrays.asList(whereToWatchBuffer));
@@ -34,9 +34,9 @@ public class JournalController {
         journal.addMovie(movie);
     }
 
-    public void registerSeries(String name, int year, String genre, int yearOfEnding,
-                               String[] castBuffer, String originalTitle, String[] whereToWatchBuffer,
-                               int seasonNumber){
+    public void register(String name, int year, int genre, int yearOfEnding,
+                         String[] castBuffer, String originalTitle, String[] whereToWatchBuffer,
+                         int seasonNumber){
 
         ArrayList<String> cast = new ArrayList<>(Arrays.asList(castBuffer));
         ArrayList<String> whereToWatch = new ArrayList<>(Arrays.asList(whereToWatchBuffer));
@@ -186,8 +186,10 @@ public class JournalController {
 
     }
 
-    public ArrayList<String> availableGenres(){
-        return journal.getGenresList();
+    public static void showGenres(){
+        for(int i = 0; i < Genres.values().length; ++i){
+            System.out.println(i+1 + " - " + Journal.Genres.values()[i].name());
+        }
     }
 
     public ArrayList<Book> allBooks(){

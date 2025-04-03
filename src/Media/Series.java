@@ -10,7 +10,7 @@ public class Series extends Media{
     private String originalTitle;
     private List<String> whereToWatch;
 
-    public Series(String name, int year, String genre, int yearOfEnding, List<String> cast, String originalTitle, List<String> whereToWatch) {
+    public Series(String name, int year, int genre, int yearOfEnding, List<String> cast, String originalTitle, List<String> whereToWatch) {
         super(name, year, genre);
         this.yearOfEnding = yearOfEnding;
         this.cast = cast;

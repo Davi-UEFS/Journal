@@ -8,7 +8,7 @@ public class Book extends Media{
     private boolean owned;
     private LocalDate readDate;
 
-    public Book(String name, int year, String genre, String isbn, String author, String publisher, boolean owned) {
+    public Book(String name, int year, int genre, String isbn, String author, String publisher, boolean owned) {
         super(name, year, genre);
         this.isbn = isbn;
         this.author = author;
