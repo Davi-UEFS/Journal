@@ -203,4 +203,20 @@ public class JournalController {
     public ArrayList<Series> allSeries(){
         return journal.getSeriesList();
     }
+
+    public boolean reviewSeason(String name, int seasonNumber, String review){
+        Series serie = findSeries(name);
+
+        if(serie == null)
+            return false;
+
+        for(Season season: serie.getSeasons()){
+            if(seasonNumber == season.getSeasonNumber()){
+                season.setReview(review);
+                return true;
+            }
+
+        }
+        return false;
+    }
 }
