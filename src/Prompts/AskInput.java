@@ -36,12 +36,22 @@ public class AskInput {
     }
     public static int askForYear(Scanner scanner) {
         System.out.print("Digite o ano de lançamento (YYYY): ");
-        return Validate.validateInt(scanner); // Convertendo para int
+        int year = Validate.validateInt(scanner);
+        while(year > 2025){
+            System.out.print("Ano inválido! Digite novamente: ");
+            year = Validate.validateInt(scanner);
+        }
+        return year; // Convertendo para int
     }
 
     public static int askForYearOfEnding(Scanner scanner) {
         System.out.print("Digite o ano de encerramento (9999 se ainda está em lançamento): ");
-        return Validate.validateInt(scanner); // Convertendo para int
+        int year = Validate.validateInt(scanner);
+        while((year > 2025 && year < 9999) || (year > 9999)){
+            System.out.print("Ano inválido! Digite novamente: ");
+            year = Validate.validateInt(scanner);
+        }
+        return year; // Convertendo para int
     }
 
 
@@ -97,5 +107,10 @@ public class AskInput {
             System.out.println("Digite uma nota entre 0 e 5");
         }
         return rate;
+    }
+
+    public static String askForReview(Scanner scanner){
+        System.out.println("Digite sua review: ");
+        return Validate.validateString(scanner);
     }
 }
