@@ -69,6 +69,10 @@ public class RateMenu {
                     System.out.println((success4)? (Prompts.Colors.green + "Review salva com sucesso!"+ Prompts.Colors.rst) :
                             (Prompts.Colors.red + "Não foi possível salvar a review!" + Prompts.Colors.rst));
                     break;
+
+                default:
+                    System.out.println(Prompts.Colors.red + "Opção inválida " + Prompts.Colors.rst);
+                    break;
             }
         } while (option != 5);
     }

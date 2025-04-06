@@ -48,8 +48,9 @@ public class MainMenu {
                 case 4:
                     //Instructions here
                     break;
-                
+
                 default:
+                    System.out.println(Prompts.Colors.red + "Opção inválida " + Prompts.Colors.rst);
                     break;
             }
             
