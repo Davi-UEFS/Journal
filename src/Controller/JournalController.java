@@ -54,7 +54,7 @@ public class JournalController {
         journal.addSeries(series);
     }
 
-    public String rateMedia(String name, double rating){
+    public String rate(String name, double rating){
         try{
             Media media = journal.findMedia(name);
             media.setSeen(true);
@@ -66,8 +66,8 @@ public class JournalController {
         }
 
     }
-    //TODO: OVERRIDE PARA METODOS DE RATE?
-    public String rateSeason(String name, int seasonNumber, double rating){
+
+    public String rate(String name, int seasonNumber, double rating){
         try{
             Series series = journal.findSeries(name);
 
@@ -84,7 +84,7 @@ public class JournalController {
         }
     }
 
-    public String writeMediaReview(String name, String review){
+    public String writeReview(String name, String review){
         try{
             Media media = journal.findMedia(name);
             media.setSeen(true);
@@ -97,7 +97,7 @@ public class JournalController {
 
     }
 
-    public String writeSeasonReview(String name, int seasonNumber, String review){
+    public String writeReview(String name, int seasonNumber, String review){
         try {
             Series serie = journal.findSeries(name);
 

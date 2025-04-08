@@ -34,14 +34,14 @@ public class RateMenu {
                     title = View.Prompts.AskInput.askForTitle(scanner);
                     rating = View.Prompts.AskInput.askForRate(scanner);
 
-                    System.out.println(journalController.rateMedia(title, rating));
+                    System.out.println(journalController.rate(title, rating));
 
                     break;
 
                 case 2:
                     title = View.Prompts.AskInput.askForTitle(scanner);
                     review = View.Prompts.AskInput.askForReview(scanner);
-                    System.out.println(journalController.writeMediaReview(title, review));
+                    System.out.println(journalController.writeReview(title, review));
                     break;
 
                 case 3:
@@ -49,7 +49,7 @@ public class RateMenu {
                     seasonNumber = View.Prompts.AskInput.askForSeasonNumber(scanner);
                     rating = View.Prompts.AskInput.askForRate(scanner);
 
-                    System.out.println(journalController.rateSeason(title, seasonNumber, rating));
+                    System.out.println(journalController.rate(title, seasonNumber, rating));
 
                     break;
 
@@ -58,7 +58,7 @@ public class RateMenu {
                     seasonNumber = View.Prompts.AskInput.askForSeasonNumber(scanner);
                     review = View.Prompts.AskInput.askForReview(scanner);
 
-                    System.out.println(journalController.writeSeasonReview(title, seasonNumber, review));
+                    System.out.println(journalController.writeReview(title, seasonNumber, review));
                     break;
 
                 default:
