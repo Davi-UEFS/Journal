@@ -3,12 +3,13 @@ import java.time.Duration;
 import java.util.List;
 
 public class Movie extends Media {
-    private List<String> cast;
-    private Duration duration;
-    private String direction;
-    private String script;
-    private String originalTitle;
-    private List<String> whereToWatch;
+    private final List<String> cast;
+    private final Duration duration;
+    private final String direction;
+    private final String script;
+    private final String originalTitle;
+    private final List<String> whereToWatch;
+    private final int hashCode;
 
     
     public Movie(String name, int year, int genre, List<String> cast, Duration duration, String direction,
@@ -20,6 +21,11 @@ public class Movie extends Media {
         this.script = script;
         this.originalTitle = originalTitle;
         this.whereToWatch = whereToWatch;
+        this.hashCode = hashCodeMaker(name, year);
+    }
+
+    private int hashCodeMaker(String name, int year){
+        return name.hashCode() + year;
     }
 
     public void showCast(){
@@ -29,39 +35,29 @@ public class Movie extends Media {
     public List<String> getCast() {
         return cast;
     }
-    public void setCast(List<String> cast) {
-        this.cast = cast;
-    }
+
     public Duration getDuration() {
         return duration;
     }
-    public void setDuration(Duration duration) {
-        this.duration = duration;
-    }
+
     public String getDirection() {
         return direction;
     }
-    public void setDirection(String direction) {
-        this.direction = direction;
-    }
+
     public String getScript() {
         return script;
     }
-    public void setScript(String script) {
-        this.script = script;
-    }
+
     public String getOriginalTitle() {
         return originalTitle;
     }
-    public void setOriginalTitle(String originalTitle) {
-        this.originalTitle = originalTitle;
-    }
+
     public List<String> getWhereToWatch() {
         return whereToWatch;
     }
-    public void setWhereToWatch(List<String> whereToWatch) {
-        this.whereToWatch = whereToWatch;
-    }
 
+    public int getHashCode(){
+        return hashCode;
+    }
 
 }

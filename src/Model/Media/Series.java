@@ -5,10 +5,11 @@ import java.util.List;
 
 public class Series extends Media {
     private int yearOfEnding;
-    private List<String> cast;
-    private PriorityQueue<Season> seasons; //TODO: Usar priority queue?
-    private String originalTitle;
-    private List<String> whereToWatch;
+    private final List<String> cast;
+    private final PriorityQueue<Season> seasons; //TODO: Usar priority queue?
+    private final String originalTitle;
+    private final List<String> whereToWatch;
+    private final int hashCode;
 
     public Series(String name, int year, int genre, int yearOfEnding, List<String> cast, String originalTitle, List<String> whereToWatch) {
         super(name, year, genre);
@@ -17,11 +18,15 @@ public class Series extends Media {
         this.seasons = new PriorityQueue<>();
         this.originalTitle = originalTitle;
         this.whereToWatch = whereToWatch;
+        this.hashCode = hashCodeMaker(name, year);
     }
-
 
     public void addSeason(Season season){
         this.seasons.add(season);
+    }
+
+    private int hashCodeMaker(String name, int year){
+        return name.hashCode() + year;
     }
 
     public void showCast(){
@@ -40,10 +45,6 @@ public class Series extends Media {
         return cast;
     }
 
-    public void setCast(List<String> cast) {
-        this.cast = cast;
-    }
-
     public PriorityQueue<Season> getSeasons() {
         return seasons;
     }
@@ -52,15 +53,8 @@ public class Series extends Media {
         return originalTitle;
     }
 
-    public void setOriginalTitle(String originalTitle) {
-        this.originalTitle = originalTitle;
-    }
-
     public List<String> getWhereToWatch() {
         return whereToWatch;
     }
 
-    public void setWhereToWatch(List<String> whereToWatch) {
-        this.whereToWatch = whereToWatch;
-    }
 }
