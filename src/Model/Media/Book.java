@@ -14,6 +14,11 @@ public class Book extends Media{
         this.author = author;
         this.publisher = publisher;
         this.owned = owned;
+        this.hashCode = hashCodeMaker(name, isbn);
+    }
+
+    private int hashCodeMaker(String name, String isbn){
+        return name.hashCode() + isbn.hashCode();
     }
     
     public String getIsbn() {

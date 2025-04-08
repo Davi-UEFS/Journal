@@ -7,12 +7,17 @@ public abstract class Media {
     private double rating;
     private boolean seen = false;
     private String review;
-
+    protected int hashCode;
 
     public Media(String name, int year, int genre) {
         this.title = name;
         this.year = year;
         this.genre = genre;
+        this.hashCode = hashCodeMaker(name, year);
+    }
+
+    protected int hashCodeMaker(String name, int year){
+        return name.hashCode() + year;
     }
 
     public double getRating(){

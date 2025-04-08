@@ -9,7 +9,6 @@ public class Series extends Media {
     private final PriorityQueue<Season> seasons; //TODO: Usar priority queue?
     private final String originalTitle;
     private final List<String> whereToWatch;
-    private final int hashCode;
 
     public Series(String name, int year, int genre, int yearOfEnding, List<String> cast, String originalTitle, List<String> whereToWatch) {
         super(name, year, genre);
@@ -18,15 +17,10 @@ public class Series extends Media {
         this.seasons = new PriorityQueue<>();
         this.originalTitle = originalTitle;
         this.whereToWatch = whereToWatch;
-        this.hashCode = hashCodeMaker(name, year);
     }
 
     public void addSeason(Season season){
         this.seasons.add(season);
-    }
-
-    private int hashCodeMaker(String name, int year){
-        return name.hashCode() + year;
     }
 
     public void showCast(){

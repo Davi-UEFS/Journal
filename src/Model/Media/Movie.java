@@ -9,7 +9,6 @@ public class Movie extends Media {
     private final String script;
     private final String originalTitle;
     private final List<String> whereToWatch;
-    private final int hashCode;
 
     
     public Movie(String name, int year, int genre, List<String> cast, Duration duration, String direction,
@@ -21,11 +20,6 @@ public class Movie extends Media {
         this.script = script;
         this.originalTitle = originalTitle;
         this.whereToWatch = whereToWatch;
-        this.hashCode = hashCodeMaker(name, year);
-    }
-
-    private int hashCodeMaker(String name, int year){
-        return name.hashCode() + year;
     }
 
     public void showCast(){
