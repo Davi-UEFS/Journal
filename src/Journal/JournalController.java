@@ -1,5 +1,6 @@
 package Journal;
 
+import Exceptions.MediaNotFoundException;
 import Media.*;
 
 import java.time.Duration;
@@ -50,38 +51,71 @@ public class JournalController {
         journal.addSeries(series);
     }
 
-    public boolean rateMedia(String name, double rating){
-        Media media = findMedia(name);
+    public String rateMedia(String name, double rating){
+        try{
+            Media media = journal.findMedia(name);
+            media.setSeen(true);
+            media.setRating(rating);
+            return "Avaliação salva com sucesso";
 
-        if(media == null)
-            return false;
+        } catch (MediaNotFoundException e){
+            return e.getMessage();
+        }
 
-        media.setSeen(true);
-        media.setRating(rating);
-        return true;
+    }
+    //TODO: OVERRIDE PARA METODOS DE RATE?
+    public String rateSeason(String name, int seasonNumber, double rating){
+        try{
+            Series series = journal.findSeries(name);
+
+            for(Season season: series.getSeasons()){   //TODO: METODO FINDSEASON? *
+                if(seasonNumber == season.getSeasonNumber()){
+                    season.setRating(rating);
+                    return "Avaliação salva com sucesso";
+                }
+            }
+            return "Erro. Temporada não cadastrada"; //TODO: EXCECAO PARA TEMPORADA? **
+
+        }catch (MediaNotFoundException e) {
+            return e.getMessage();
+        }
     }
 
-    public boolean rateSeason(String name, int seasonNumber, double rating){
-        Series serie = findSeries(name);
+    public String writeMediaReview(String name, String review){
+        try{
+            Media media = journal.findMedia(name);
+            media.setSeen(true);
+            media.setReview(review);
+            return "Review salva com sucesso";
 
-        if(serie == null)
-            return false;
-
-        for(Season season: serie.getSeasons()){
-            if(seasonNumber == season.getSeasonNumber()){
-                season.setRating(rating);
-                return true;
-            }
-
+        }catch (MediaNotFoundException e){
+            return e.getMessage();
         }
-        return false;
+
+    }
+
+    public String writeSeasonReview(String name, int seasonNumber, String review){
+        try {
+            Series serie = journal.findSeries(name);
+
+            for (Season season : serie.getSeasons()) { //TODO: *
+                if (seasonNumber == season.getSeasonNumber()) {
+                    season.setReview(review);
+                    return "Review salva com sucesso";
+                }
+            }
+            return "Erro. Temporada não cadastrada";
+
+        } catch (MediaNotFoundException e) { //TODO: **
+            return e.getMessage();
+        }
 
     }
 
     public List<Book> searchBook(String title){
         String titleLower = title.toLowerCase().trim();
         List<Book> bookList = journal.getBookList();
-        return bookList.stream().filter(book -> book.getTitle().toLowerCase().contains(titleLower)).toList(); //TODO GUARDAR NOME DO LIVRO EM LOWERCASE
+        return bookList.stream().filter(book -> book.getTitle().toLowerCase().contains(titleLower)).toList();
     }
 
     public List<Movie> searchMovie(String title){
@@ -96,94 +130,28 @@ public class JournalController {
         return seriesList.stream().filter(series -> series.getTitle().toLowerCase().contains(titleLower)).toList();
     }
 
-    public boolean writeReview(String name, String review){
-        Media media = findMedia(name);
-
-        if(media==null)
-            return false;
-
-        media.setSeen(true);  //TODO: VERIFICAO DEPOIS
-        media.setReview(review);
-        return true;
-
-    }
-
-    private Media findMedia(String name){
-
-        Media media = findBook(name);
-
-        if(media == null)
-            media = findMovie(name);
-
-        if(media == null)
-            media = findSeries(name);
-
-        return media;
-    }
-
-    private Book findBook(String name){
-        String lowerName = name.toLowerCase();
-
-        for(Book book:journal.getBookList()) {
-            if (lowerName.equals(book.getTitle().toLowerCase()))
-                return book;
-        }
-        return null;
-    }
-
-    private Movie findMovie(String name){
-        String lowerName = name.toLowerCase();
-
-        for(Movie movie:journal.getMovieList()) {
-            if (lowerName.equals(movie.getTitle().toLowerCase()))
-                return movie;
-        }
-        return null;
-    }
-
-    private Series findSeries(String name){
-        String lowerName = name.toLowerCase();
-
-        for(Series series:journal.getSeriesList()) {
-            if (lowerName.equals(series.getTitle().toLowerCase()))
-                return series;
-        }
-        return null;
-    }
-
     public String readReview(String name){
 
-        Media media = findBook(name);
+        try{
+            Media media = journal.findMedia(name);
+            return "Review: " + ((media.getReview() == null)?
+                    "Você ainda não escreveu uma review" : media.getReview());
+        } catch (MediaNotFoundException e){
+            return e.getMessage();
 
-        if(media == null)
-            media = findMovie(name);
-
-        if(media == null)
-            media = findSeries(name);
-
-        if(media == null)
-            return "Midia nao encontrada";  //TODO: GRAMATICA
-
-        return "Review: " + ((media.getReview() == null)?
-                "Voce ainda nao escreveu uma review" : media.getReview());
-
+        }
     }
 
-    public String showRating(String name){
+    public String showRating(String name) {
 
-        Media media = findBook(name);
+        try {
+            Media media = journal.findMedia(name);
+            return "Nota: " + ((media.getRating() == 0.0) ?
+                    "Você ainda não avaliou a obra" : media.getRating());
+        } catch (MediaNotFoundException e) {
+            return e.getMessage();
 
-        if(media == null)    //se nao existe um livro com este nome
-            media = findMovie(name);
-
-        if(media == null)    //se nao existe livro nem filme
-            media = findSeries(name);
-
-        if(media == null)
-            return "Midia nao encontrada"; //TODO: GRAMATICA
-
-        return "Nota: " + media.getRating();
-
+        }
     }
 
     public static void showGenres(){
@@ -204,19 +172,5 @@ public class JournalController {
         return journal.getSeriesList();
     }
 
-    public boolean reviewSeason(String name, int seasonNumber, String review){
-        Series serie = findSeries(name);
 
-        if(serie == null)
-            return false;
-
-        for(Season season: serie.getSeasons()){
-            if(seasonNumber == season.getSeasonNumber()){
-                season.setReview(review);
-                return true;
-            }
-
-        }
-        return false;
-    }
 }
