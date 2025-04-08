@@ -1,6 +1,8 @@
 package Journal;
 
 import java.util.ArrayList;
+
+import Exceptions.MediaNotFoundException;
 import Media.*;
 
 public class JournalModel {
@@ -13,6 +15,48 @@ public class JournalModel {
         this.movieList = new ArrayList<>();
         this.seriesList = new ArrayList<>();
 
+    }
+
+    public Book findBook(String name) throws MediaNotFoundException {
+        String lowerName = name.toLowerCase();
+
+        for(Book book:bookList) {
+            if (lowerName.equals(book.getTitle().toLowerCase()))
+                return book;
+        }
+        throw new MediaNotFoundException("Obra não encontrada");
+    }
+
+    public Movie findMovie(String name) throws MediaNotFoundException {
+        String lowerName = name.toLowerCase();
+
+        for(Movie movie:movieList) {
+            if (lowerName.equals(movie.getTitle().toLowerCase()))
+                return movie;
+        }
+        throw new MediaNotFoundException("Obra não encontrada");
+    }
+
+    public Series findSeries(String name) throws MediaNotFoundException{
+        String lowerName = name.toLowerCase();
+
+        for(Series series:seriesList) {
+            if (lowerName.equals(series.getTitle().toLowerCase()))
+                return series;
+        }
+        throw new MediaNotFoundException("Obra não encontrada");
+    }
+
+    public Media findMedia(String name) throws MediaNotFoundException {
+        try {
+            return findBook(name);
+        } catch (MediaNotFoundException e) {
+            try {
+                return findMovie(name);
+            } catch (MediaNotFoundException e2) {
+                return findSeries(name);
+            }
+        }
     }
 
     public void addBook(Book book){
