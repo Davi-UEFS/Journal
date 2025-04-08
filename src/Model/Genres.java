@@ -14,7 +14,7 @@ public enum Genres {
     INFANTIL,
     OUTROS;
 
-    public void showGenres(){
+    public static void showGenres(){
         for(int i = 0; i < Genres.values().length; ++i){
             System.out.println(i+1 + " - " + Genres.values()[i].name());
         }
