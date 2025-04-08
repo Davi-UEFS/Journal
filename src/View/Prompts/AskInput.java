@@ -85,7 +85,7 @@ public class AskInput {
         return Validate.validateInt(scanner);
     }
     public static int askForGenre(Scanner scanner) {
-        JournalController.showGenres();
+        JournalController.viewGenres();
         System.out.print("Digite um dos gêneros acima: ");
         int wantedGenre = Validate.validateInt(scanner);
         while(wantedGenre < 1 || wantedGenre > 12){
