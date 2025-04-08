@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 public class SearchTest {
-
+    //TODO IMPORTANTE: MUDAR O NOME DESSES NEGOCIO AE
     @Test
     public void TestSearch() {
         Library journal = new Library();
@@ -26,7 +26,7 @@ public class SearchTest {
         System.out.println("fodase");
 
         String[] cast = {"Carlinhos", "Dalva", "Davi"};
-        String[] where = {"Metflix", "Matagal"};
+        String[] where = {"Netflix", "Matagal"};
 
         journalController.register("As Aventuras de Carlinhos", 2020, 6, 2050,
                 cast, "Ocolast 2", where, 5);
