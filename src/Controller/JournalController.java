@@ -8,6 +8,7 @@ import Model.Exceptions.MediaNotFoundException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class JournalController {
@@ -116,20 +117,27 @@ public class JournalController {
 
     public List<Book> searchBook(String title){
         String titleLower = title.toLowerCase().trim();
-        List<Book> bookList = journal.getBookList();
-        return bookList.stream().filter(book -> book.getTitle().toLowerCase().contains(titleLower)).toList();
+        List<Book> filteredBooks = journal.getBookList().stream().filter
+                (book -> book.getTitle().toLowerCase().contains(titleLower)).toList();
+
+        return filteredBooks.stream().sorted(Comparator.comparing(Book::getRating)).toList();
     }
 
-    public List<Movie> searchMovie(String title){
+    public List<Movie> searchMovie(String title) {
         String titleLower = title.toLowerCase().trim();
-        List<Movie> movieList = journal.getMovieList();
-        return movieList.stream().filter(movie -> movie.getTitle().toLowerCase().contains(titleLower)).toList();
+        List<Movie> filteredMovies = journal.getMovieList().stream().filter
+                (movie -> movie.getTitle().toLowerCase().contains(titleLower)).toList();
+
+        return filteredMovies.stream().sorted(Comparator.comparing(Movie::getRating)).toList();
     }
 
     public List<Series> searchSeries(String title){
         String titleLower = title.toLowerCase().trim();
-        List<Series> seriesList = journal.getSeriesList();
-        return seriesList.stream().filter(series -> series.getTitle().toLowerCase().contains(titleLower)).toList();
+        List<Series> filteredSeries = journal.getSeriesList().stream().filter
+                (series -> series.getTitle().toLowerCase().contains(titleLower)).toList();
+
+        return filteredSeries.stream().sorted(Comparator.comparing(Series::getRating)).toList();
+
     }
 
     public String readReview(String name){
@@ -156,10 +164,8 @@ public class JournalController {
         }
     }
 
-    public static void showGenres(){
-        for(int i = 0; i < Genres.values().length; ++i){
-            System.out.println(i+1 + " - " + Genres.values()[i].name());
-        }
+    public static void viewGenres() {
+        Genres.showGenres();
     }
 
     public ArrayList<Book> allBooks(){
