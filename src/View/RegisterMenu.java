@@ -1,7 +1,7 @@
-package Menus;
+package View;
 
-import Prompts.*;
-import Journal.JournalController;
+import View.Prompts.*;
+import Controller.JournalController;
 
 import java.time.Duration;
 import java.util.Scanner;
@@ -21,12 +21,12 @@ public class RegisterMenu {
         int option;
 
         do {
-            System.out.println(Prompts.Colors.purple + "--== MENU DE REGISTRO ==--" + Prompts.Colors.rst);
+            System.out.println(View.Prompts.Colors.purple + "--== MENU DE REGISTRO ==--" + View.Prompts.Colors.rst);
             System.out.println("1 - Registrar livro");
             System.out.println("2 - Registrar filme");
             System.out.println("3 - Registrar série");
-            System.out.println(Prompts.Colors.red + "4 - Voltar" + Prompts.Colors.rst);
-            option = Prompts.Validate.validateInt(scanner);
+            System.out.println(View.Prompts.Colors.red + "4 - Voltar" + View.Prompts.Colors.rst);
+            option = View.Prompts.Validate.validateInt(scanner);
 
             switch (option) {
                 case 1:
@@ -41,7 +41,7 @@ public class RegisterMenu {
 
                     journalController.register(bTitle, bYear, bGenre, bIsbn, bAuthor,
                             bPublisher, bOwned);
-                    System.out.println(Prompts.Colors.green + "Livro registrado com sucesso!" + Prompts.Colors.rst);
+                    System.out.println(View.Prompts.Colors.green + "Livro registrado com sucesso!" + View.Prompts.Colors.rst);
 
                     break;
 
@@ -58,7 +58,7 @@ public class RegisterMenu {
 
                     journalController.register(mTitle, mYear, mGenre, mcastBuffer,
                             mDuration, mDirector, mScript, mOriginalTitle, mWhereToWatch);
-                    System.out.println(Prompts.Colors.green + "Filme registrado com sucesso!" + Prompts.Colors.rst);
+                    System.out.println(View.Prompts.Colors.green + "Filme registrado com sucesso!" + View.Prompts.Colors.rst);
 
                     break;
 
@@ -74,7 +74,7 @@ public class RegisterMenu {
 
                     journalController.register(sTitle, sYear, sGenre, sYearOfEnding,
                             sCastBuffer, sOriginalTitle, sWhereToWatch, seasonNumber);
-                    System.out.println(Prompts.Colors.green + "Série registrada com sucesso!" + Prompts.Colors.rst);
+                    System.out.println(View.Prompts.Colors.green + "Série registrada com sucesso!" + View.Prompts.Colors.rst);
 
                     break;
 
@@ -83,7 +83,7 @@ public class RegisterMenu {
                     break;
 
                 default:
-                    System.out.println(Prompts.Colors.red + "Opção inválida " + Prompts.Colors.rst);
+                    System.out.println(View.Prompts.Colors.red + "Opção inválida " + View.Prompts.Colors.rst);
                     break;
 
             }

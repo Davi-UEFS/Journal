@@ -1,6 +1,6 @@
-package Menus;
+package View;
 
-import Journal.JournalController;
+import Controller.JournalController;
 import java.util.Scanner;
 
 public class RateMenu {
@@ -20,49 +20,49 @@ public class RateMenu {
         double rating;
 
         do {
-            System.out.println(Prompts.Colors.blue + "--== MENU DE AVALIAÇÃO ==--" + Prompts.Colors.rst);
+            System.out.println(View.Prompts.Colors.blue + "--== MENU DE AVALIAÇÃO ==--" + View.Prompts.Colors.rst);
             System.out.println("1 - Avaliar obra");
             System.out.println("2 - Escrever review (obra)");
             System.out.println("3 - Avaliar temporada");
             System.out.println("4 - Escrever review (temporada)");
-            System.out.println(Prompts.Colors.red + "5 - Voltar" + Prompts.Colors.rst);
+            System.out.println(View.Prompts.Colors.red + "5 - Voltar" + View.Prompts.Colors.rst);
 
-            option = Prompts.Validate.validateInt(scanner);
+            option = View.Prompts.Validate.validateInt(scanner);
 
             switch (option) {
                 case 1:
-                    title = Prompts.AskInput.askForTitle(scanner);
-                    rating = Prompts.AskInput.askForRate(scanner);
+                    title = View.Prompts.AskInput.askForTitle(scanner);
+                    rating = View.Prompts.AskInput.askForRate(scanner);
 
                     System.out.println(journalController.rateMedia(title, rating));
 
                     break;
 
                 case 2:
-                    title = Prompts.AskInput.askForTitle(scanner);
-                    review = Prompts.AskInput.askForReview(scanner);
+                    title = View.Prompts.AskInput.askForTitle(scanner);
+                    review = View.Prompts.AskInput.askForReview(scanner);
                     System.out.println(journalController.writeMediaReview(title, review));
                     break;
 
                 case 3:
-                    title = Prompts.AskInput.askForTitle(scanner);
-                    seasonNumber = Prompts.AskInput.askForSeasonNumber(scanner);
-                    rating = Prompts.AskInput.askForRate(scanner);
+                    title = View.Prompts.AskInput.askForTitle(scanner);
+                    seasonNumber = View.Prompts.AskInput.askForSeasonNumber(scanner);
+                    rating = View.Prompts.AskInput.askForRate(scanner);
 
                     System.out.println(journalController.rateSeason(title, seasonNumber, rating));
 
                     break;
 
                 case 4:
-                    title = Prompts.AskInput.askForTitle(scanner);
-                    seasonNumber = Prompts.AskInput.askForSeasonNumber(scanner);
-                    review = Prompts.AskInput.askForReview(scanner);
+                    title = View.Prompts.AskInput.askForTitle(scanner);
+                    seasonNumber = View.Prompts.AskInput.askForSeasonNumber(scanner);
+                    review = View.Prompts.AskInput.askForReview(scanner);
 
                     System.out.println(journalController.writeSeasonReview(title, seasonNumber, review));
                     break;
 
                 default:
-                    System.out.println(Prompts.Colors.red + "Opção inválida " + Prompts.Colors.rst);
+                    System.out.println(View.Prompts.Colors.red + "Opção inválida " + View.Prompts.Colors.rst);
                     break;
             }
         } while (option != 5);

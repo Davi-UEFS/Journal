@@ -1,8 +1,8 @@
-package Prompts;
+package View.Prompts;
 
 import java.time.Duration;
 import java.util.Scanner;
-import Journal.JournalController;
+import Controller.JournalController;
 
 public class AskInput {
 

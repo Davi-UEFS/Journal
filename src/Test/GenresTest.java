@@ -1,9 +1,6 @@
 package Test;
-import Journal.Genres;
-import Prompts.Validate;
+import Model.Genres;
 import org.junit.jupiter.api.Test;
-
-import java.util.Scanner;
 
 public class GenresTest {
 

@@ -1,6 +1,6 @@
-package Menus;
+package View;
 
-import Journal.JournalController;
+import Controller.JournalController;
 
 import java.util.Scanner;
 
@@ -23,13 +23,13 @@ public class MainMenu {
         int option;
 
         do{
-            System.out.println(Prompts.Colors.cyan + "--== DIÁRIO CULTURAL ==--" + Prompts.Colors.rst);
+            System.out.println(View.Prompts.Colors.cyan + "--== DIÁRIO CULTURAL ==--" + View.Prompts.Colors.rst);
             System.out.println("1 - Registrar ");
             System.out.println("2 - Avaliar ");
             System.out.println("3 - Ver");
-            System.out.println(Prompts.Colors.red + "4 - Encerrar " + Prompts.Colors.rst);
+            System.out.println(View.Prompts.Colors.red + "4 - Encerrar " + View.Prompts.Colors.rst);
 
-            option = Prompts.Validate.validateInt(scanner);
+            option = View.Prompts.Validate.validateInt(scanner);
 
             switch (option) {
                 case 1:
@@ -50,7 +50,7 @@ public class MainMenu {
                     break;
 
                 default:
-                    System.out.println(Prompts.Colors.red + "Opção inválida " + Prompts.Colors.rst);
+                    System.out.println(View.Prompts.Colors.red + "Opção inválida " + View.Prompts.Colors.rst);
                     break;
             }
             

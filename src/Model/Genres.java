@@ -1,4 +1,4 @@
-package Journal;
+package Model;
 
 public enum Genres {
     TERROR,

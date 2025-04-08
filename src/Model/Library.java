@@ -1,16 +1,19 @@
-package Journal;
+package Model;
 
 import java.util.ArrayList;
 
-import Exceptions.MediaNotFoundException;
-import Media.*;
+import Model.Media.Book;
+import Model.Media.Media;
+import Model.Media.Movie;
+import Model.Media.Series;
+import Model.Exceptions.MediaNotFoundException;
 
-public class JournalModel {
+public class Library {
     private final ArrayList<Book> bookList;
     private final ArrayList<Movie> movieList;
     private final ArrayList<Series> seriesList;
 
-    public JournalModel(){
+    public Library(){
         this.bookList = new ArrayList<>();
         this.movieList = new ArrayList<>();
         this.seriesList = new ArrayList<>();

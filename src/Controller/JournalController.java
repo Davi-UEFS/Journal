@@ -1,7 +1,9 @@
-package Journal;
+package Controller;
 
-import Exceptions.MediaNotFoundException;
-import Media.*;
+import Model.Genres;
+import Model.Library;
+import Model.Media.*;
+import Model.Exceptions.MediaNotFoundException;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -9,9 +11,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class JournalController {
-    private final JournalModel journal;
+    private final Library journal;
 
-    public JournalController(JournalModel jornal){
+    public JournalController(Library jornal){
         this.journal = jornal;
     }
 
@@ -156,7 +158,7 @@ public class JournalController {
 
     public static void showGenres(){
         for(int i = 0; i < Genres.values().length; ++i){
-            System.out.println(i+1 + " - " + Journal.Genres.values()[i].name());
+            System.out.println(i+1 + " - " + Genres.values()[i].name());
         }
     }
 

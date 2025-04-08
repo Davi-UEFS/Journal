@@ -1,9 +1,9 @@
-package Media;
+package Model.Media;
 
 public abstract class Media {
-    private String title;  //TODO: FINAL?
-    private int year;
-    private int genre;
+    private final String title;  //TODO: FINAL?
+    private final int year;
+    private final int genre;
     private double rating;
     private boolean seen = false;
     private String review;
@@ -50,8 +50,5 @@ public abstract class Media {
     public void setReview(String review) {
         this.review = review;
     }
-
-
-    
 
 }

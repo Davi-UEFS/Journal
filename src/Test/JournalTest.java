@@ -1,8 +1,8 @@
 package Test;
 
-import Journal.JournalModel;
-import Journal.JournalController;
-import Media.Book;
+import Model.Library;
+import Controller.JournalController;
+import Model.Media.Book;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ public class JournalTest {
 
     @Test
     public void testAddBook(){
-        JournalModel journal = new JournalModel();
+        Library journal = new Library();
         JournalController journalController = new JournalController(journal);
         journalController.register("Alpha", 2025, 4,"12345",
                 "Davi", "PBL Books", true);

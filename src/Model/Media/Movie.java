@@ -1,6 +1,5 @@
-package Media;
+package Model.Media;
 import java.time.Duration;
-import java.time.LocalDate;
 import java.util.List;
 
 public class Movie extends Media {

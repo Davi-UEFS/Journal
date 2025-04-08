@@ -1,4 +1,4 @@
-package Prompts;
+package View.Prompts;
 
 public class Colors{
     public static final String rst = "\u001B[0m";

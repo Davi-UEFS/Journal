@@ -1,9 +1,10 @@
 package Test;
 
-import Journal.*;
-import Media.Book;
-import Media.Season;
-import Media.Series;
+import Controller.*;
+import Model.Library;
+import Model.Media.Book;
+import Model.Media.Season;
+import Model.Media.Series;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public class SearchTest {
 
     @Test
     public void TestSearch() {
-        JournalModel journal = new JournalModel();
+        Library journal = new Library();
         JournalController journalController = new JournalController(journal);
         journalController.register("2050 Classes", 2025, 5,
                 "12345", "Davi", "PBL Books", true);
@@ -28,7 +29,7 @@ public class SearchTest {
         String[] where = {"Metflix", "Matagal"};
 
         journalController.register("As Aventuras de Carlinhos", 2020, 6, 2050,
-                cast, "Ocolast 2", where, 1);
+                cast, "Ocolast 2", where, 5);
         journalController.register("As Aventuras de Nycolas", 2013, 3, 2020,
                 cast, "Tomar no teus inferno", where, 1);
 

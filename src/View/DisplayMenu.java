@@ -1,7 +1,7 @@
-package Menus;
+package View;
 
-import Journal.JournalController;
-import Media.*;
+import Controller.JournalController;
+import Model.Media.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class DisplayMenu {
         String title;
 
         do{
-            System.out.println(Prompts.Colors.green + "--== MENU DE DISPLAY ==--" + Prompts.Colors.rst);
+            System.out.println(View.Prompts.Colors.green + "--== MENU DE DISPLAY ==--" + View.Prompts.Colors.rst);
             System.out.println("1 - Ver avaliações");
             System.out.println("2 - Ver livros cadastrados");
             System.out.println("3 - Ver filmes cadastrados");
@@ -32,15 +32,15 @@ public class DisplayMenu {
             System.out.println("5 - Buscar livros");
             System.out.println("6 - Buscar filmes");
             System.out.println("7 - Buscar series");
-            System.out.println(Prompts.Colors.red + "8 - Voltar" + Prompts.Colors.rst);
+            System.out.println(View.Prompts.Colors.red + "8 - Voltar" + View.Prompts.Colors.rst);
 
-            option = Prompts.Validate.validateInt(scanner);
+            option = View.Prompts.Validate.validateInt(scanner);
 
             switch (option) {
 
                 case 1:
 
-                    title = Prompts.AskInput.askForTitle(scanner);
+                    title = View.Prompts.AskInput.askForTitle(scanner);
 
                     System.out.println(journalController.readReview(title));
                     //TODO JUNTAR METODOS?
@@ -60,25 +60,25 @@ public class DisplayMenu {
                     break;
 
                 case 5:
-                    title = Prompts.AskInput.askForTitle(scanner);
+                    title = View.Prompts.AskInput.askForTitle(scanner);
                     List<Book> bookList = journalController.searchBook(title);
                     printBookList(bookList);
                     break;
 
                 case 6:
-                    title = Prompts.AskInput.askForTitle(scanner);
+                    title = View.Prompts.AskInput.askForTitle(scanner);
                     List<Movie> movieList = journalController.searchMovie(title);
                     printMovieList(movieList);
                     break;
 
                 case 7:
-                    title = Prompts.AskInput.askForTitle(scanner);
+                    title = View.Prompts.AskInput.askForTitle(scanner);
                     List<Series> seriesList = journalController.searchSeries(title);
                     printSeriesList(seriesList);
                     break;
 
                 default:
-                    System.out.println(Prompts.Colors.red + "Opção inválida" + Prompts.Colors.rst);
+                    System.out.println(View.Prompts.Colors.red + "Opção inválida" + View.Prompts.Colors.rst);
                     break;
 
             }
