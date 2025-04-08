@@ -1,13 +1,18 @@
-package Media;
+package Model.Media;
 
-public class Season {
+public class Season implements Comparable<Season>{
     private double rating;
-    private int seasonNumber;
+    private final int seasonNumber;
     private String review;
     private boolean seen;
 
     public Season(int seasonNumber){
         this.seasonNumber = seasonNumber;
+    }
+
+    @Override
+    public int compareTo(Season other) {
+        return Integer.compare(this.seasonNumber, other.seasonNumber);
     }
 
     public double getRating() {

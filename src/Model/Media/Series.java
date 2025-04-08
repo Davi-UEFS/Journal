@@ -1,12 +1,12 @@
-package Media;
-import java.time.Duration;
+package Model.Media;
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 import java.util.List;
 
-public class Series extends Media{
+public class Series extends Media {
     private int yearOfEnding;
     private List<String> cast;
-    private List<Season> seasons; //TODO: Usar priority queue?
+    private PriorityQueue<Season> seasons; //TODO: Usar priority queue?
     private String originalTitle;
     private List<String> whereToWatch;
 
@@ -14,10 +14,11 @@ public class Series extends Media{
         super(name, year, genre);
         this.yearOfEnding = yearOfEnding;
         this.cast = cast;
-        this.seasons = new ArrayList<Season>();
+        this.seasons = new PriorityQueue<>();
         this.originalTitle = originalTitle;
         this.whereToWatch = whereToWatch;
     }
+
 
     public void addSeason(Season season){
         this.seasons.add(season);
@@ -43,12 +44,8 @@ public class Series extends Media{
         this.cast = cast;
     }
 
-    public List<Season> getSeasons() {
+    public PriorityQueue<Season> getSeasons() {
         return seasons;
-    }
-
-    public void setSeasons(List<Season> seasons) {
-        this.seasons = seasons;
     }
 
     public String getOriginalTitle() {
