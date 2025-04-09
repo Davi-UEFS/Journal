@@ -4,11 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="777e825e-0275-4249-b6dc-5e89089676e6" name="Changes" comment="Troquei a funcao de digitar genero. Agora pede pra escolher um dos generos listados. Logicamente, a model foi alterada para incluir a lista de generos. TODO: deixar mais clean a criacao da ArrayList" />
+    <list default="true" id="777e825e-0275-4249-b6dc-5e89089676e6" name="Changes" comment="Imprime o resultado de register, pois agora este pode falhar">
+      <change afterPath="$PROJECT_DIR$/src/Test/MovieTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Test/SearchTest.java" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Exception" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -18,39 +31,141 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Davi-UEFS"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Davi-UEFS&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Davi-UEFS/Journal.git",
-    "accountId": "2868f764-73a9-4ab0-9bf6-0aa98e35afc5"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Davi-UEFS/Journal.git&quot;,
+    &quot;accountId&quot;: &quot;2868f764-73a9-4ab0-9bf6-0aa98e35afc5&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2uyHMbp3SodoVO62O2O3RAzXp0G" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.App.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "false",
-    "JUnit.JournalTest.executor": "Run",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feature-genrelist"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.App.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;JUnit.BookTest.checkHash.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookTest.testAddBook.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookTest.testSearchBook.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.JournalTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.SearchTest.TestSearch.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.SeriesTest.checkHash.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.SeriesTest.testSearchSeries.executor&quot;: &quot;Run&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="Model" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.SeriesTest.testSearchSeries">
+    <configuration name="BookTest.checkHash" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Journal" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Test" />
+      <option name="MAIN_CLASS_NAME" value="Test.BookTest" />
+      <option name="METHOD_NAME" value="checkHash" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BookTest.testAddBook" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Journal" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Test" />
+      <option name="MAIN_CLASS_NAME" value="Test.BookTest" />
+      <option name="METHOD_NAME" value="testAddBook" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BookTest.testSearchBook" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Journal" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Test" />
+      <option name="MAIN_CLASS_NAME" value="Test.BookTest" />
+      <option name="METHOD_NAME" value="testSearchBook" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SeriesTest.checkHash" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Journal" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Test" />
+      <option name="MAIN_CLASS_NAME" value="Test.SeriesTest" />
+      <option name="METHOD_NAME" value="checkHash" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SeriesTest.testSearchSeries" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Journal" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Test" />
+      <option name="MAIN_CLASS_NAME" value="Test.SeriesTest" />
+      <option name="METHOD_NAME" value="testSearchSeries" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.SeriesTest.testSearchSeries" />
+        <item itemvalue="JUnit.BookTest.testAddBook" />
+        <item itemvalue="JUnit.SeriesTest.checkHash" />
+        <item itemvalue="JUnit.BookTest.checkHash" />
+        <item itemvalue="JUnit.BookTest.testSearchBook" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -67,6 +182,13 @@
       <option name="presentableId" value="Default" />
       <updated>1743213849255</updated>
       <workItem from="1743213852119" duration="1501000" />
+      <workItem from="1743722240164" duration="226000" />
+      <workItem from="1744076068269" duration="3810000" />
+      <workItem from="1744137575747" duration="2790000" />
+      <workItem from="1744143432862" duration="75000" />
+      <workItem from="1744143552259" duration="5029000" />
+      <workItem from="1744208570910" duration="4691000" />
+      <workItem from="1744220185972" duration="7000" />
     </task>
     <task id="LOCAL-00001" summary="Troquei a funcao de digitar genero. Agora pede pra escolher um dos generos listados. Logicamente, a model foi alterada para incluir a lista de generos. TODO: deixar mais clean a criacao da ArrayList">
       <option name="closed" value="true" />
@@ -76,11 +198,248 @@
       <option name="project" value="LOCAL" />
       <updated>1743215346942</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Assert para teste de adicionar livro.">
+      <option name="closed" value="true" />
+      <created>1743722458181</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1743722458181</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Metodos de find agora estao no Model. Metodos de escrever e avaliar estao utilizando excecoes e foram modificados. Retorna em String.">
+      <option name="closed" value="true" />
+      <created>1744079709095</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1744079709095</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Metodos find estao aqui agora. Lanca excecoes.">
+      <option name="closed" value="true" />
+      <created>1744079757294</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1744079757294</updated>
+    </task>
+    <task id="LOCAL-00005" summary="booleano success nao e mais necessario, pois o retorno é em String. Variaveis agora sao declaradas fora do escopo dos cases. Scanner e JournalController são final.">
+      <option name="closed" value="true" />
+      <created>1744079858361</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1744079858361</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Criada exceção para mídia não encontrada.">
+      <option name="closed" value="true" />
+      <created>1744079894990</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1744079894990</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Lista de temporadas agora e Priority Queue. Season implementa Comparable para organizar as temporadas que forem adicionadas">
+      <option name="closed" value="true" />
+      <created>1744140348919</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1744140348919</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Criei pastas de View, Model e Controller e organizei.">
+      <option name="closed" value="true" />
+      <created>1744140386075</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1744140386075</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Agora retorna na ordem de avaliacao.">
+      <option name="closed" value="true" />
+      <created>1744144749779</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1744144749779</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Renomeado. Contera tudo que tange a livros">
+      <option name="closed" value="true" />
+      <created>1744144775436</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1744144775436</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Metodo estatico adicionado.">
+      <option name="closed" value="true" />
+      <created>1744144790889</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1744144790889</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Usa metodo estatico de Genre (controller que liga os dois)">
+      <option name="closed" value="true" />
+      <created>1744144839866</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1744144839866</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Ajeitar os nomes. Mais info no TODO">
+      <option name="closed" value="true" />
+      <created>1744144896924</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1744144896924</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Criado atributos de hashCode e metodos para faze-los.">
+      <option name="closed" value="true" />
+      <created>1744145707090</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1744145707090</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Usando sobrecarga para metodos de avaliar e escrever review.">
+      <option name="closed" value="true" />
+      <created>1744148569977</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1744148569977</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Classes de teste para livros e series. Cada uma testa add, search, etc.">
+      <option name="closed" value="true" />
+      <created>1744148606287</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1744148606287</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Add teste para hashcode">
+      <option name="closed" value="true" />
+      <created>1744209520358</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1744209520358</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Metodo get agora e super. Retirado de Movie">
+      <option name="closed" value="true" />
+      <created>1744209671413</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1744209671413</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Adicionado teste para add o mesmo livro">
+      <option name="closed" value="true" />
+      <created>1744213046760</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1744213046760</updated>
+    </task>
+    <task id="LOCAL-00020" summary="metodos de printMedias agora usam toString">
+      <option name="closed" value="true" />
+      <created>1744213116046</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1744213116046</updated>
+    </task>
+    <task id="LOCAL-00021" summary="register agora pode falhar se a obra ja existir">
+      <option name="closed" value="true" />
+      <created>1744213154647</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1744213154647</updated>
+    </task>
+    <task id="LOCAL-00022" summary="isRegistered analisa se uma obra ja existe. Lanca a excecao MediaAlreadyExistsException se existir.">
+      <option name="closed" value="true" />
+      <created>1744213201990</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1744213201990</updated>
+    </task>
+    <task id="LOCAL-00023" summary="toString adicionados">
+      <option name="closed" value="true" />
+      <created>1744213221251</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1744213221251</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Rename de algumas variaveis para mais clareza">
+      <option name="closed" value="true" />
+      <created>1744213250760</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1744213250760</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Imprime o resultado de register, pois agora este pode falhar">
+      <option name="closed" value="true" />
+      <created>1744213283659</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1744213283659</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Troquei a funcao de digitar genero. Agora pede pra escolher um dos generos listados. Logicamente, a model foi alterada para incluir a lista de generos. TODO: deixar mais clean a criacao da ArrayList" />
-    <option name="LAST_COMMIT_MESSAGE" value="Troquei a funcao de digitar genero. Agora pede pra escolher um dos generos listados. Logicamente, a model foi alterada para incluir a lista de generos. TODO: deixar mais clean a criacao da ArrayList" />
+    <MESSAGE value="Assert para teste de adicionar livro." />
+    <MESSAGE value="Metodos de find agora estao no Model. Metodos de escrever e avaliar estao utilizando excecoes e foram modificados. Retorna em String." />
+    <MESSAGE value="Metodos find estao aqui agora. Lanca excecoes." />
+    <MESSAGE value="booleano success nao e mais necessario, pois o retorno é em String. Variaveis agora sao declaradas fora do escopo dos cases. Scanner e JournalController são final." />
+    <MESSAGE value="Criada exceção para mídia não encontrada." />
+    <MESSAGE value="Lista de temporadas agora e Priority Queue. Season implementa Comparable para organizar as temporadas que forem adicionadas" />
+    <MESSAGE value="Criei pastas de View, Model e Controller e organizei." />
+    <MESSAGE value="Agora retorna na ordem de avaliacao." />
+    <MESSAGE value="Renomeado. Contera tudo que tange a livros" />
+    <MESSAGE value="Metodo estatico adicionado." />
+    <MESSAGE value="Usa metodo estatico de Genre (controller que liga os dois)" />
+    <MESSAGE value="Ajeitar os nomes. Mais info no TODO" />
+    <MESSAGE value="Criado atributos de hashCode e metodos para faze-los." />
+    <MESSAGE value="Usando sobrecarga para metodos de avaliar e escrever review." />
+    <MESSAGE value="Classes de teste para livros e series. Cada uma testa add, search, etc." />
+    <MESSAGE value="Add teste para hashcode" />
+    <MESSAGE value="Metodo get agora e super. Retirado de Movie" />
+    <MESSAGE value="Adicionado teste para add o mesmo livro" />
+    <MESSAGE value="metodos de printMedias agora usam toString" />
+    <MESSAGE value="register agora pode falhar se a obra ja existir" />
+    <MESSAGE value="isRegistered analisa se uma obra ja existe. Lanca a excecao MediaAlreadyExistsException se existir." />
+    <MESSAGE value="toString adicionados" />
+    <MESSAGE value="Rename de algumas variaveis para mais clareza" />
+    <MESSAGE value="Imprime o resultado de register, pois agora este pode falhar" />
+    <option name="LAST_COMMIT_MESSAGE" value="Imprime o resultado de register, pois agora este pode falhar" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="Model.Exceptions.MediaAlreadyExistsException" package="Model.Exceptions" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
