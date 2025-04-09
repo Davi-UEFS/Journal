@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="777e825e-0275-4249-b6dc-5e89089676e6" name="Changes" comment="Imprime o resultado de register, pois agora este pode falhar">
-      <change afterPath="$PROJECT_DIR$/src/Test/MovieTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Test/SearchTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Media/Series.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Media/Series.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Test/SeriesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Test/SeriesTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +74,7 @@
       <recent name="Model" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.SeriesTest.testSearchSeries">
+  <component name="RunManager" selected="JUnit.MovieTest.addMovieTest">
     <configuration name="BookTest.checkHash" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Journal" />
       <extension name="coverage">
@@ -108,7 +107,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BookTest.testSearchBook" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MovieTest.addMovieTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Journal" />
       <extension name="coverage">
         <pattern>
@@ -117,8 +116,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="Test" />
-      <option name="MAIN_CLASS_NAME" value="Test.BookTest" />
-      <option name="METHOD_NAME" value="testSearchBook" />
+      <option name="MAIN_CLASS_NAME" value="Test.MovieTest" />
+      <option name="METHOD_NAME" value="addMovieTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -158,11 +157,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.MovieTest.addMovieTest" />
         <item itemvalue="JUnit.SeriesTest.testSearchSeries" />
         <item itemvalue="JUnit.BookTest.testAddBook" />
         <item itemvalue="JUnit.SeriesTest.checkHash" />
         <item itemvalue="JUnit.BookTest.checkHash" />
-        <item itemvalue="JUnit.BookTest.testSearchBook" />
       </list>
     </recent_temporary>
   </component>
@@ -189,6 +188,7 @@
       <workItem from="1744143552259" duration="5029000" />
       <workItem from="1744208570910" duration="4691000" />
       <workItem from="1744220185972" duration="7000" />
+      <workItem from="1744220415063" duration="778000" />
     </task>
     <task id="LOCAL-00001" summary="Troquei a funcao de digitar genero. Agora pede pra escolher um dos generos listados. Logicamente, a model foi alterada para incluir a lista de generos. TODO: deixar mais clean a criacao da ArrayList">
       <option name="closed" value="true" />
