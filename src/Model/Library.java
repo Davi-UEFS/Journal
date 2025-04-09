@@ -2,13 +2,14 @@ package Model;
 
 import java.util.ArrayList;
 
+import Model.Exceptions.MediaAlreadyExistsException;
 import Model.Media.Book;
 import Model.Media.Media;
 import Model.Media.Movie;
 import Model.Media.Series;
 import Model.Exceptions.MediaNotFoundException;
 
-public class Library {
+public class Library{
     private final ArrayList<Book> bookList;
     private final ArrayList<Movie> movieList;
     private final ArrayList<Series> seriesList;
@@ -62,6 +63,29 @@ public class Library {
         }
     }
 
+    public void isRegistered(Book book) throws MediaAlreadyExistsException {
+        for(Book bookE: bookList){
+            if(book.getHashCode() == bookE.getHashCode())
+                throw new MediaAlreadyExistsException("Esse livro já foi cadastrado!");
+
+        }
+    }
+
+    public void isRegistered(Movie movie) throws MediaAlreadyExistsException {
+        for(Movie movieE: movieList){
+            if(movie.getHashCode() == movieE.getHashCode())
+                throw new MediaAlreadyExistsException("Esse filme já foi cadastrado!");
+
+        }
+    }
+
+    public void isRegistered(Series series) throws MediaAlreadyExistsException {
+        for(Series seriesE: seriesList){
+            if(series.getHashCode() == seriesE.getHashCode())
+                throw new MediaAlreadyExistsException("Esse livro já foi cadastrado!");
+
+        }
+    }
     public void addBook(Book book){
         bookList.add(book);
     }
