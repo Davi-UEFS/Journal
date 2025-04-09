@@ -15,8 +15,11 @@ public class BookTest {
     public void testAddBook(){
         Library journal = new Library();
         JournalController journalController = new JournalController(journal);
-        journalController.register("Alpha", 2025, 4,"12345",
-                "Davi", "PBL Books", true);
+        System.out.println(journalController.register("Alpha", 2025, 4,"12345",
+                "Davi", "PBL Books", true));
+
+        System.out.println(journalController.register("Alpha", 2025, 4,"12345",
+                "Davi", "PBL Books", true));
 
         assert(journal.getBookList().getFirst().getTitle().equals("Alpha"));
 
