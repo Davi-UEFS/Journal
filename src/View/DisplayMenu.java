@@ -87,22 +87,21 @@ public class DisplayMenu {
 
     private void printBookList(List<Book> bookList) {
         for(Book book: bookList)
-            System.out.printf("Titulo: %s (%d)\n", book.getTitle(), book.getYear());
-
+            System.out.println(book.toString());
     }
 
     private void printMovieList(List<Movie> movieList) {
         for(Movie movie: movieList)
-            System.out.printf("Titulo: %s (%d)\n", movie.getTitle(), movie.getYear());
+            System.out.printf(movie.toString());
 
     }
 
     private void printSeriesList(List<Series> seriesList) {
         for(Series series: seriesList){
-            System.out.printf("Titulo: %s (%d-%d)\n", series.getTitle(), series.getYear(), series.getYearOfEnding());
+            System.out.println(series.toString());
             for(Season season: series.getSeasons()) {
                 System.out.print("\t");
-                System.out.printf("Temporada: %d \n", season.getSeasonNumber());
+                System.out.println(season.toString());
             }
 
         }
