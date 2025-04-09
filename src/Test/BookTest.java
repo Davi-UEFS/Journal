@@ -50,6 +50,17 @@ public class BookTest {
 
     }
 
+    @Test
+    public void checkHash(){
+        Library journal = new Library();
+        JournalController journalController = new JournalController(journal);
+
+        journalController.register("Alpha", 1999, 5, "978-3161484100",
+                "Carlos Drummond", "PBL Books", true);
+
+        System.out.println(journal.getBookList().getFirst().getHashCode());
+    }
+
     private void printAllBooks(JournalController journalController){
 
         ArrayList<Book> bookList = journalController.allBooks();

@@ -17,13 +17,11 @@ public class SeriesTest {
         Library journal = new Library();
         JournalController journalController = new JournalController(journal);
 
-
         journalController.register("Missão Explosiva", 2021, 1, 2024,
                 new String[]{"João", "Maria", "Lucas"},
                 "Ação Total",
                 new String[]{"Netflix", "HBO Max"},
                 2);
-
 
         journalController.register("Amor em Paris", 2019, 3, 2020,
                 new String[]{"Pedro", "Ana"},
@@ -46,6 +44,20 @@ public class SeriesTest {
         System.out.println("Series com 'i' :");
         printSeriesList(seriesList);
 
+    }
+
+    @Test
+    public void checkHash(){
+        Library journal = new Library();
+        JournalController journalController = new JournalController(journal);
+
+        journalController.register("Missão Explosiva", 2021, 1, 2024,
+                new String[]{"João", "Maria", "Lucas"},
+                "Ação Total",
+                new String[]{"Netflix", "HBO Max"},
+                2);
+
+        System.out.println(journal.getSeriesList().getFirst().getHashCode());
     }
 
     private void printSeriesList(List<Series> seriesList) {
