@@ -35,7 +35,7 @@ public class SeriesTest {
                 new String[]{"HBO Max", "Prime Video", "Netflix"},
                 4);
 
-        //Add temporada 1 na serie "Missao Explosiva"
+
         Season seasonMissao = new Season(1);
         journalController.allSeries().getFirst().addSeason(seasonMissao);
 
@@ -43,6 +43,8 @@ public class SeriesTest {
         assertEquals(2, seriesList.size()); //Dois filmes com "is"
         System.out.println("Series com 'is' :");
         printSeriesList(seriesList);
+
+        assertEquals(2, journalController.allSeries().getFirst().getNumberOfSeasons());
 
     }
 
