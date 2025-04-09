@@ -61,6 +61,10 @@ public class RateMenu {
                     System.out.println(journalController.writeReview(title, seasonNumber, review));
                     break;
 
+                case 5:
+                    System.out.println("Retornando...");
+                    break;
+
                 default:
                     System.out.println(View.Prompts.Colors.red + "Opção inválida " + View.Prompts.Colors.rst);
                     break;

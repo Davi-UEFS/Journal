@@ -46,7 +46,7 @@ public class MainMenu {
                     break;
 
                 case 4:
-                    //Instructions here
+                    System.out.println("Encerrando...");
                     break;
 
                 default:
