@@ -36,12 +36,12 @@ public class SeriesTest {
                 4);
 
         //Add temporada 1 na serie "Missao Explosiva"
-        Season season = new Season(1);
-        journalController.allSeries().getFirst().addSeason(season);
+        Season seasonMissao = new Season(1);
+        journalController.allSeries().getFirst().addSeason(seasonMissao);
 
         List<Series> seriesList = journalController.searchSeries("is");
         assertEquals(2, seriesList.size()); //Dois filmes com "is"
-        System.out.println("Series com 'i' :");
+        System.out.println("Series com 'is' :");
         printSeriesList(seriesList);
 
     }
@@ -62,10 +62,10 @@ public class SeriesTest {
 
     private void printSeriesList(List<Series> seriesList) {
         for(Series series: seriesList){
-            System.out.printf("Titulo: %s (%d-%d)\n", series.getTitle(), series.getYear(), series.getYearOfEnding());
+            System.out.println(series.toString());
             for(Season season: series.getSeasons()) {
                 System.out.print("\t");
-                System.out.printf("Temporada: %d \n", season.getSeasonNumber());
+                System.out.println(season.toString());
             }
 
         }
