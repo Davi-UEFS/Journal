@@ -56,4 +56,7 @@ public abstract class Media {
         this.review = review;
     }
 
+    public int getHashCode() {
+        return hashCode;
+    }
 }

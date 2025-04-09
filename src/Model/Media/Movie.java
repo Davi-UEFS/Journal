@@ -50,8 +50,4 @@ public class Movie extends Media {
         return whereToWatch;
     }
 
-    public int getHashCode(){
-        return hashCode;
-    }
-
 }
