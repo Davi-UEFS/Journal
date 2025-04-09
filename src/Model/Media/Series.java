@@ -56,4 +56,8 @@ public class Series extends Media {
         return whereToWatch;
     }
 
+    public int getNumberOfSeasons(){
+        return seasons.size();
+    }
+
 }
