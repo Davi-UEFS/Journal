@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Exceptions.MediaAlreadyExistsException;
 import Model.Genres;
 import Model.Library;
 import Model.Media.*;
@@ -18,14 +19,21 @@ public class JournalController {
         this.journal = jornal;
     }
 
-    public void register(String name, int year, int genre, String isbn,
+    public String register(String name, int year, int genre, String isbn,
                              String author, String publisher, boolean owned){
 
         Book book = new Book(name, year, genre, isbn, author, publisher, owned);
-        journal.addBook(book);
+
+        try {
+            journal.isRegistered(book);
+            journal.addBook(book);
+            return "Livro registrado com sucesso!";
+        } catch (MediaAlreadyExistsException e){
+            return e.getMessage();
+        }
     }
 
-    public void register(String name, int year, int genre, String[] castBuffer,
+    public String register(String name, int year, int genre, String[] castBuffer,
                          Duration duration, String direction, String script,
                          String originalTitle, String[] whereToWatchBuffer){
 
@@ -35,10 +43,18 @@ public class JournalController {
         Movie movie = new Movie(name, year, genre, cast, duration, direction,
                 script, originalTitle, whereToWatch);
 
-        journal.addMovie(movie);
+        try {
+            journal.isRegistered(movie);
+            journal.addMovie(movie);
+            return "Filme registrado com sucesso!";
+
+        }catch (MediaAlreadyExistsException e){
+            return e.getMessage();
+        }
+
     }
 
-    public void register(String name, int year, int genre, int yearOfEnding,
+    public String register(String name, int year, int genre, int yearOfEnding,
                          String[] castBuffer, String originalTitle, String[] whereToWatchBuffer,
                          int seasonNumber){
 
@@ -50,8 +66,14 @@ public class JournalController {
         Series series = new Series(name, year, genre, yearOfEnding, cast,
                 originalTitle, whereToWatch);
 
-        series.addSeason(season);
-        journal.addSeries(series);
+        try {
+            journal.isRegistered(series);
+            series.addSeason(season);
+            journal.addSeries(series);
+            return "Série registrada com sucesso!";
+        }catch (MediaAlreadyExistsException e){
+            return e.getMessage();
+        }
     }
 
     public String rate(String name, double rating){
