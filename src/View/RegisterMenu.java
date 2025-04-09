@@ -28,6 +28,9 @@ public class RegisterMenu {
             System.out.println(View.Prompts.Colors.red + "4 - Voltar" + View.Prompts.Colors.rst);
             option = View.Prompts.Validate.validateInt(scanner);
 
+            /*TODO: TRATAR EXCECOES NA VIEW?
+                    DECLARAR VARIAVEIS FORA DOS CASES*/
+
             switch (option) {
                 case 1:
 
@@ -39,9 +42,8 @@ public class RegisterMenu {
                     String bPublisher = AskInput.askForPublisher(scanner);
                     boolean bOwned = AskInput.askForOwned(scanner);
 
-                    journalController.register(bTitle, bYear, bGenre, bIsbn, bAuthor,
-                            bPublisher, bOwned);
-                    System.out.println(View.Prompts.Colors.green + "Livro registrado com sucesso!" + View.Prompts.Colors.rst);
+                    System.out.println(journalController.register(bTitle, bYear, bGenre, bIsbn, bAuthor,
+                            bPublisher, bOwned));
 
                     break;
 
@@ -56,9 +58,8 @@ public class RegisterMenu {
                     String mOriginalTitle = AskInput.askForOriginalTitle(scanner);
                     String[] mWhereToWatch = AskInput.askForWhereToWatch(scanner);
 
-                    journalController.register(mTitle, mYear, mGenre, mcastBuffer,
-                            mDuration, mDirector, mScript, mOriginalTitle, mWhereToWatch);
-                    System.out.println(View.Prompts.Colors.green + "Filme registrado com sucesso!" + View.Prompts.Colors.rst);
+                    System.out.println(journalController.register(mTitle, mYear, mGenre, mcastBuffer,
+                            mDuration, mDirector, mScript, mOriginalTitle, mWhereToWatch));
 
                     break;
 
@@ -72,9 +73,8 @@ public class RegisterMenu {
                     String[] sWhereToWatch = AskInput.askForWhereToWatch(scanner);
                     int seasonNumber = AskInput.askForSeasonNumber(scanner);
 
-                    journalController.register(sTitle, sYear, sGenre, sYearOfEnding,
-                            sCastBuffer, sOriginalTitle, sWhereToWatch, seasonNumber);
-                    System.out.println(View.Prompts.Colors.green + "Série registrada com sucesso!" + View.Prompts.Colors.rst);
+                    System.out.println(journalController.register(sTitle, sYear, sGenre, sYearOfEnding,
+                            sCastBuffer, sOriginalTitle, sWhereToWatch, seasonNumber));
 
                     break;
 
