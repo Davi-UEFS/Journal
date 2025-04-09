@@ -1,9 +1,11 @@
 package Model.Media;
 
+import java.util.Comparator;
+
 public abstract class Media {
-    private final String title;  //TODO: FINAL?
-    private final int year;
-    private final int genre;
+    protected final String title;  //TODO: FINAL?
+    protected final int year;
+    protected final int genre;
     private double rating;
     private boolean seen = false;
     private String review;
@@ -18,6 +20,11 @@ public abstract class Media {
 
     protected int hashCodeMaker(String name, int year){
         return name.hashCode() + year;
+    }
+
+    @Override
+    public String toString() {
+        return this.title + " (" + this.year + ")";
     }
 
     public double getRating(){

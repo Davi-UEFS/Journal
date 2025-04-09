@@ -27,6 +27,11 @@ public class Series extends Media {
         cast.forEach(actor->System.out.println(actor));
     }
 
+    @Override
+    public String toString() {
+        return this.title + " (" + this.year + " - "  + this.yearOfEnding + ")";
+    }
+
     public int getYearOfEnding() {
         return yearOfEnding;
     }
