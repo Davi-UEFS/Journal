@@ -184,12 +184,49 @@ public class JournalController {
         else return filteredBooks;
     }
 
-    public List<Movie> searchMovie(String title) {
-        String titleLower = title.toLowerCase().trim();
-        List<Movie> filteredMovies = journal.getMovieList().stream().filter
-                (movie -> movie.getTitle().toLowerCase().contains(titleLower)).toList();
+    public List<Movie> searchMovie(String choice, String name) {
+        List<Movie> filteredMovies = new ArrayList<>();
+        String nameLower = name.toLowerCase().trim();
 
-        return filteredMovies.stream().sorted(Comparator.comparing(Movie::getRating)).toList();
+        switch (choice) {
+            case "title" -> {
+                filteredMovies = journal.getMovieList().stream().filter
+                        (movie -> movie.getTitle().toLowerCase().contains(nameLower)).toList();
+
+                return filteredMovies.stream().sorted(Comparator.comparing(Movie::getRating)).toList();
+            }
+            case "director" -> {
+                filteredMovies = journal.getMovieList().stream().filter
+                        (movie -> movie.getDirection().toLowerCase().contains(nameLower)).toList();
+
+                return filteredMovies.stream().sorted(Comparator.comparing(Movie::getRating)).toList();
+            }
+            case "actor" -> {
+                // TODO: FAZER BUSCA POR ATOR
+                return filteredMovies;
+            }
+            default -> {
+                return filteredMovies;
+            }
+        }
+    }
+
+    public List<Movie> searchMovie(String choice, int num){
+        List<Movie> filteredMovies = new ArrayList<>();
+
+        if(choice.equals("year")) {;
+            filteredMovies = journal.getMovieList().stream().filter
+                    (movie -> movie.getYear() == num).toList();
+
+            return filteredMovies.stream().sorted(Comparator.comparing(Movie::getRating)).toList();
+        }
+        else if(choice.equals("genre")) {
+            filteredMovies = journal.getMovieList().stream().filter
+                    (movie -> movie.getGenre() == num).toList();
+
+            return filteredMovies.stream().sorted(Comparator.comparing(Movie::getRating)).toList();
+        }
+        else return filteredMovies;
     }
 
     public List<Series> searchSeries(String title){

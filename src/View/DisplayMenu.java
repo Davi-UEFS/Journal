@@ -64,9 +64,7 @@ public class DisplayMenu {
                     break;
 
                 case 6:
-                    title = View.Prompts.AskInput.askForTitle(scanner);
-                    List<Movie> movieList = journalController.searchMovie(title);
-                    printMovieList(movieList);
+                    searchMovieMiniMenu();
                     break;
 
                 case 7:
@@ -92,9 +90,9 @@ public class DisplayMenu {
         String bTitle;
         int bYear;
         int bGenre;
-        String bAuthor;
+        String Author;
         String ISBN;
-        List<Book> bookList = new ArrayList<>();
+        List<Book> bookList;
         do {
             System.out.println(View.Prompts.Colors.green + "--== BUSCAR LIVRO ==--" + View.Prompts.Colors.rst);
             System.out.println("1 - Buscar por título");
@@ -130,8 +128,8 @@ public class DisplayMenu {
 
                 case 4:
                     //author
-                    bAuthor = View.Prompts.AskInput.askForAuthor(scanner);
-                    bookList = journalController.searchBook("author", bAuthor);
+                    Author = View.Prompts.AskInput.askForAuthor(scanner);
+                    bookList = journalController.searchBook("author", Author);
                     printBookList(bookList);
                     break;
 
@@ -147,10 +145,69 @@ public class DisplayMenu {
                     break;
 
                 default:
-                    System.out.println(View.Prompts.Colors.red + "Opção inválida " + View.Prompts.Colors.rst);
+                    System.out.println(View.Prompts.Colors.red + "Opção inválida" + View.Prompts.Colors.rst);
                     break;
             }
         } while (bOption!=6);
+    }
+
+    private void searchMovieMiniMenu(){
+        int mOption;
+        String mTitle;
+        int mYear;
+        int mGenre;
+        String director;
+        String actor;
+        List<Movie> movieList;
+        do {
+            System.out.println(View.Prompts.Colors.green + "--== BUSCAR FILME ==--" + View.Prompts.Colors.rst);
+            System.out.println("1 - Buscar por título");
+            System.out.println("2 - Buscar por ano");
+            System.out.println("3 - Buscar por gênero");
+            System.out.println("4 - Buscar por diretor");
+            System.out.println("5 - Buscar por ator no elenco");
+            System.out.println(View.Prompts.Colors.red + "6 - Voltar" + View.Prompts.Colors.rst);
+
+            mOption = View.Prompts.Validate.validateInt(scanner);
+
+            switch (mOption) {
+                case 1:
+                    mTitle = View.Prompts.AskInput.askForTitle(scanner);
+                    movieList = journalController.searchMovie("title", mTitle);
+                    printMovieList(movieList);
+                    break;
+
+                case 2:
+                    mYear = View.Prompts.AskInput.askForYear(scanner);
+                    movieList = journalController.searchMovie("year", mYear);
+                    printMovieList(movieList);
+                    break;
+
+                case 3:
+                    mGenre = View.Prompts.AskInput.askForGenre(scanner);
+                    movieList = journalController.searchMovie("genre", mGenre);
+                    printMovieList(movieList);
+                    break;
+
+                case 4:
+                    director = View.Prompts.AskInput.askForDirector(scanner);
+                    movieList = journalController.searchMovie("director", director);
+                    printMovieList(movieList);
+                    break;
+
+                case 5:
+                    // TODO: FAZER BUSCA POR ATOR
+                    break;
+
+                case 6:
+                    System.out.println("Retornando...");
+                    break;
+
+                default:
+                    System.out.println(View.Prompts.Colors.red + "Opção inválida " + View.Prompts.Colors.rst);
+                    break;
+            }
+        } while(mOption != 6);
     }
 
     private void printBookList(List<Book> bookList) {
