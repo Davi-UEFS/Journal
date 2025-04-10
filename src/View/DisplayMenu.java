@@ -60,7 +60,7 @@ public class DisplayMenu {
                     break;
 
                 case 5:
-                    bookSearchMiniMenu();
+                    searchBookMiniMenu();
                     break;
 
                 case 6:
@@ -68,9 +68,7 @@ public class DisplayMenu {
                     break;
 
                 case 7:
-                    title = View.Prompts.AskInput.askForTitle(scanner);
-                    List<Series> seriesList = journalController.searchSeries(title);
-                    printSeriesList(seriesList);
+                    searchSeriesMiniMenu();
                     break;
 
                 case 8:
@@ -85,13 +83,13 @@ public class DisplayMenu {
         }while (option!=8);
     }
 
-    private void bookSearchMiniMenu(){
-        int bOption;
-        String bTitle;
-        int bYear;
-        int bGenre;
-        String Author;
-        String ISBN;
+    private void searchBookMiniMenu(){
+        int option;
+        String title;
+        int year;
+        int genre;
+        String author;
+        String isbn;
         List<Book> bookList;
         do {
             System.out.println(View.Prompts.Colors.green + "--== BUSCAR LIVRO ==--" + View.Prompts.Colors.rst);
@@ -102,41 +100,41 @@ public class DisplayMenu {
             System.out.println("5 - Buscar por ISBN");
             System.out.println(View.Prompts.Colors.red + "6 - Voltar" + View.Prompts.Colors.rst);
 
-            bOption = View.Prompts.Validate.validateInt(scanner);
+            option = View.Prompts.Validate.validateInt(scanner);
 
-            switch (bOption) {
+            switch (option) {
                 case 1:
                     //title
-                    bTitle = View.Prompts.AskInput.askForTitle(scanner);
-                    bookList = journalController.searchBook("title", bTitle);
+                    title = View.Prompts.AskInput.askForTitle(scanner);
+                    bookList = journalController.searchBookByTitle(title);
                     printBookList(bookList);
                     break;
 
                 case 2:
                     //ano
-                    bYear = View.Prompts.AskInput.askForYear(scanner);
-                    bookList = journalController.searchBook("year", bYear);
+                    year = View.Prompts.AskInput.askForYear(scanner);
+                    bookList = journalController.searchBookByYear(year);
                     printBookList(bookList);
                     break;
 
                 case 3:
                     //genre
-                    bGenre = View.Prompts.AskInput.askForGenre(scanner);
-                    bookList = journalController.searchBook("genre", bGenre);
+                    genre = View.Prompts.AskInput.askForGenre(scanner);
+                    bookList = journalController.searchBookByGenre(genre);
                     printBookList(bookList);
                     break;
 
                 case 4:
                     //author
-                    Author = View.Prompts.AskInput.askForAuthor(scanner);
-                    bookList = journalController.searchBook("author", Author);
+                    author = View.Prompts.AskInput.askForAuthor(scanner);
+                    bookList = journalController.searchBookByAuthor(author);
                     printBookList(bookList);
                     break;
 
                 case 5:
                     //isbn
-                    ISBN = View.Prompts.AskInput.askForISBN(scanner);
-                    bookList = journalController.searchBook("isbn", ISBN);
+                    isbn = View.Prompts.AskInput.askForISBN(scanner);
+                    bookList = journalController.searchBookByIsbn(isbn);
                     printBookList(bookList);
                     break;
 
@@ -148,14 +146,14 @@ public class DisplayMenu {
                     System.out.println(View.Prompts.Colors.red + "Opção inválida" + View.Prompts.Colors.rst);
                     break;
             }
-        } while (bOption!=6);
+        } while (option!=6);
     }
 
     private void searchMovieMiniMenu(){
-        int mOption;
-        String mTitle;
-        int mYear;
-        int mGenre;
+        int option;
+        String title;
+        int year;
+        int genre;
         String director;
         String actor;
         List<Movie> movieList;
@@ -168,30 +166,30 @@ public class DisplayMenu {
             System.out.println("5 - Buscar por ator no elenco");
             System.out.println(View.Prompts.Colors.red + "6 - Voltar" + View.Prompts.Colors.rst);
 
-            mOption = View.Prompts.Validate.validateInt(scanner);
+            option = View.Prompts.Validate.validateInt(scanner);
 
-            switch (mOption) {
+            switch (option) {
                 case 1:
-                    mTitle = View.Prompts.AskInput.askForTitle(scanner);
-                    movieList = journalController.searchMovie("title", mTitle);
+                    title = View.Prompts.AskInput.askForTitle(scanner);
+                    movieList = journalController.searchMovieByTitle(title);
                     printMovieList(movieList);
                     break;
 
                 case 2:
-                    mYear = View.Prompts.AskInput.askForYear(scanner);
-                    movieList = journalController.searchMovie("year", mYear);
+                    year = View.Prompts.AskInput.askForYear(scanner);
+                    movieList = journalController.searchMovieByYear(year);
                     printMovieList(movieList);
                     break;
 
                 case 3:
-                    mGenre = View.Prompts.AskInput.askForGenre(scanner);
-                    movieList = journalController.searchMovie("genre", mGenre);
+                    genre = View.Prompts.AskInput.askForGenre(scanner);
+                    movieList = journalController.searchMovieByGenre(genre);
                     printMovieList(movieList);
                     break;
 
                 case 4:
                     director = View.Prompts.AskInput.askForDirector(scanner);
-                    movieList = journalController.searchMovie("director", director);
+                    movieList = journalController.searchMovieByDirector(director);
                     printMovieList(movieList);
                     break;
 
@@ -207,7 +205,58 @@ public class DisplayMenu {
                     System.out.println(View.Prompts.Colors.red + "Opção inválida " + View.Prompts.Colors.rst);
                     break;
             }
-        } while(mOption != 6);
+        } while(option != 6);
+    }
+
+    public void searchSeriesMiniMenu(){
+        int option;
+        String title;
+        int year;
+        int genre;
+        String actor;
+        List<Series> seriesList;
+        do {
+            System.out.println(View.Prompts.Colors.green + "--== BUSCAR SÉRIE ==--" + View.Prompts.Colors.rst);
+            System.out.println("1 - Buscar por título");
+            System.out.println("2 - Buscar por ano de lançamento");
+            System.out.println("3 - Buscar por gênero");
+            System.out.println("4 - Buscar por ator no elenco");
+            System.out.println(View.Prompts.Colors.red + "5 - Voltar" + View.Prompts.Colors.rst);
+
+            option = View.Prompts.Validate.validateInt(scanner);
+
+            switch (option) {
+                case 1:
+                    title = View.Prompts.AskInput.askForTitle(scanner);
+                    seriesList = journalController.searchSeriesByTitle(title);
+                    printSeriesList(seriesList);
+                    break;
+
+                case 2:
+                    year = View.Prompts.AskInput.askForYear(scanner);
+                    seriesList = journalController.searchSeriesByYear(year);
+                    printSeriesList(seriesList);
+                    break;
+
+                case 3:
+                    genre = View.Prompts.AskInput.askForGenre(scanner);
+                    seriesList = journalController.searchSeriesByGenre(genre);
+                    printSeriesList(seriesList);
+                    break;
+
+                case 4:
+                    //TODO: FAZER BUSCA POR ATOR
+                    break;
+
+                case 5:
+                    System.out.println("Retornando...");
+                    break;
+
+                default:
+                    System.out.println(View.Prompts.Colors.red + "Opção inválida " + View.Prompts.Colors.rst);
+                    break;
+            }
+        } while(option != 5);
     }
 
     private void printBookList(List<Book> bookList) {

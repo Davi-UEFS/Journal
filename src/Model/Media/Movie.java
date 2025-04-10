@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Movie extends Media {
     private final List<String> cast;
-    private final Duration duration;
+    private final Duration duration; //TODO: TROCAR PRA DOUBLE
     private final String direction;
     private final String script;
     private final String originalTitle;
