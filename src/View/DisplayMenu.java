@@ -60,9 +60,7 @@ public class DisplayMenu {
                     break;
 
                 case 5:
-                    title = View.Prompts.AskInput.askForTitle(scanner);
-                    List<Book> bookList = journalController.searchBook(title);
-                    printBookList(bookList);
+                    bookSearchMiniMenu();
                     break;
 
                 case 6:
@@ -87,6 +85,72 @@ public class DisplayMenu {
 
             }
         }while (option!=8);
+    }
+
+    private void bookSearchMiniMenu(){
+        int bOption;
+        String bTitle;
+        int bYear;
+        int bGenre;
+        String bAuthor;
+        String ISBN;
+        List<Book> bookList = new ArrayList<>();
+        do {
+            System.out.println(View.Prompts.Colors.green + "--== BUSCAR LIVRO ==--" + View.Prompts.Colors.rst);
+            System.out.println("1 - Buscar por título");
+            System.out.println("2 - Buscar por ano");
+            System.out.println("3 - Buscar por gênero");
+            System.out.println("4 - Buscar por autor");
+            System.out.println("5 - Buscar por ISBN");
+            System.out.println(View.Prompts.Colors.red + "6 - Voltar" + View.Prompts.Colors.rst);
+
+            bOption = View.Prompts.Validate.validateInt(scanner);
+
+            switch (bOption) {
+                case 1:
+                    //title
+                    bTitle = View.Prompts.AskInput.askForTitle(scanner);
+                    bookList = journalController.searchBook("title", bTitle);
+                    printBookList(bookList);
+                    break;
+
+                case 2:
+                    //ano
+                    bYear = View.Prompts.AskInput.askForYear(scanner);
+                    bookList = journalController.searchBook("year", bYear);
+                    printBookList(bookList);
+                    break;
+
+                case 3:
+                    //genre
+                    bGenre = View.Prompts.AskInput.askForGenre(scanner);
+                    bookList = journalController.searchBook("genre", bGenre);
+                    printBookList(bookList);
+                    break;
+
+                case 4:
+                    //author
+                    bAuthor = View.Prompts.AskInput.askForAuthor(scanner);
+                    bookList = journalController.searchBook("author", bAuthor);
+                    printBookList(bookList);
+                    break;
+
+                case 5:
+                    //isbn
+                    ISBN = View.Prompts.AskInput.askForISBN(scanner);
+                    bookList = journalController.searchBook("isbn", ISBN);
+                    printBookList(bookList);
+                    break;
+
+                case 6:
+                    System.out.println("Retornando...");
+                    break;
+
+                default:
+                    System.out.println(View.Prompts.Colors.red + "Opção inválida " + View.Prompts.Colors.rst);
+                    break;
+            }
+        } while (bOption!=6);
     }
 
     private void printBookList(List<Book> bookList) {

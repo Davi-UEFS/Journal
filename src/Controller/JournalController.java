@@ -137,12 +137,51 @@ public class JournalController {
 
     }
 
-    public List<Book> searchBook(String title){
-        String titleLower = title.toLowerCase().trim();
-        List<Book> filteredBooks = journal.getBookList().stream().filter
-                (book -> book.getTitle().toLowerCase().contains(titleLower)).toList();
+    public List<Book> searchBook(String choice, String name){
+        List<Book> filteredBooks = new ArrayList<>();
+        String nameLower = name.toLowerCase().trim();
 
-        return filteredBooks.stream().sorted(Comparator.comparing(Book::getRating)).toList();
+        switch (choice) {
+            case "title" -> {
+                filteredBooks = journal.getBookList().stream().filter
+                        (book -> book.getTitle().toLowerCase().contains(nameLower)).toList();
+
+                return filteredBooks.stream().sorted(Comparator.comparing(Book::getRating)).toList();
+            }
+            case "author" -> {
+                filteredBooks = journal.getBookList().stream().filter
+                        (book -> book.getAuthor().toLowerCase().contains(nameLower)).toList();
+
+                return filteredBooks.stream().sorted(Comparator.comparing(Book::getRating)).toList();
+            }
+            case "isbn" -> {
+                filteredBooks = journal.getBookList().stream().filter
+                        (book -> book.getIsbn().toLowerCase().equals(nameLower)).toList();
+
+                return filteredBooks.stream().sorted(Comparator.comparing(Book::getRating)).toList();
+            }
+            default -> {
+                return filteredBooks;
+            }
+        }
+    }
+
+    public List<Book> searchBook(String choice, int num){
+        List<Book> filteredBooks = new ArrayList<>();
+
+        if(choice.equals("year")) {;
+            filteredBooks = journal.getBookList().stream().filter
+                    (book -> book.getYear() == num).toList();
+
+            return filteredBooks.stream().sorted(Comparator.comparing(Book::getRating)).toList();
+        }
+        else if(choice.equals("genre")) {
+            filteredBooks = journal.getBookList().stream().filter
+                    (book -> book.getGenre() == num).toList();
+
+            return filteredBooks.stream().sorted(Comparator.comparing(Book::getRating)).toList();
+        }
+        else return filteredBooks;
     }
 
     public List<Movie> searchMovie(String title) {

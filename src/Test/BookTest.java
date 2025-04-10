@@ -45,10 +45,10 @@ public class BookTest {
                 "Machado de Assis", "PBL Books", false);
 
         System.out.println("Livros com 'ta': ");
-        List<Book> books = journalController.searchBook("ta");
+        List<Book> books = journalController.searchBook("title", "ta");
         printBookList(books);
         System.out.println("Livros com 'Al");
-        books = journalController.searchBook("Al");
+        books = journalController.searchBook("title", "Al");
         printBookList(books);
 
     }
