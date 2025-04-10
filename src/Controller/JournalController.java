@@ -20,7 +20,7 @@ public class JournalController {
     }
 
     public String register(String name, int year, int genre, String isbn,
-                             String author, String publisher, boolean owned){
+                             String author, String publisher, boolean owned) {
 
         Book book = new Book(name, year, genre, isbn, author, publisher, owned);
 
@@ -56,12 +56,12 @@ public class JournalController {
 
     public String register(String name, int year, int genre, int yearOfEnding,
                          String[] castBuffer, String originalTitle, String[] whereToWatchBuffer,
-                         int seasonNumber){
+                         int seasonNumber, int episodeCount){
 
         ArrayList<String> cast = new ArrayList<>(Arrays.asList(castBuffer));
         ArrayList<String> whereToWatch = new ArrayList<>(Arrays.asList(whereToWatchBuffer));
 
-        Season season = new Season(seasonNumber);
+        Season season = new Season(seasonNumber, episodeCount);
 
         Series series = new Series(name, year, genre, yearOfEnding, cast,
                 originalTitle, whereToWatch);

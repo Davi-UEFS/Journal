@@ -104,7 +104,7 @@ public class AskInput {
 
         while(rate < 0 || rate > 5) {
             rate = Validate.validateDouble(scanner);
-            System.out.println("Digite uma nota entre 0 e 5");
+            System.out.println("Digite uma nota entre 0 e 5 ");
         }
         return rate;
     }
@@ -112,5 +112,10 @@ public class AskInput {
     public static String askForReview(Scanner scanner){
         System.out.println("Digite sua review: ");
         return Validate.validateString(scanner);
+    }
+
+    public static int askForEpisodeCount(Scanner scanner){
+        System.out.print("Digite a quantidade de episódios: ");
+        return Validate.validateInt(scanner);
     }
 }

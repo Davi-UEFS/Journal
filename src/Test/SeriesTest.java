@@ -21,22 +21,22 @@ public class SeriesTest {
                 new String[]{"João", "Maria", "Lucas"},
                 "Ação Total",
                 new String[]{"Netflix", "HBO Max"},
-                2);
+                2, 5);
 
         journalController.register("Amor em Paris", 2019, 3, 2020,
                 new String[]{"Pedro", "Ana"},
                 "Filmes Românticos",
                 new String[]{"Prime Video", "Disney+"},
-                1);
+                1, 7);
 
         journalController.register("Invasão Alien", 2023, 7, 2025,
                 new String[]{"Carlos", "Julia", "Miguel", "Laura"},
                 "Sci-Fi Productions",
                 new String[]{"HBO Max", "Prime Video", "Netflix"},
-                4);
+                4, 9);
 
 
-        Season seasonMissao = new Season(1);
+        Season seasonMissao = new Season(1, 6);
         journalController.allSeries().getFirst().addSeason(seasonMissao);
 
         List<Series> seriesList = journalController.searchSeries("is");
@@ -57,7 +57,7 @@ public class SeriesTest {
                 new String[]{"João", "Maria", "Lucas"},
                 "Ação Total",
                 new String[]{"Netflix", "HBO Max"},
-                2);
+                2, 4);
 
         System.out.println(journal.getSeriesList().getFirst().getHashCode());
     }

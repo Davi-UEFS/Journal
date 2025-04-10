@@ -45,6 +45,7 @@ public class RegisterMenu {
                     System.out.println(journalController.register(bTitle, bYear, bGenre, bIsbn, bAuthor,
                             bPublisher, bOwned));
 
+
                     break;
 
                 case 2:
@@ -72,9 +73,10 @@ public class RegisterMenu {
                     String sOriginalTitle = AskInput.askForOriginalTitle(scanner);
                     String[] sWhereToWatch = AskInput.askForWhereToWatch(scanner);
                     int seasonNumber = AskInput.askForSeasonNumber(scanner);
+                    int episodeCount = AskInput.askForEpisodeCount(scanner);
 
                     System.out.println(journalController.register(sTitle, sYear, sGenre, sYearOfEnding,
-                            sCastBuffer, sOriginalTitle, sWhereToWatch, seasonNumber));
+                            sCastBuffer, sOriginalTitle, sWhereToWatch, seasonNumber, episodeCount));
 
                     break;
 
