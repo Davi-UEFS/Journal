@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class DisplayMenu {
-    private Scanner scanner;
-    private JournalController journalController;
+    private final Scanner scanner;
+    private final JournalController journalController;
 
     public DisplayMenu(JournalController journalController, Scanner scanner) {
         this.journalController = journalController;
@@ -17,6 +17,61 @@ public class DisplayMenu {
         this.scanner = scanner;
     }
 
+    private void sortByMiniMenu(){
+        int option;
+
+        do{
+            System.out.println(View.Prompts.Colors.green + "--== MENU DE DISPLAY ==--" + View.Prompts.Colors.rst);
+            System.out.println("1 - Por avaliação (crescente) ");
+            System.out.println("2 - Por avaliação (decrescente)");
+            System.out.println("3 - Por gênero (crescente)");
+            System.out.println("4 - Por gênero (decrescente)");
+            System.out.println("5 - Por ano de lançamento (crescente)");
+            System.out.println("6 - Por ano de lançamento (decrescente)");
+            System.out.println(View.Prompts.Colors.red + "7 - Voltar" + View.Prompts.Colors.rst);
+
+            option = View.Prompts.Validate.validateInt(scanner);
+
+            switch (option) {
+
+                case 1:
+
+                    System.out.println(journalController.sortListAscending(journalController.allBooks()));
+
+                    break;
+
+                case 2:
+                    System.out.println(journalController.sortListDescending(journalController.allBooks()));
+
+                    break;
+
+                case 3:
+
+                    break;
+
+                case 4:
+
+                    break;
+
+                case 5:
+
+                    break;
+
+                case 6:
+
+                    break;
+
+                case 7:
+                    System.out.println("Retornando...");
+                    break;
+
+                default:
+                    System.out.println(View.Prompts.Colors.red + "Opção inválida" + View.Prompts.Colors.rst);
+                    break;
+
+            }
+        }while (option!=7);
+    }
 
     public void displayMiniMenu() {
 
