@@ -96,7 +96,7 @@ public class DisplayMenu {
 
     private void printMovieList(List<Movie> movieList) {
         for(Movie movie: movieList)
-            System.out.printf(movie.toString());
+            System.out.println(movie.toString());
 
     }
 

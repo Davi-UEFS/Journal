@@ -17,9 +17,8 @@ public class Season implements Comparable<Season>{
         return Integer.compare(this.seasonNumber, other.seasonNumber);
     }
 
-    @Override
     public String toString() {
-        return "Temporada: " + seasonNumber;
+        return "Temporada: " + seasonNumber + " - " + episodeCount + " Episódios";
     }
 
     public double getRating() {

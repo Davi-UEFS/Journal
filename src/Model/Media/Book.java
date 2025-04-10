@@ -48,5 +48,8 @@ public class Book extends Media{
         this.readDate = readDate;
     }
 
+    public String toString() {
+        return "\n" + title + " (" + this.year + ")\nAutor: " + author + "\nEditora: " + publisher + "\nISBN: " + isbn;
+    }
 
 }

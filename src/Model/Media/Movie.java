@@ -50,4 +50,9 @@ public class Movie extends Media {
         return whereToWatch;
     }
 
+    public String toString() {
+        return "\n" + title + " (" + year + ")\nDuração: " + duration.toString() + " minutos\nDireção: " +
+                direction + "\nTítulo original: " + originalTitle + "\nElenco: " + cast;
+    }
+
 }

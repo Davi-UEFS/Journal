@@ -27,9 +27,10 @@ public class Series extends Media {
         cast.forEach(actor->System.out.println(actor));
     }
 
-    @Override
     public String toString() {
-        return this.title + " (" + this.year + " - "  + this.yearOfEnding + ")";
+        String endingYear = (yearOfEnding == 9999) ? "Em andamento" : Integer.toString(yearOfEnding);
+        return "\n" + title + " (" + year + " - "  + endingYear + ")\nTítulo original: " + originalTitle +
+                    "\nOnde assistir: " + whereToWatch + "\nElenco: " + cast;
     }
 
     public int getYearOfEnding() {

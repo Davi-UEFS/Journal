@@ -22,11 +22,6 @@ public abstract class Media {
         return name.hashCode() + year;
     }
 
-    @Override
-    public String toString() {
-        return this.title + " (" + this.year + ")";
-    }
-
     public double getRating(){
         return rating;
     }
