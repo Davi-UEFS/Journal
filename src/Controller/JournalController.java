@@ -144,21 +144,21 @@ public class JournalController {
         List<Book> filteredBooks = journal.getBookList().stream().filter
                 (book -> book.getTitle().toLowerCase().contains(titleLower)).toList();
 
-        return filteredBooks.stream().sorted(Comparator.comparing(Book::getRating)).toList();
+        return sortListAscending(filteredBooks);
     }
 
     public List<Book> searchBookByYear(int year){
         List<Book> filteredBooks = journal.getBookList().stream().filter
                 (book -> book.getYear() == year).toList();
 
-        return filteredBooks.stream().sorted(Comparator.comparing(Book::getRating)).toList();
+        return sortListAscending(filteredBooks);
     }
 
     public List<Book> searchBookByGenre(int genre){
         List<Book> filteredBooks = journal.getBookList().stream().filter
                 (book -> book.getGenre() == genre).toList();
 
-        return filteredBooks.stream().sorted(Comparator.comparing(Book::getRating)).toList();
+        return sortListAscending(filteredBooks);
     }
 
     public List<Book> searchBookByIsbn(String isbn){
@@ -166,7 +166,7 @@ public class JournalController {
         List<Book> filteredBooks = journal.getBookList().stream().filter
                 (book -> book.getTitle().toLowerCase().contains(isbnLower)).toList();
 
-        return filteredBooks.stream().sorted(Comparator.comparing(Book::getRating)).toList();
+        return sortListAscending(filteredBooks);
     }
 
     public List<Book> searchBookByAuthor(String author){
@@ -174,7 +174,7 @@ public class JournalController {
         List<Book> filteredBooks = journal.getBookList().stream().filter
                 (book -> book.getTitle().toLowerCase().contains(authorLower)).toList();
 
-        return filteredBooks.stream().sorted(Comparator.comparing(Book::getRating)).toList();
+        return sortListAscending(filteredBooks);
     }
 
 
@@ -184,7 +184,7 @@ public class JournalController {
         List<Movie> filteredMovies = journal.getMovieList().stream().filter
                 (movie -> movie.getTitle().toLowerCase().contains(titleLower)).toList();
 
-        return filteredMovies.stream().sorted(Comparator.comparing(Movie::getRating)).toList();
+        return sortListAscending(filteredMovies);
     }
 
     public List<Movie> searchMovieByDirector(String director){
@@ -192,21 +192,21 @@ public class JournalController {
         List<Movie> filteredMovies = journal.getMovieList().stream().filter
                 (movie -> movie.getDirection().toLowerCase().contains(directorLower)).toList();
 
-        return filteredMovies.stream().sorted(Comparator.comparing(Movie::getRating)).toList();
+        return sortListAscending(filteredMovies);
     }
 
     public List<Movie> searchMovieByYear(int year){
         List<Movie> filteredMovies = journal.getMovieList().stream().filter
                 (movie -> movie.getYear() == year).toList();
 
-        return filteredMovies.stream().sorted(Comparator.comparing(Movie::getRating)).toList();
+        return sortListAscending(filteredMovies);
     }
 
     public List<Movie> searchMovieByGenre(int genre){
         List<Movie> filteredMovies = journal.getMovieList().stream().filter
                 (movie -> movie.getGenre() == genre).toList();
 
-        return filteredMovies.stream().sorted(Comparator.comparing(Movie::getRating)).toList();
+        return sortListAscending(filteredMovies);
     }
 
 
@@ -216,21 +216,21 @@ public class JournalController {
         List<Series> filteredSeries = journal.getSeriesList().stream().filter
                 (series -> series.getTitle().toLowerCase().contains(titleLower)).toList();
 
-        return filteredSeries.stream().sorted(Comparator.comparing(Series::getRating)).toList();
+        return sortListAscending(filteredSeries);
     }
 
     public List<Series> searchSeriesByYear(int year){
         List<Series> filteredSeries = journal.getSeriesList().stream().filter
                 (series -> series.getYear() == year).toList();
 
-        return filteredSeries.stream().sorted(Comparator.comparing(Series::getRating)).toList();
+        return sortListAscending(filteredSeries);
     }
 
     public List<Series> searchSeriesByGenre(int genre){
         List<Series> filteredSeries = journal.getSeriesList().stream().filter
                 (series -> series.getGenre() == genre).toList();
 
-        return filteredSeries.stream().sorted(Comparator.comparing(Series::getRating)).toList();
+        return sortListAscending(filteredSeries);
     }
 
     public List<Series> searchSeries(String title){
@@ -238,7 +238,7 @@ public class JournalController {
         List<Series> filteredSeries = journal.getSeriesList().stream().filter
                 (series -> series.getTitle().toLowerCase().contains(titleLower)).toList();
 
-        return filteredSeries.stream().sorted(Comparator.comparing(Series::getRating)).toList();
+        return sortListAscending(filteredSeries);
 
     }
 
@@ -264,6 +264,14 @@ public class JournalController {
             return e.getMessage();
 
         }
+    }
+
+    public <X extends Media> List<X> sortListAscending(List<X> mediaList){
+        return mediaList.stream().sorted(Comparator.comparing(Media::getRating)).toList();
+    }
+
+    public <X extends Media> List<X> sortListDescending(List<X> mediaList){
+        return mediaList.stream().sorted(Comparator.comparing(Media::getRating)).toList().reversed();
     }
 
     public static void viewGenres() {
