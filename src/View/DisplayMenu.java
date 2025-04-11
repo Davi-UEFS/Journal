@@ -2,8 +2,8 @@ package View;
 
 import Controller.JournalController;
 import Model.Media.*;
+import Model.Genres;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -36,21 +36,21 @@ public class DisplayMenu {
 
                 case 1:
 
-                    System.out.println(journalController.sortListAscending(journalController.allBooks()));
+                    System.out.println(journalController.allBooks());
 
                     break;
 
                 case 2:
-                    System.out.println(journalController.sortListDescending(journalController.allBooks()));
+                    System.out.println(journalController.sortDescending(journalController.allBooks()));
 
                     break;
 
                 case 3:
-
+                    System.out.println(journalController.booksByGenreTextAscending());
                     break;
 
                 case 4:
-
+                    System.out.println(journalController.booksByGenreTextDescending());
                     break;
 
                 case 5:
@@ -142,7 +142,7 @@ public class DisplayMenu {
         int option;
         String title;
         int year;
-        int genre;
+        Genres genre;
         String author;
         String isbn;
         List<Book> bookList;
@@ -208,7 +208,7 @@ public class DisplayMenu {
         int option;
         String title;
         int year;
-        int genre;
+        Genres genre;
         String director;
         String actor;
         List<Movie> movieList;
@@ -267,7 +267,7 @@ public class DisplayMenu {
         int option;
         String title;
         int year;
-        int genre;
+        Genres genre;
         String actor;
         List<Series> seriesList;
         do {
@@ -336,9 +336,4 @@ public class DisplayMenu {
         }
     }
 
-    private void printMediaList(ArrayList<Media> mediaList){
-        for(Media media: mediaList){
-            System.out.printf("Titulo: %s (%d) \n", media.getTitle(), media.getYear());
-        }
-    }
 }
