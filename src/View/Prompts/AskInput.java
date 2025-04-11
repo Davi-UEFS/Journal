@@ -2,7 +2,9 @@ package View.Prompts;
 
 import java.time.Duration;
 import java.util.Scanner;
+
 import Controller.JournalController;
+import Model.Genres;
 
 public class AskInput {
 
@@ -84,8 +86,8 @@ public class AskInput {
         System.out.print("Digite o número da temporada: ");
         return Validate.validateInt(scanner);
     }
-    public static int askForGenre(Scanner scanner) {
-        JournalController.viewGenres();
+    public static Genres askForGenre(Scanner scanner) {
+        Genres.showGenres();
         System.out.print("Digite um dos gêneros acima: ");
         int wantedGenre = Validate.validateInt(scanner);
         while(wantedGenre < 1 || wantedGenre > 12){
@@ -93,7 +95,7 @@ public class AskInput {
             System.out.print("Opção inválida! Digite novamente: ");
         }
 
-        return wantedGenre;
+        return Genres.values()[wantedGenre - 1];
     }
 
     public static double askForRate(Scanner scanner){
