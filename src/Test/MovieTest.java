@@ -1,6 +1,7 @@
 package Test;
 
 import Controller.JournalController;
+import Model.Genres;
 import Model.Library;
 
 import Model.Media.Movie;
@@ -18,13 +19,13 @@ public class MovieTest {
         JournalController journalController = new JournalController(journal);
 
         journalController.register(
-                "Aventuras no Espaço", 2021, 2, new String[]{"Carlos", "Mariana", "João"},
+                "Aventuras no Espaço", 2021, Genres.AVENTURA, new String[]{"Carlos", "Mariana", "João"},
                 Duration.ofMinutes(125), "Maria Silva", "Roteiro etc etc",
                 "Space Adventures", new String[]{"Netflix", "HBO Max"}
         );
 
         journalController.register(
-                "Mistério na Floresta", 2022, 4, new String[]{"Lucas", "Clara", "Paulo"},
+                "Mistério na Floresta", 2022, Genres.COMÉDIA, new String[]{"Lucas", "Clara", "Paulo"},
                 Duration.ofMinutes(98), "Fernanda Costa", "Roteiro etc etc",
                 "Forest Mystery", new String[]{"Amazon Prime", "GloboPlay"}
         );

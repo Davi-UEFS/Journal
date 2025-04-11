@@ -1,17 +1,18 @@
 package Model.Media;
 
-import java.util.Comparator;
+import Model.Genres;
+
 
 public abstract class Media {
-    protected final String title;  //TODO: FINAL?
+    protected final String title;
     protected final int year;
-    protected final int genre;
+    protected final Genres genre;
     private double rating;
     private boolean seen = false;
     private String review;
     protected int hashCode;
 
-    public Media(String name, int year, int genre) {
+    public Media(String name, int year, Genres genre) {
         this.title = name;
         this.year = year;
         this.genre = genre;
@@ -38,7 +39,7 @@ public abstract class Media {
         return year;
     }
 
-    public int getGenre() {
+    public Genres getGenre() {
         return genre;
     }
 

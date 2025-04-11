@@ -1,4 +1,6 @@
 package Model.Media;
+import Model.Genres;
+
 import java.time.Duration;
 import java.util.List;
 
@@ -11,8 +13,8 @@ public class Movie extends Media {
     private final List<String> whereToWatch;
 
     
-    public Movie(String name, int year, int genre, List<String> cast, Duration duration, String direction,
-            String script, String originalTitle, List<String> whereToWatch) {
+    public Movie(String name, int year, Genres genre, List<String> cast, Duration duration, String direction,
+                 String script, String originalTitle, List<String> whereToWatch) {
         super(name, year, genre);
         this.cast = cast;
         this.duration = duration;

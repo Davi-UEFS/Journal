@@ -1,4 +1,6 @@
 package Model.Media;
+import Model.Genres;
+
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.List;
@@ -10,7 +12,7 @@ public class Series extends Media {
     private final String originalTitle;
     private final List<String> whereToWatch;
 
-    public Series(String name, int year, int genre, int yearOfEnding, List<String> cast, String originalTitle, List<String> whereToWatch) {
+    public Series(String name, int year, Genres genre, int yearOfEnding, List<String> cast, String originalTitle, List<String> whereToWatch) {
         super(name, year, genre);
         this.yearOfEnding = yearOfEnding;
         this.cast = cast;
