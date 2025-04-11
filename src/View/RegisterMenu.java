@@ -1,5 +1,6 @@
 package View;
 
+import Model.Genres;
 import View.Prompts.*;
 import Controller.JournalController;
 
@@ -17,6 +18,12 @@ public class RegisterMenu {
     }
 
     public void registerMiniMenu(JournalController journalController) {
+        String title;
+        int year;
+        Genres genre;
+        String originalTitle;
+        String[] castBuffer;
+        String[] whereToWatch;
 
         int option;
 
@@ -32,52 +39,52 @@ public class RegisterMenu {
                     DECLARAR VARIAVEIS FORA DOS CASES*/
 
             switch (option) {
-                case 1:
+                case 1: // Livro
+                    title = AskInput.askForTitle(scanner);
+                    year = AskInput.askForYear(scanner);
+                    genre = AskInput.askForGenre(scanner);
+                    String isbn = AskInput.askForISBN(scanner); // Variável exclusiva do case 1
+                    String author = AskInput.askForAuthor(scanner);
+                    String publisher = AskInput.askForPublisher(scanner);
+                    boolean owned = AskInput.askForOwned(scanner);
 
-                    String bTitle = AskInput.askForTitle(scanner);
-                    int bYear = AskInput.askForYear(scanner);
-                    int bGenre = AskInput.askForGenre(scanner);
-                    String bIsbn = AskInput.askForISBN(scanner);
-                    String bAuthor = AskInput.askForAuthor(scanner);
-                    String bPublisher = AskInput.askForPublisher(scanner);
-                    boolean bOwned = AskInput.askForOwned(scanner);
-
-                    System.out.println(journalController.register(bTitle, bYear, bGenre, bIsbn, bAuthor,
-                            bPublisher, bOwned));
-
-
+                    System.out.println(journalController.register(
+                            title, year, genre, isbn, author, publisher, owned
+                    ));
                     break;
 
-                case 2:
-                    String mTitle = AskInput.askForTitle(scanner);
-                    int mYear = AskInput.askForYear(scanner);
-                    int mGenre = AskInput.askForGenre(scanner);
-                    String[] mcastBuffer = AskInput.askForCast(scanner);
-                    Duration mDuration = AskInput.askForDuration(scanner);
-                    String mDirector = AskInput.askForDirector(scanner);
-                    String mScript = AskInput.askForScript(scanner);
-                    String mOriginalTitle = AskInput.askForOriginalTitle(scanner);
-                    String[] mWhereToWatch = AskInput.askForWhereToWatch(scanner);
+                case 2: // Filme
+                    title = AskInput.askForTitle(scanner);
+                    year = AskInput.askForYear(scanner);
+                    genre = AskInput.askForGenre(scanner);
+                    castBuffer = AskInput.askForCast(scanner);
+                    Duration duration = AskInput.askForDuration(scanner); // Exclusivo do case 2
+                    String director = AskInput.askForDirector(scanner);
+                    String script = AskInput.askForScript(scanner);
+                    originalTitle = AskInput.askForOriginalTitle(scanner);
+                    whereToWatch = AskInput.askForWhereToWatch(scanner);
 
-                    System.out.println(journalController.register(mTitle, mYear, mGenre, mcastBuffer,
-                            mDuration, mDirector, mScript, mOriginalTitle, mWhereToWatch));
-
+                    System.out.println(journalController.register(
+                            title, year, genre, castBuffer, duration, director,
+                            script, originalTitle, whereToWatch
+                    ));
                     break;
 
-                case 3:
-                    String sTitle = AskInput.askForTitle(scanner);
-                    int sYear = AskInput.askForYear(scanner);
-                    int sGenre = AskInput.askForGenre(scanner);
-                    int sYearOfEnding = AskInput.askForYearOfEnding(scanner);
-                    String[] sCastBuffer = AskInput.askForCast(scanner);
-                    String sOriginalTitle = AskInput.askForOriginalTitle(scanner);
-                    String[] sWhereToWatch = AskInput.askForWhereToWatch(scanner);
+                case 3: // Série
+                    title = AskInput.askForTitle(scanner);
+                    year = AskInput.askForYear(scanner);
+                    genre = AskInput.askForGenre(scanner);
+                    int yearOfEnding = AskInput.askForYearOfEnding(scanner); // Exclusivo do case 3
+                    castBuffer = AskInput.askForCast(scanner);
+                    originalTitle = AskInput.askForOriginalTitle(scanner);
+                    whereToWatch = AskInput.askForWhereToWatch(scanner);
                     int seasonNumber = AskInput.askForSeasonNumber(scanner);
                     int episodeCount = AskInput.askForEpisodeCount(scanner);
 
-                    System.out.println(journalController.register(sTitle, sYear, sGenre, sYearOfEnding,
-                            sCastBuffer, sOriginalTitle, sWhereToWatch, seasonNumber, episodeCount));
-
+                    System.out.println(journalController.register(
+                            title, year, genre, yearOfEnding, castBuffer,
+                            originalTitle, whereToWatch, seasonNumber, episodeCount
+                    ));
                     break;
 
                 case 4:
