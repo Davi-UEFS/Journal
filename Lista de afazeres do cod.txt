@@ -1,0 +1,41 @@
+(X) Cadastrar Livros
+(X) Avaliar Livros
+	(X) Marcar livro como lido ou não lido
+	(X) Livros lidos podem ser avaliados entre 1 e 5
+	(X) Registrar quando o livro foi lido
+	(X) Escrever reviews
+(X) Cadastrar Filmes
+(X) Avaliar Filmes
+	(X) Marcar filme como visto
+	(X) Filmes assistidos podem ser avaliados de 1 a 5
+	(X) Escrever reviews
+( ) Cadastrar séries
+	(X) Cadastrar temporadas, indicando ano e n° de episódios
+	( ) Cadastrar ano de série
+(X) Avaliar séries
+	(X) Avaliar temporadas individualmente
+	(X) Escrever reviews para cada temporada
+(X) Buscar por livros
+	Pesquisar por 
+	(X) título
+	(X) autor
+	(X) gênero 
+	(X) ano
+	(X) ISBN
+( ) Buscar por filmes
+	Pesquisar por
+	(X) título
+	(X) diretor
+	( ) ator no elenco
+	(X) gênero
+	(X) ano de lançamento
+( ) Buscar por séries
+	Pesquisar por
+	(X) título
+	( ) ?? gênero ??
+	( ) ?? ator no elenco ??
+	( ) ?? ano de lançamento ??
+(X) listar livros, séries e filmes
+	( ) ordenar por avaliação
+	( ) filtrar por gênero
+	( ) filtrar por ano de lançamento
