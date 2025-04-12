@@ -1,12 +1,22 @@
+import Controller.BookService;
+import Controller.MovieService;
+import Controller.SeriesService;
 import Model.Library;
-import Controller.JournalController;
 import View.MainMenu;
+
+import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        Library journal = new Library(); //Model (listas de midias)
-        JournalController journalController = new JournalController(journal); //Controller (add, avaliar, etc)
-        MainMenu menivis = new MainMenu(journalController); //View (print e prompt)
+        Scanner scanner = new Scanner(System.in);
+        //Model (listas de midias)
+        Library journal = new Library();
+        //Controllers (add, avaliar, etc)
+        BookService bookService = new BookService(journal);
+        MovieService movieService = new MovieService(journal);
+        SeriesService seriesService = new SeriesService(journal);
+        //View (print e prompt)
+        MainMenu menivis = new MainMenu(bookService, movieService, seriesService, scanner);
         menivis.showMenu();
     }
 }

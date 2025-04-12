@@ -3,7 +3,6 @@ package View.Prompts;
 import java.time.Duration;
 import java.util.Scanner;
 
-import Controller.JournalController;
 import Model.Genres;
 
 public class AskInput {
