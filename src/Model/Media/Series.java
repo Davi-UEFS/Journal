@@ -1,14 +1,16 @@
 package Model.Media;
+import Model.Exceptions.MediaNotFoundException;
+import Model.Exceptions.SeasonNotFoundException;
 import Model.Genres;
 
-import java.util.ArrayList;
-import java.util.PriorityQueue;
+
+import java.util.TreeSet;
 import java.util.List;
 
 public class Series extends Media {
     private int yearOfEnding;
     private final List<String> cast;
-    private final PriorityQueue<Season> seasons; //TODO: Usar priority queue?
+    private final TreeSet<Season> seasons; //TODO: Usar priority queue?
     private final String originalTitle;
     private final List<String> whereToWatch;
 
@@ -16,7 +18,7 @@ public class Series extends Media {
         super(name, year, genre);
         this.yearOfEnding = yearOfEnding;
         this.cast = cast;
-        this.seasons = new PriorityQueue<>();
+        this.seasons = new TreeSet<>();
         this.originalTitle = originalTitle;
         this.whereToWatch = whereToWatch;
     }
@@ -27,6 +29,31 @@ public class Series extends Media {
 
     public void showCast(){
         cast.forEach(actor->System.out.println(actor));
+    }
+
+    public Season findSeason(int seasonNumber) throws SeasonNotFoundException {
+
+        for (Season season : seasons) { //TODO: *
+            if (seasonNumber == season.getSeasonNumber())
+                return season;
+
+        }
+        throw new SeasonNotFoundException("Temporada não encontrada!");
+    }
+
+    //TODO: VER SE TA BONITO
+    public void updateRate() {
+        double sum = 0;
+
+        if (seasons.isEmpty())
+            setRating(0);
+        else {
+
+            for (Season season : seasons) {
+                sum += season.getRating();
+            }
+            setRating(sum/seasons.size());
+        }
     }
 
     public String toString() {
@@ -47,7 +74,7 @@ public class Series extends Media {
         return cast;
     }
 
-    public PriorityQueue<Season> getSeasons() {
+    public TreeSet<Season> getSeasons() {
         return seasons;
     }
 
