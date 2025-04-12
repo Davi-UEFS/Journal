@@ -7,10 +7,7 @@ import Model.Media.*;
 import Model.Exceptions.MediaNotFoundException;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class JournalController {
     private final Library journal;
@@ -27,6 +24,7 @@ public class JournalController {
         try {
             journal.isRegistered(book);
             journal.addBook(book);
+            journal.addYear(year);
             return "Livro registrado com sucesso!";
         } catch (MediaAlreadyExistsException e){
             return e.getMessage();
@@ -46,6 +44,7 @@ public class JournalController {
         try {
             journal.isRegistered(movie);
             journal.addMovie(movie);
+            journal.addYear(year);
             return "Filme registrado com sucesso!";
 
         }catch (MediaAlreadyExistsException e){
@@ -70,6 +69,7 @@ public class JournalController {
             journal.isRegistered(series);
             series.addSeason(season);
             journal.addSeries(series);
+            journal.addYear(year);
             return "Série registrada com sucesso!";
         }catch (MediaAlreadyExistsException e){
             return e.getMessage();
@@ -266,6 +266,7 @@ public class JournalController {
         }
     }
 
+    //TODO: CRESCENTE E DA MENOR NOTA PARA A MAIOR OU DA MAIOR PARA A MENOR?
     public <X extends Media> List<X> sortAscending(List<X> mediaList){
         return mediaList.stream().sorted(Comparator.comparing(Media::getRating)).toList();
     }
@@ -274,54 +275,72 @@ public class JournalController {
         return mediaList.stream().sorted(Comparator.comparing(Media::getRating)).toList().reversed();
     }
 
-    public StringBuffer booksByGenreTextAscending() {
-        //TODO: Logica nao e adequada para GUI
-        StringBuffer booksByGenreText = new StringBuffer();
+    /*Gera um LinkedHashMap (para manter a ordem) com as chaves sendo
+     os anos cadastrados e os valores sendo as listas de cada ano.
+     */
+    public Map<Integer, List<Book>> booksByAscendingYearAscendingRate(){
+        Map<Integer, List<Book>> mapYearBook = new LinkedHashMap<>();
 
-        for (Genres genre: Genres.values()) {
-
-            booksByGenreText.append(genre);
-            booksByGenreText.append("\n");
-            List<Book> booksByGenre = searchBookByGenre(genre);
-
-            if (booksByGenre.isEmpty())
-                booksByGenreText.append("Nenhum livro cadastrado para esse gênero.\n\n");
-
-            else {
-                for (Book book : booksByGenre) {
-                    booksByGenreText.append(book.toString());
-                    booksByGenreText.append("\n\n");
-                }
-            }
-
-
+        for(Integer year: journal.getYearsRegistered()){
+            List<Book> books = searchBookByYear(year);
+            mapYearBook.put(year, books);
         }
-        return booksByGenreText;
+        return mapYearBook;
     }
 
-    public StringBuffer booksByGenreTextDescending() {
-        //TODO: Logica nao e adequada para GUI
-        StringBuffer booksByGenreText = new StringBuffer();
+    public Map<Integer, List<Book>> booksByAscendingYearDescendingRate(){
+        Map<Integer, List<Book>> mapYearBook = new LinkedHashMap<>();
 
-        for (Genres genre: Genres.values()) {
+        for(Integer year: journal.getYearsRegistered()){
+            List<Book> books = sortDescending(searchBookByYear(year));
+            mapYearBook.put(year, books);
+        }
+        return mapYearBook;
+    }
 
-            booksByGenreText.append(genre);
-            booksByGenreText.append("\n");
-            List<Book> booksByGenre = sortDescending(searchBookByGenre(genre));
+    public Map<Integer, List<Book>> booksByDescendingYearAscendingRate(){
+        Map<Integer, List<Book>> mapYearBook = new LinkedHashMap<>();
 
-            if (booksByGenre.isEmpty())
-                booksByGenreText.append("Nenhum livro cadastrado para esse gênero.\n\n");
+        for(Integer year: journal.getYearsRegistered().reversed()){
+            List<Book> books = searchBookByYear(year);
+            mapYearBook.put(year, books);
+        }
+        return mapYearBook;
+    }
 
-            else {
-                for (Book book : booksByGenre) {
-                    booksByGenreText.append(book.toString());
-                    booksByGenreText.append("\n\n");
-                }
-            }
+    public Map<Integer, List<Book>> booksByDescendingYearDescendingRate(){
+        Map<Integer, List<Book>> mapYearBook = new LinkedHashMap<>();
 
+        for(Integer year: journal.getYearsRegistered().reversed()){
+            List<Book> books = sortDescending(searchBookByYear(year));
+            mapYearBook.put(year, books);
+        }
+        return mapYearBook;
+    }
+
+    /*Gera um EnumMap (para manter a ordem) com as chaves sendo
+     os generos e os valores sendo as listas de cada genero.
+     */
+    public Map<Genres, List<Book>> booksByGenreAscendingRate() {
+        Map<Genres, List<Book>> mapGenreBook = new EnumMap<>(Genres.class);
+
+        for (Genres genre : Genres.values()) {
+            List<Book> books = searchBookByGenre(genre);
+            mapGenreBook.put(genre, books);
 
         }
-        return booksByGenreText;
+        return mapGenreBook;
+    }
+
+    public Map<Genres, List<Book>> booksByGenreDescendingRate() {
+        Map<Genres, List<Book>> mapGenreBook = new EnumMap<>(Genres.class);
+
+        for (Genres genre : Genres.values()) {
+            List<Book> books = sortDescending(searchBookByGenre(genre));
+            mapGenreBook.put(genre, books);
+
+        }
+        return mapGenreBook;
     }
 
     public ArrayList<Book> allBooks(){
