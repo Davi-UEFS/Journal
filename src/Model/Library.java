@@ -1,23 +1,28 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
-import Model.Exceptions.MediaAlreadyExistsException;
 import Model.Media.Book;
 import Model.Media.Media;
 import Model.Media.Movie;
 import Model.Media.Series;
+
+import Model.Exceptions.MediaAlreadyExistsException;
 import Model.Exceptions.MediaNotFoundException;
 
 public class Library{
     private final ArrayList<Book> bookList;
     private final ArrayList<Movie> movieList;
     private final ArrayList<Series> seriesList;
+    private TreeSet<Integer> yearsRegistered;
 
     public Library(){
         this.bookList = new ArrayList<>();
         this.movieList = new ArrayList<>();
         this.seriesList = new ArrayList<>();
+        this.yearsRegistered = new TreeSet<>();
 
     }
 
@@ -86,6 +91,7 @@ public class Library{
 
         }
     }
+
     public void addBook(Book book){
         bookList.add(book);
     }
@@ -98,6 +104,9 @@ public class Library{
         seriesList.add(series);
     }
 
+    public void addYear(int year){
+        yearsRegistered.add(year);
+    }
     public ArrayList<Book> getBookList() {
         return bookList;
     }
@@ -110,6 +119,9 @@ public class Library{
         return movieList;
     }
 
+    public TreeSet<Integer> getYearsRegistered() {
+        return yearsRegistered;
+    }
 }
 
 
