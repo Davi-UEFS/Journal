@@ -5,6 +5,7 @@ import Model.Media.*;
 import Model.Genres;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class DisplayMenu {
@@ -19,16 +20,20 @@ public class DisplayMenu {
 
     private void sortByMiniMenu(){
         int option;
+        Map<Genres, List<Book>> mapGenreBook;
+        Map<Integer, List<Book>> mapIntBook;
 
         do{
             System.out.println(View.Prompts.Colors.green + "--== MENU DE DISPLAY ==--" + View.Prompts.Colors.rst);
-            System.out.println("1 - Por avaliação (crescente) ");
-            System.out.println("2 - Por avaliação (decrescente)");
+            System.out.println("1 - Ver todos (crescente) ");
+            System.out.println("2 - Ver todos (decrescente)");
             System.out.println("3 - Por gênero (crescente)");
             System.out.println("4 - Por gênero (decrescente)");
-            System.out.println("5 - Por ano de lançamento (crescente)");
-            System.out.println("6 - Por ano de lançamento (decrescente)");
-            System.out.println(View.Prompts.Colors.red + "7 - Voltar" + View.Prompts.Colors.rst);
+            System.out.println("5 - Por mais recente (crescente)");
+            System.out.println("6 - Por mais recente (decrescente)");
+            System.out.println("5 - Por menos recente (crescente)");
+            System.out.println("6 - Por menos recente (decrescente)");
+            System.out.println(View.Prompts.Colors.red + "9 - Voltar" + View.Prompts.Colors.rst);
 
             option = View.Prompts.Validate.validateInt(scanner);
 
@@ -36,7 +41,7 @@ public class DisplayMenu {
 
                 case 1:
 
-                    System.out.println(journalController.allBooks());
+                    System.out.println(journalController.sortAscending(journalController.allBooks()));
 
                     break;
 
@@ -46,31 +51,68 @@ public class DisplayMenu {
                     break;
 
                 case 3:
-                    System.out.println(journalController.booksByGenreTextAscending());
+
+                    mapGenreBook = journalController.booksByGenreAscendingRate();
+                    printMapGenreBook(mapGenreBook);
+
                     break;
 
                 case 4:
-                    System.out.println(journalController.booksByGenreTextDescending());
+                    mapGenreBook = journalController.booksByGenreDescendingRate();
+                    printMapGenreBook(mapGenreBook);
                     break;
 
                 case 5:
+                    mapIntBook = journalController.booksByAscendingYearAscendingRate();
+                    printMapYearBook(mapIntBook);
 
                     break;
 
                 case 6:
-
+                    mapIntBook = journalController.booksByAscendingYearDescendingRate();
+                    printMapYearBook(mapIntBook);
                     break;
 
                 case 7:
-                    System.out.println("Retornando...");
+                    mapIntBook = journalController.booksByDescendingYearAscendingRate();
+                    printMapYearBook(mapIntBook);
+
                     break;
 
+                case 8:
+                    mapIntBook = journalController.booksByDescendingYearDescendingRate();
+                    printMapYearBook(mapIntBook);
+
+                case 9:
+                    System.out.println("Retornando...");
                 default:
                     System.out.println(View.Prompts.Colors.red + "Opção inválida" + View.Prompts.Colors.rst);
                     break;
 
             }
-        }while (option!=7);
+        }while (option!=9);
+    }
+
+    private void printMapGenreBook(Map<Genres, List<Book>> mapGenreBook) {
+        for (Map.Entry<Genres, List<Book>> thisGenreBooks : mapGenreBook.entrySet()) {
+
+            if (!thisGenreBooks.getValue().isEmpty()) {
+                System.out.println(thisGenreBooks.getKey());
+                for (Book book : thisGenreBooks.getValue())
+                    System.out.println(book + "\n");
+            }
+        }
+    }
+
+    private void printMapYearBook(Map<Integer, List<Book>> mapYearBook) {
+        for (Map.Entry<Integer, List<Book>> thisYearBooks : mapYearBook.entrySet()) {
+
+            if (!thisYearBooks.getValue().isEmpty()) {
+                System.out.println(thisYearBooks.getKey());
+                for (Book book : thisYearBooks.getValue())
+                    System.out.println(book + "\n");
+            }
+        }
     }
 
     public void displayMiniMenu() {
@@ -103,7 +145,7 @@ public class DisplayMenu {
                     break;
 
                 case 2:
-                    printBookList(journalController.allBooks());
+                    sortByMiniMenu();
                     break;
 
                 case 3:
