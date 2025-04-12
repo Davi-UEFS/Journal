@@ -52,7 +52,7 @@ public class BookTest {
         books = journalController.searchBookByTitle("Al");
         printBookList(books);
 
-        System.out.println(journalController.booksByGenreTextAscending());
+        System.out.println(journalController.booksByGenreAscendingRate());
 
     }
 
