@@ -1,23 +1,30 @@
 package View;
 
+import Controller.BookService;
+import Controller.MovieService;
+import Controller.SeriesService;
 import Model.Genres;
 import View.Prompts.*;
-import Controller.JournalController;
 
 import java.time.Duration;
 import java.util.Scanner;
 
 
 public class RegisterMenu {
-    private Scanner scanner;
-    private JournalController journalController;
+    private final Scanner scanner;
+    private final BookService bookService;
+    private final MovieService movieService;
+    private final SeriesService seriesService;
 
-    public RegisterMenu(JournalController journalController, Scanner scanner) {
-        this.journalController = journalController;
+    public RegisterMenu(BookService bookService, MovieService movieService,
+                        SeriesService seriesService, Scanner scanner) {
+        this.bookService = bookService;
+        this.movieService = movieService;
+        this.seriesService = seriesService;
         this.scanner = scanner;
     }
 
-    public void registerMiniMenu(JournalController journalController) {
+    public void show() {
         String title;
         int year;
         Genres genre;
@@ -48,7 +55,7 @@ public class RegisterMenu {
                     String publisher = AskInput.askForPublisher(scanner);
                     boolean owned = AskInput.askForOwned(scanner);
 
-                    System.out.println(journalController.register(
+                    System.out.println(bookService.register(
                             title, year, genre, isbn, author, publisher, owned
                     ));
                     break;
@@ -64,7 +71,7 @@ public class RegisterMenu {
                     originalTitle = AskInput.askForOriginalTitle(scanner);
                     whereToWatch = AskInput.askForWhereToWatch(scanner);
 
-                    System.out.println(journalController.register(
+                    System.out.println(movieService.register(
                             title, year, genre, castBuffer, duration, director,
                             script, originalTitle, whereToWatch
                     ));
@@ -81,7 +88,7 @@ public class RegisterMenu {
                     int seasonNumber = AskInput.askForSeasonNumber(scanner);
                     int episodeCount = AskInput.askForEpisodeCount(scanner);
 
-                    System.out.println(journalController.register(
+                    System.out.println(seriesService.register(
                             title, year, genre, yearOfEnding, castBuffer,
                             originalTitle, whereToWatch, seasonNumber, episodeCount
                     ));

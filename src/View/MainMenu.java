@@ -1,22 +1,29 @@
 package View;
 
-import Controller.JournalController;
+import Controller.BookService;
+import Controller.MovieService;
+import Controller.SeriesService;
 
 import java.util.Scanner;
 
 public class MainMenu {
-
-    private Scanner scanner = new Scanner(System.in);  //TODO: FINAL?
-    private JournalController journalController;
-    private DisplayMenu displayMenu;
-    private RegisterMenu registerMenu;
-    private RateMenu rateMenu;
+    private final Scanner scanner;  //TODO: FINAL?
+    private final BookService bookService;
+    private final MovieService movieService;
+    private final SeriesService seriesService;
+    private final DisplayMenu displayMenu;
+    private final RegisterMenu registerMenu;
+    private final RateMenu rateMenu;
     
-    public MainMenu(JournalController journalController) {
-        this.journalController = journalController;
-        this.displayMenu = new DisplayMenu(journalController, scanner);
-        this.rateMenu = new RateMenu(journalController, scanner);
-        this.registerMenu = new RegisterMenu(journalController, scanner);
+    public MainMenu(BookService bookService, MovieService movieService,
+                    SeriesService seriesService, Scanner scanner) {
+        this.bookService = bookService;
+        this.movieService = movieService;
+        this.seriesService = seriesService;
+        this.displayMenu = new DisplayMenu(bookService, movieService, seriesService, scanner);
+        this.rateMenu = new RateMenu(bookService, movieService, seriesService, scanner);
+        this.registerMenu = new RegisterMenu(bookService, movieService, seriesService, scanner);
+        this.scanner = scanner;
     }
 
     public void showMenu(){
@@ -33,16 +40,16 @@ public class MainMenu {
 
             switch (option) {
                 case 1:
-                    registerMenu.registerMiniMenu(journalController);
+                    registerMenu.show();
 
                     break;
 
                 case 2:
-                    rateMenu.rateMiniMenu();
+                    rateMenu.show();
                     break;
 
                 case 3:
-                    displayMenu.displayMiniMenu();
+                    displayMenu.show();
                     break;
 
                 case 4:
