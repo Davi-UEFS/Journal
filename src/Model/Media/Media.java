@@ -7,9 +7,9 @@ public abstract class Media {
     protected final String title;
     protected final int year;
     protected final Genres genre;
-    private double rating;
-    private boolean seen = false;
-    private String review;
+    protected double rating;
+    protected boolean seen = false;
+    protected String review;
     protected int hashCode;
 
     public Media(String name, int year, Genres genre) {
@@ -20,7 +20,7 @@ public abstract class Media {
     }
 
     protected int hashCodeMaker(String name, int year){
-        return name.hashCode() + year;
+        return name.hashCode() + 227 * year;
     }
 
     public double getRating(){
