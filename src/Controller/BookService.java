@@ -1,0 +1,51 @@
+package Controller;
+
+import Model.Exceptions.MediaAlreadyExistsException;
+import Model.Genres;
+import Model.Library;
+import Model.Media.Book;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class BookService extends MediaService<Book>{
+
+    public BookService(Library journal){
+        super(journal);
+    }
+
+    public String register(String name, int year, Genres genre, String isbn,
+                           String author, String publisher, boolean owned) {
+
+        Book book = new Book(name, year, genre, isbn, author, publisher, owned);
+
+        try {
+            journal.isRegistered(book);
+            journal.addBook(book);
+            journal.addYear(year);
+            return "Livro registrado com sucesso!";
+        } catch (MediaAlreadyExistsException e){
+            return e.getMessage();
+        }
+    }
+
+    public List<Book> searchBookByIsbn(String isbn){
+        String isbnLower = isbn.toLowerCase().trim();
+        List<Book> filteredBooks = journal.getBookList().stream().filter
+                (book -> book.getTitle().toLowerCase().contains(isbnLower)).toList();
+
+        return sortAscending(filteredBooks);
+    }
+
+    public List<Book> searchBookByAuthor(String author){
+        String authorLower = author.toLowerCase().trim();
+        List<Book> filteredBooks = journal.getBookList().stream().filter
+                (book -> book.getTitle().toLowerCase().contains(authorLower)).toList();
+
+        return sortAscending(filteredBooks);
+    }
+
+    public ArrayList<Book> allBooks(){
+        return journal.getBookList();
+    }
+}
