@@ -1,6 +1,9 @@
 package View;
 
-import Controller.JournalController;
+import Controller.BookService;
+import Controller.MediaService;
+import Controller.MovieService;
+import Controller.SeriesService;
 import Model.Media.*;
 import Model.Genres;
 
@@ -10,30 +13,33 @@ import java.util.Scanner;
 
 public class DisplayMenu {
     private final Scanner scanner;
-    private final JournalController journalController;
+    private final BookService bookService;
+    private final MovieService movieService;
+    private final SeriesService seriesService;
 
-    public DisplayMenu(JournalController journalController, Scanner scanner) {
-        this.journalController = journalController;
-        
+    public DisplayMenu(BookService bookService, MovieService movieService,
+                        SeriesService seriesService, Scanner scanner) {
+        this.bookService = bookService;
+        this.movieService = movieService;
+        this.seriesService = seriesService;
         this.scanner = scanner;
     }
 
-    private void sortByMiniMenu(){
+    public void show() {
+
         int option;
-        Map<Genres, List<Book>> mapGenreBook;
-        Map<Integer, List<Book>> mapIntBook;
+        String title;
+        int seasonNumber;
 
         do{
             System.out.println(View.Prompts.Colors.green + "--== MENU DE DISPLAY ==--" + View.Prompts.Colors.rst);
-            System.out.println("1 - Ver todos (crescente) ");
-            System.out.println("2 - Ver todos (decrescente)");
-            System.out.println("3 - Por gênero (crescente)");
-            System.out.println("4 - Por gênero (decrescente)");
-            System.out.println("5 - Por mais recente (crescente)");
-            System.out.println("6 - Por mais recente (decrescente)");
-            System.out.println("5 - Por menos recente (crescente)");
-            System.out.println("6 - Por menos recente (decrescente)");
-            System.out.println(View.Prompts.Colors.red + "9 - Voltar" + View.Prompts.Colors.rst);
+            System.out.println("1 - Ver avaliações/reviews (livro)");
+            System.out.println("2 - Ver avaliações/reviews (filme)");
+            System.out.println("3 - Ver avaliações/reviews (série)");
+            System.out.println("4 - Ver livros cadastrados");
+            System.out.println("5 - Ver filmes cadastrados");
+            System.out.println("6 - Ver series cadastradas");
+            System.out.println(View.Prompts.Colors.red + "7 - Voltar" + View.Prompts.Colors.rst);
 
             option = View.Prompts.Validate.validateInt(scanner);
 
@@ -41,341 +47,151 @@ public class DisplayMenu {
 
                 case 1:
 
-                    System.out.println(journalController.sortAscending(journalController.allBooks()));
+                    title = View.Prompts.AskInput.askForTitle(scanner);
 
+                    System.out.println(bookService.readReview(title));
+                    System.out.println(bookService.showRating(title));
                     break;
 
                 case 2:
-                    System.out.println(journalController.sortDescending(journalController.allBooks()));
 
+                    title = View.Prompts.AskInput.askForTitle(scanner);
+
+                    System.out.println(movieService.readReview(title));
+                    System.out.println(movieService.showRating(title));
                     break;
 
                 case 3:
 
-                    mapGenreBook = journalController.booksByGenreAscendingRate();
-                    printMapGenreBook(mapGenreBook);
-
+                    title = View.Prompts.AskInput.askForTitle(scanner);
+                    seasonNumber = View.Prompts.AskInput.askForSeasonNumber(scanner);
+                    System.out.println(seriesService.readReview(title, seasonNumber));
+                    //Nota da temporada
+                    System.out.println(seriesService.showRating(title, seasonNumber));
+                    //Media das notas das temporadas
+                    System.out.println(seriesService.showRating(title));
                     break;
 
                 case 4:
-                    mapGenreBook = journalController.booksByGenreDescendingRate();
-                    printMapGenreBook(mapGenreBook);
+                    listByMiniMenu(bookService, bookService.allBooks());
                     break;
 
                 case 5:
-                    mapIntBook = journalController.booksByAscendingYearAscendingRate();
-                    printMapYearBook(mapIntBook);
-
+                    listByMiniMenu(movieService, movieService.allMovies());
                     break;
 
                 case 6:
-                    mapIntBook = journalController.booksByAscendingYearDescendingRate();
-                    printMapYearBook(mapIntBook);
+                    listByMiniMenu(seriesService, seriesService.allSeries());
                     break;
 
                 case 7:
-                    mapIntBook = journalController.booksByDescendingYearAscendingRate();
-                    printMapYearBook(mapIntBook);
-
+                    System.out.println("Retornando...");
                     break;
 
-                case 8:
-                    mapIntBook = journalController.booksByDescendingYearDescendingRate();
-                    printMapYearBook(mapIntBook);
-
-                case 9:
-                    System.out.println("Retornando...");
                 default:
                     System.out.println(View.Prompts.Colors.red + "Opção inválida" + View.Prompts.Colors.rst);
                     break;
 
+            }
+        }while (option!=7);
+    }
+
+    private <T extends Media> void listByMiniMenu(MediaService<T> service, List<T> mediaList){
+        int option;
+        Map<Genres, List<T>> mapGenreMedia;
+        Map<Integer, List<T>> mapIntMedia;
+
+        do{
+            showListOptions();
+            option = View.Prompts.Validate.validateInt(scanner);
+
+            switch (option) {
+
+                case 1:
+
+                    System.out.println(service.sortAscending(mediaList));
+                    break;
+
+                case 2:
+                    System.out.println(service.sortDescending(mediaList));
+                    break;
+
+                case 3:
+
+                    mapGenreMedia = service.byGenreAscendingRate(mediaList);
+                    printMapGenreMedia(mapGenreMedia);
+                    break;
+
+                case 4:
+                    mapGenreMedia = service.byGenreDescendingRate(mediaList);
+                    printMapGenreMedia(mapGenreMedia);
+                    break;
+
+                case 5:
+                    mapIntMedia = service.mapByAscendingYearAscendingRate(mediaList);
+                    printMapYearMedia(mapIntMedia);
+                    break;
+
+                case 6:
+                    mapIntMedia = service.mapByAscendingYearDescendingRate(mediaList);
+                    printMapYearMedia(mapIntMedia);
+                    break;
+
+                case 7:
+                    mapIntMedia = service.mapByDescendingYearAscendingRate(mediaList);
+                    printMapYearMedia(mapIntMedia);
+                    break;
+
+                case 8:
+                    mapIntMedia = service.mapByDescendingYearDescendingRate(mediaList);
+                    printMapYearMedia(mapIntMedia);
+                    break;
+
+                case 9:
+                    System.out.println("Retornando...");
+                    break;
+
+                default:
+                    System.out.println(View.Prompts.Colors.red + "Opção inválida" + View.Prompts.Colors.rst);
+                    break;
             }
         }while (option!=9);
     }
 
-    private void printMapGenreBook(Map<Genres, List<Book>> mapGenreBook) {
-        for (Map.Entry<Genres, List<Book>> thisGenreBooks : mapGenreBook.entrySet()) {
+    private <T extends Media> void printMapGenreMedia(Map<Genres, List<T>> mapGenreMedia) {
+        for (Map.Entry<Genres, List<T>> thisGenreMedia : mapGenreMedia.entrySet()) {
 
-            if (!thisGenreBooks.getValue().isEmpty()) {
-                System.out.println(thisGenreBooks.getKey());
-                for (Book book : thisGenreBooks.getValue())
-                    System.out.println(book + "\n");
+            if (!thisGenreMedia.getValue().isEmpty()) {
+                System.out.println(thisGenreMedia.getKey());
+                for (Media media : thisGenreMedia.getValue())
+                    System.out.println(media + "\n");
             }
         }
     }
 
-    private void printMapYearBook(Map<Integer, List<Book>> mapYearBook) {
-        for (Map.Entry<Integer, List<Book>> thisYearBooks : mapYearBook.entrySet()) {
+    private <T extends Media> void printMapYearMedia(Map<Integer, List<T>> mapYearMedia) {
+        for (Map.Entry<Integer, List<T>> thisYearMedia : mapYearMedia.entrySet()) {
 
-            if (!thisYearBooks.getValue().isEmpty()) {
-                System.out.println(thisYearBooks.getKey());
-                for (Book book : thisYearBooks.getValue())
-                    System.out.println(book + "\n");
+            if (!thisYearMedia.getValue().isEmpty()) {
+                System.out.println(thisYearMedia.getKey());
+                for (Media media : thisYearMedia.getValue())
+                    System.out.println(media + "\n");
             }
         }
     }
 
-    public void displayMiniMenu() {
+    private void showListOptions(){
+        System.out.println(View.Prompts.Colors.green + "--== MENU DE DISPLAY ==--" + View.Prompts.Colors.rst);
+        System.out.println("1 - Ver todos (crescente) ");
+        System.out.println("2 - Ver todos (decrescente)");
+        System.out.println("3 - Por gênero (crescente)");
+        System.out.println("4 - Por gênero (decrescente)");
+        System.out.println("5 - Por mais recente (crescente)");
+        System.out.println("6 - Por mais recente (decrescente)");
+        System.out.println("5 - Por menos recente (crescente)");
+        System.out.println("6 - Por menos recente (decrescente)");
+        System.out.println(View.Prompts.Colors.red + "9 - Voltar" + View.Prompts.Colors.rst);
 
-        int option;
-        String title;
-
-        do{
-            System.out.println(View.Prompts.Colors.green + "--== MENU DE DISPLAY ==--" + View.Prompts.Colors.rst);
-            System.out.println("1 - Ver avaliações");
-            System.out.println("2 - Ver livros cadastrados");
-            System.out.println("3 - Ver filmes cadastrados");
-            System.out.println("4 - Ver series cadastradas");
-            System.out.println("5 - Buscar livros");
-            System.out.println("6 - Buscar filmes");
-            System.out.println("7 - Buscar series");
-            System.out.println(View.Prompts.Colors.red + "8 - Voltar" + View.Prompts.Colors.rst);
-
-            option = View.Prompts.Validate.validateInt(scanner);
-
-            switch (option) {
-
-                case 1:
-
-                    title = View.Prompts.AskInput.askForTitle(scanner);
-
-                    System.out.println(journalController.readReview(title));
-                    //TODO JUNTAR METODOS?
-                    System.out.println(journalController.showRating(title));
-                    break;
-
-                case 2:
-                    sortByMiniMenu();
-                    break;
-
-                case 3:
-                    printMovieList(journalController.allMovies());
-                    break;
-
-                case 4:
-                    printSeriesList(journalController.allSeries());
-                    break;
-
-                case 5:
-                    searchBookMiniMenu();
-                    break;
-
-                case 6:
-                    searchMovieMiniMenu();
-                    break;
-
-                case 7:
-                    searchSeriesMiniMenu();
-                    break;
-
-                case 8:
-                    System.out.println("Retornando...");
-                    break;
-
-                default:
-                    System.out.println(View.Prompts.Colors.red + "Opção inválida" + View.Prompts.Colors.rst);
-                    break;
-
-            }
-        }while (option!=8);
-    }
-
-    private void searchBookMiniMenu(){
-        int option;
-        String title;
-        int year;
-        Genres genre;
-        String author;
-        String isbn;
-        List<Book> bookList;
-        do {
-            System.out.println(View.Prompts.Colors.green + "--== BUSCAR LIVRO ==--" + View.Prompts.Colors.rst);
-            System.out.println("1 - Buscar por título");
-            System.out.println("2 - Buscar por ano");
-            System.out.println("3 - Buscar por gênero");
-            System.out.println("4 - Buscar por autor");
-            System.out.println("5 - Buscar por ISBN");
-            System.out.println(View.Prompts.Colors.red + "6 - Voltar" + View.Prompts.Colors.rst);
-
-            option = View.Prompts.Validate.validateInt(scanner);
-
-            switch (option) {
-                case 1:
-                    //title
-                    title = View.Prompts.AskInput.askForTitle(scanner);
-                    bookList = journalController.searchBookByTitle(title);
-                    printBookList(bookList);
-                    break;
-
-                case 2:
-                    //ano
-                    year = View.Prompts.AskInput.askForYear(scanner);
-                    bookList = journalController.searchBookByYear(year);
-                    printBookList(bookList);
-                    break;
-
-                case 3:
-                    //genre
-                    genre = View.Prompts.AskInput.askForGenre(scanner);
-                    bookList = journalController.searchBookByGenre(genre);
-                    printBookList(bookList);
-                    break;
-
-                case 4:
-                    //author
-                    author = View.Prompts.AskInput.askForAuthor(scanner);
-                    bookList = journalController.searchBookByAuthor(author);
-                    printBookList(bookList);
-                    break;
-
-                case 5:
-                    //isbn
-                    isbn = View.Prompts.AskInput.askForISBN(scanner);
-                    bookList = journalController.searchBookByIsbn(isbn);
-                    printBookList(bookList);
-                    break;
-
-                case 6:
-                    System.out.println("Retornando...");
-                    break;
-
-                default:
-                    System.out.println(View.Prompts.Colors.red + "Opção inválida" + View.Prompts.Colors.rst);
-                    break;
-            }
-        } while (option!=6);
-    }
-
-    private void searchMovieMiniMenu(){
-        int option;
-        String title;
-        int year;
-        Genres genre;
-        String director;
-        String actor;
-        List<Movie> movieList;
-        do {
-            System.out.println(View.Prompts.Colors.green + "--== BUSCAR FILME ==--" + View.Prompts.Colors.rst);
-            System.out.println("1 - Buscar por título");
-            System.out.println("2 - Buscar por ano");
-            System.out.println("3 - Buscar por gênero");
-            System.out.println("4 - Buscar por diretor");
-            System.out.println("5 - Buscar por ator no elenco");
-            System.out.println(View.Prompts.Colors.red + "6 - Voltar" + View.Prompts.Colors.rst);
-
-            option = View.Prompts.Validate.validateInt(scanner);
-
-            switch (option) {
-                case 1:
-                    title = View.Prompts.AskInput.askForTitle(scanner);
-                    movieList = journalController.searchMovieByTitle(title);
-                    printMovieList(movieList);
-                    break;
-
-                case 2:
-                    year = View.Prompts.AskInput.askForYear(scanner);
-                    movieList = journalController.searchMovieByYear(year);
-                    printMovieList(movieList);
-                    break;
-
-                case 3:
-                    genre = View.Prompts.AskInput.askForGenre(scanner);
-                    movieList = journalController.searchMovieByGenre(genre);
-                    printMovieList(movieList);
-                    break;
-
-                case 4:
-                    director = View.Prompts.AskInput.askForDirector(scanner);
-                    movieList = journalController.searchMovieByDirector(director);
-                    printMovieList(movieList);
-                    break;
-
-                case 5:
-                    // TODO: FAZER BUSCA POR ATOR
-                    break;
-
-                case 6:
-                    System.out.println("Retornando...");
-                    break;
-
-                default:
-                    System.out.println(View.Prompts.Colors.red + "Opção inválida " + View.Prompts.Colors.rst);
-                    break;
-            }
-        } while(option != 6);
-    }
-
-    public void searchSeriesMiniMenu(){
-        int option;
-        String title;
-        int year;
-        Genres genre;
-        String actor;
-        List<Series> seriesList;
-        do {
-            System.out.println(View.Prompts.Colors.green + "--== BUSCAR SÉRIE ==--" + View.Prompts.Colors.rst);
-            System.out.println("1 - Buscar por título");
-            System.out.println("2 - Buscar por ano de lançamento");
-            System.out.println("3 - Buscar por gênero");
-            System.out.println("4 - Buscar por ator no elenco");
-            System.out.println(View.Prompts.Colors.red + "5 - Voltar" + View.Prompts.Colors.rst);
-
-            option = View.Prompts.Validate.validateInt(scanner);
-
-            switch (option) {
-                case 1:
-                    title = View.Prompts.AskInput.askForTitle(scanner);
-                    seriesList = journalController.searchSeriesByTitle(title);
-                    printSeriesList(seriesList);
-                    break;
-
-                case 2:
-                    year = View.Prompts.AskInput.askForYear(scanner);
-                    seriesList = journalController.searchSeriesByYear(year);
-                    printSeriesList(seriesList);
-                    break;
-
-                case 3:
-                    genre = View.Prompts.AskInput.askForGenre(scanner);
-                    seriesList = journalController.searchSeriesByGenre(genre);
-                    printSeriesList(seriesList);
-                    break;
-
-                case 4:
-                    //TODO: FAZER BUSCA POR ATOR
-                    break;
-
-                case 5:
-                    System.out.println("Retornando...");
-                    break;
-
-                default:
-                    System.out.println(View.Prompts.Colors.red + "Opção inválida " + View.Prompts.Colors.rst);
-                    break;
-            }
-        } while(option != 5);
-    }
-
-    private void printBookList(List<Book> bookList) {
-        for(Book book: bookList)
-            System.out.println(book.toString());
-    }
-
-    private void printMovieList(List<Movie> movieList) {
-        for(Movie movie: movieList)
-            System.out.println(movie.toString());
-
-    }
-
-    private void printSeriesList(List<Series> seriesList) {
-        for(Series series: seriesList){
-            System.out.println(series.toString());
-            for(Season season: series.getSeasons()) {
-                System.out.print("\t");
-                System.out.println(season.toString());
-            }
-
-        }
     }
 
 }
