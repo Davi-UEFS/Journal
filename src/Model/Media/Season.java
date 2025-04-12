@@ -5,7 +5,7 @@ public class Season implements Comparable<Season>{
     private final int seasonNumber;
     private String review;
     private boolean seen;
-    private int episodeCount;
+    private final int episodeCount;
 
     public Season(int seasonNumber, int episodeCount) {
         this.seasonNumber = seasonNumber;
