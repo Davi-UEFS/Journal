@@ -56,12 +56,6 @@ public class Series extends Media {
         }
     }
 
-    public String toString() {
-        String endingYear = (yearOfEnding == 9999) ? "Em andamento" : Integer.toString(yearOfEnding);
-        return "\n" + title + " (" + year + " - "  + endingYear + ")\nTítulo original: " + originalTitle +
-                    "\nOnde assistir: " + whereToWatch + "\nElenco: " + cast;
-    }
-
     public int getYearOfEnding() {
         return yearOfEnding;
     }
@@ -88,6 +82,13 @@ public class Series extends Media {
 
     public int getNumberOfSeasons(){
         return seasons.size();
+    }
+
+    @Override
+    public String toString() {
+        String endingYear = (yearOfEnding == 9999) ? "Em andamento" : Integer.toString(yearOfEnding);
+        return "\n" + title + " (" + year + " - "  + endingYear + ")\nTítulo original: " + originalTitle +
+                "\nOnde assistir: " + whereToWatch + "\nElenco: " + cast;
     }
 
 }

@@ -10,17 +10,11 @@ public abstract class Media {
     protected double rating;
     protected boolean seen = false;
     protected String review;
-    protected int hashCode;
 
-    public Media(String name, int year, Genres genre) {
-        this.title = name;
+    public Media(String title, int year, Genres genre) {
+        this.title = title;
         this.year = year;
         this.genre = genre;
-        this.hashCode = hashCodeMaker(name, year);
-    }
-
-    protected int hashCodeMaker(String name, int year){
-        return name.hashCode() + 227 * year;
     }
 
     public double getRating(){
@@ -59,7 +53,7 @@ public abstract class Media {
         this.review = review;
     }
 
-    public int getHashCode() {
-        return hashCode;
+    public int getId() {
+        return title.hashCode() + 227 *  year;
     }
 }
