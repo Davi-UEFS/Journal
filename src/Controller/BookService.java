@@ -32,7 +32,7 @@ public class BookService extends MediaService<Book>{
     public List<Book> searchBookByIsbn(String isbn){
         String isbnLower = isbn.toLowerCase().trim();
         List<Book> filteredBooks = journal.getBookList().stream().filter
-                (book -> book.getTitle().toLowerCase().contains(isbnLower)).toList();
+                (book -> book.getIsbn().toLowerCase().contains(isbnLower)).toList();
 
         return sortAscending(filteredBooks);
     }
@@ -40,7 +40,7 @@ public class BookService extends MediaService<Book>{
     public List<Book> searchBookByAuthor(String author){
         String authorLower = author.toLowerCase().trim();
         List<Book> filteredBooks = journal.getBookList().stream().filter
-                (book -> book.getTitle().toLowerCase().contains(authorLower)).toList();
+                (book -> book.getAuthor().toLowerCase().contains(authorLower)).toList();
 
         return sortAscending(filteredBooks);
     }
