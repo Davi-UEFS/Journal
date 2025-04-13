@@ -60,7 +60,7 @@ public class Validate {
                 return false;
             }
 
-            System.out.println("Erro: Digite apenas 'true' ou 'false'.");
+            System.out.println("Erro: Digite apenas s/n ou sim/nao.");
         }
 
     }
