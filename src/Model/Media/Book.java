@@ -10,18 +10,14 @@ public class Book extends Media{
     private boolean owned;
     private LocalDate readDate;
 
-    public Book(String name, int year, Genres genre, String isbn, String author, String publisher, boolean owned) {
-        super(name, year, genre);
+    public Book(String title, int year, Genres genre, String isbn, String author, String publisher, boolean owned) {
+        super(title, year, genre);
         this.isbn = isbn;
         this.author = author;
         this.publisher = publisher;
         this.owned = owned;
-        this.hashCode = hashCodeMaker(name, isbn);
     }
 
-    private int hashCodeMaker(String name, String isbn){
-        return name.hashCode() + isbn.hashCode();
-    }
     
     public String getIsbn() {
         return isbn;
@@ -29,10 +25,6 @@ public class Book extends Media{
 
     public String getAuthor() {
         return author;
-    }
-
-    public String getPublisher() {
-        return publisher;
     }
 
     public boolean isOwned() {
@@ -46,10 +38,17 @@ public class Book extends Media{
     public LocalDate getReadDate() {
         return readDate;
     }
+
     public void setReadDate(LocalDate readDate) {
         this.readDate = readDate;
     }
 
+    @Override
+    public int getId(){
+        return title.hashCode() + isbn.hashCode() + 227*year;
+    }
+
+    @Override
     public String toString() {
         return "\n" + title + " (" + this.year + ")\nAutor: " + author + "\nEditora: " + publisher + "\nISBN: " + isbn;
     }
