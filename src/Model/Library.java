@@ -1,7 +1,6 @@
 package Model;
 
 import java.util.ArrayList;
-import java.util.SortedSet;
 import java.util.TreeSet;
 
 import Model.Media.Book;
@@ -16,7 +15,7 @@ public class Library{
     private final ArrayList<Book> bookList;
     private final ArrayList<Movie> movieList;
     private final ArrayList<Series> seriesList;
-    private TreeSet<Integer> yearsRegistered;
+    private final TreeSet<Integer> yearsRegistered;
 
     public Library(){
         this.bookList = new ArrayList<>();
@@ -68,25 +67,25 @@ public class Library{
         }
     }
 
-    public void isRegistered(Book book) throws MediaAlreadyExistsException {
+    public void exists(Book book) throws MediaAlreadyExistsException {
         for(Book bookE: bookList){
-            if(book.getHashCode() == bookE.getHashCode())
+            if(book.getId() == bookE.getId())
                 throw new MediaAlreadyExistsException("Esse livro já foi cadastrado!");
 
         }
     }
 
-    public void isRegistered(Movie movie) throws MediaAlreadyExistsException {
+    public void exists(Movie movie) throws MediaAlreadyExistsException {
         for(Movie movieE: movieList){
-            if(movie.getHashCode() == movieE.getHashCode())
+            if(movie.getId() == movieE.getId())
                 throw new MediaAlreadyExistsException("Esse filme já foi cadastrado!");
 
         }
     }
 
-    public void isRegistered(Series series) throws MediaAlreadyExistsException {
+    public void exists(Series series) throws MediaAlreadyExistsException {
         for(Series seriesE: seriesList){
-            if(series.getHashCode() == seriesE.getHashCode())
+            if(series.getId() == seriesE.getId())
                 throw new MediaAlreadyExistsException("Esse livro já foi cadastrado!");
 
         }
