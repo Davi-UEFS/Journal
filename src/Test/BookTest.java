@@ -49,14 +49,14 @@ public class BookTest {
                 "Machado de Assis", "PBL Books", false);
 
         System.out.println("Livros com 'ta': ");
-        List<Book> books = bookService.searchByTitle("ta", bookService.allBooks());
+        List<Book> books = bookService.searchByTitle("ta", bookService.getAllBooks());
         printBookList(books);
         System.out.println("Livros com 'Al");
-        books = bookService.searchByTitle("Al", bookService.allBooks());
+        books = bookService.searchByTitle("Al", bookService.getAllBooks());
         printBookList(books);
 
         System.out.println("Por genero crescente");
-        System.out.println(bookService.byGenreAscendingRate(bookService.allBooks()));
+        System.out.println(bookService.mapByGenreRate(bookService.getAllBooks(), true));
 
     }
 
@@ -68,7 +68,7 @@ public class BookTest {
         bookService.register("Alpha", 1999, Genres.FICÇÃO, "978-3161484100",
                 "Carlos Drummond", "PBL Books", true);
 
-        System.out.println(journal.getBookList().getFirst().getHashCode());
+        System.out.println(journal.getBookList().getFirst().getId());
     }
 
     @Test
@@ -91,13 +91,13 @@ public class BookTest {
 
 
         System.out.println("Por genero crescente");
-        printMapGenreMedia(bookService.byGenreAscendingRate(bookService.allBooks()));
+        printMapGenreMedia(bookService.mapByGenreRate(bookService.getAllBooks(),true));
 
     }
 
     private void printAllBooks(BookService bookService){
 
-        ArrayList<Book> bookList = bookService.allBooks();
+        ArrayList<Book> bookList = bookService.getAllBooks();
         for(Book book: bookList)
             System.out.printf("Titulo: %s (%d) \n ", book.getTitle(), book.getYear());
 

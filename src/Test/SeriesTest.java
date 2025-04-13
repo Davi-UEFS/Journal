@@ -7,7 +7,6 @@ import Model.Media.Season;
 import Model.Media.Series;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -35,7 +34,7 @@ public class SeriesTest {
 
         assertEquals("Série registrada com sucesso!", result1);
         assertEquals("Série registrada com sucesso!", result2);
-        assertEquals(2, seriesService.allSeries().size());
+        assertEquals(2, seriesService.getAllSeries().size());
     }
 
     @Test
@@ -50,7 +49,7 @@ public class SeriesTest {
                 new String[]{"Netflix", "HBO Max"},
                 1, 5);
 
-        Series series = seriesService.allSeries().getFirst();
+        Series series = seriesService.getAllSeries().getFirst();
         int initialSeasons = series.getNumberOfSeasons();
 
         series.addSeason(new Season(2, 8));
@@ -71,17 +70,17 @@ public class SeriesTest {
                 1, 5);
 
         // Testar avaliação de temporada
-        String ratingResult = seriesService.rate("Missão Explosiva", 1, 4.5);
+        String ratingResult = seriesService.rateSeason("Missão Explosiva", 1, 4.5);
         assertEquals("Avaliação salva com sucesso", ratingResult);
 
         // Testar review de temporada
-        String reviewResult = seriesService.writeReview("Missão Explosiva", 1, "Excelente primeira temporada!");
+        String reviewResult = seriesService.writeReviewSeason("Missão Explosiva", 1, "Excelente primeira temporada!");
         assertEquals("Review salva com sucesso", reviewResult);
 
         // Verificar avaliação e review
         System.out.println(seriesService.showRating("Missão Explosiva"));
-        System.out.println(seriesService.showRating("Missão Explosiva", 1));
-        System.out.println(seriesService.readReview("Missão Explosiva", 1));
+        System.out.println(seriesService.showRatingSeason("Missão Explosiva", 1));
+        System.out.println(seriesService.readReviewSeason("Missão Explosiva", 1));
     }
 
     @Test
@@ -101,16 +100,16 @@ public class SeriesTest {
                 new String[]{"Platform C"}, 1, 12);
 
         // Testar busca por título
-        List<Series> searchResults = seriesService.searchByTitle("Série", seriesService.allSeries());
+        List<Series> searchResults = seriesService.searchByTitle("Série", seriesService.getAllSeries());
         printSeriesList(searchResults);
         assertEquals(3, searchResults.size());
 
         // Testar busca por ano
-        List<Series> yearResults = seriesService.searchByYear(2020, seriesService.allSeries());
+        List<Series> yearResults = seriesService.searchByYear(2020, seriesService.getAllSeries());
         assertEquals(2, yearResults.size());
 
         // Testar busca por gênero
-        List<Series> genreResults = seriesService.searchByGenre(Genres.AÇÃO, seriesService.allSeries());
+        List<Series> genreResults = seriesService.searchByGenre(Genres.AÇÃO, seriesService.getAllSeries());
         assertEquals(2, genreResults.size());
     }
 
@@ -127,14 +126,14 @@ public class SeriesTest {
                 1, 8);
 
         // Adicionar temporadas adicionais
-        Series series = seriesService.allSeries().getFirst();
+        Series series = seriesService.getAllSeries().getFirst();
         series.addSeason(new Season(2, 10));
         series.addSeason(new Season(3, 12));
 
         // Avaliar diferentes temporadas
-        seriesService.rate("Série Completa", 1, 3.5);
-        seriesService.rate("Série Completa", 2, 4.0);
-        seriesService.rate("Série Completa", 3, 4.5);
+        seriesService.rateSeason("Série Completa", 1, 3.5);
+        seriesService.rateSeason("Série Completa", 2, 4.0);
+        seriesService.rateSeason("Série Completa", 3, 4.5);
 
         // Verificar avaliação geral
         assertEquals(4.0, journal.getSeriesList().getFirst().getRating());

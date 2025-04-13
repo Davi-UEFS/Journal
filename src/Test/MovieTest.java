@@ -32,9 +32,9 @@ public class MovieTest {
 
         assertEquals("Filme registrado com sucesso!", result1);
         assertEquals("Filme registrado com sucesso!", result2);
-        assertEquals(2, movieService.allMovies().size());
+        assertEquals(2, movieService.getAllMovies().size());
 
-        printMovieList(movieService.allMovies());
+        printMovieList(movieService.getAllMovies());
     }
 
     @Test
