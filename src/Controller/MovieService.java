@@ -3,14 +3,14 @@ package Controller;
 import Model.Exceptions.MediaAlreadyExistsException;
 import Model.Genres;
 import Model.Library;
+
 import Model.Media.Movie;
 
+import javax.print.ServiceUI;
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
-public class MovieService extends MediaService<Movie>{
+public class MovieService extends CommonService<Movie> {
 
     public MovieService(Library journal){
         super(journal);
@@ -27,7 +27,7 @@ public class MovieService extends MediaService<Movie>{
                 script, originalTitle, whereToWatch);
 
         try {
-            journal.isRegistered(movie);
+            journal.exists(movie);
             journal.addMovie(movie);
             journal.addYear(year);
             return "Filme registrado com sucesso!";
@@ -46,7 +46,7 @@ public class MovieService extends MediaService<Movie>{
         return sortAscending(filteredMovies);
     }
 
-    public ArrayList<Movie> allMovies(){
+    public ArrayList<Movie> getAllMovies(){
         return journal.getMovieList();
     }
 
