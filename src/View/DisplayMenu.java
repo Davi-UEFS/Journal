@@ -159,24 +159,20 @@ public class DisplayMenu {
     }
 
     private <T extends Media> void printMapGenreMedia(Map<Genres, List<T>> mapGenreMedia) {
-        for (Map.Entry<Genres, List<T>> thisGenreMedia : mapGenreMedia.entrySet()) {
 
-            if (!thisGenreMedia.getValue().isEmpty()) {
-                System.out.println(thisGenreMedia.getKey());
-                for (Media media : thisGenreMedia.getValue())
-                    System.out.println(media + "\n");
-            }
+        for (Map.Entry<Genres, List<T>> thisGenreMedia : mapGenreMedia.entrySet()) {
+            System.out.println(thisGenreMedia.getKey());
+            for (Media media : thisGenreMedia.getValue())
+                System.out.println(media + "\n");
         }
     }
 
     private <T extends Media> void printMapYearMedia(Map<Integer, List<T>> mapYearMedia) {
         for (Map.Entry<Integer, List<T>> thisYearMedia : mapYearMedia.entrySet()) {
 
-            if (!thisYearMedia.getValue().isEmpty()) {
-                System.out.println(thisYearMedia.getKey());
-                for (Media media : thisYearMedia.getValue())
-                    System.out.println(media + "\n");
-            }
+            System.out.println(thisYearMedia.getKey());
+            for (Media media : thisYearMedia.getValue())
+                System.out.println(media + "\n");
         }
     }
 
