@@ -8,7 +8,7 @@ import Model.Media.Book;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookService extends MediaService<Book>{
+public class BookService extends CommonService<Book>{
 
     public BookService(Library journal){
         super(journal);
@@ -20,7 +20,7 @@ public class BookService extends MediaService<Book>{
         Book book = new Book(name, year, genre, isbn, author, publisher, owned);
 
         try {
-            journal.isRegistered(book);
+            journal.exists(book);
             journal.addBook(book);
             journal.addYear(year);
             return "Livro registrado com sucesso!";
@@ -45,7 +45,7 @@ public class BookService extends MediaService<Book>{
         return sortAscending(filteredBooks);
     }
 
-    public ArrayList<Book> allBooks(){
+    public ArrayList<Book> getAllBooks(){
         return journal.getBookList();
     }
 }
