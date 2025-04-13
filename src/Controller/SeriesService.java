@@ -9,15 +9,13 @@ import Model.Media.Media;
 import Model.Media.Season;
 import Model.Media.Series;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
-public class SeriesService extends MediaService<Series> {
+public class SeriesService extends CommonService<Series> {
 
     public SeriesService(Library journal){
         super(journal);
     }
-
 
     public String register(String title, int year, Genres genre, int yearOfEnding,
                            String[] castBuffer, String originalTitle, String[] whereToWatchBuffer,
@@ -32,7 +30,7 @@ public class SeriesService extends MediaService<Series> {
                 originalTitle, whereToWatch);
 
         try {
-            journal.isRegistered(series);
+            journal.exists(series);
             series.addSeason(season);
             journal.addSeries(series);
             journal.addYear(year);
@@ -42,7 +40,23 @@ public class SeriesService extends MediaService<Series> {
         }
     }
 
-    public String rate(String title, int seasonNumber, double rating) {
+    /**
+     * Metodo rate não deve ser usado. A atualização já é feita no rateSeason
+     * */
+    @Override
+    public String rate(String title, double rating){
+        try {
+            Series series = journal.findSeries(title);
+            series.updateRate();
+
+            return "Avaliação atualizada com sucesso";
+
+        } catch (MediaNotFoundException e) {
+            return e.getMessage();
+        }
+    }
+
+    public String rateSeason(String title, int seasonNumber, double rating) {
         try {
             Series series = journal.findSeries(title);
 
@@ -56,7 +70,7 @@ public class SeriesService extends MediaService<Series> {
         }
     }
 
-    public String writeReview(String title, int seasonNumber, String review) {
+    public String writeReviewSeason(String title, int seasonNumber, String review) {
         try {
             Series serie = journal.findSeries(title);
             Season season = serie.findSeason(seasonNumber);
@@ -69,7 +83,7 @@ public class SeriesService extends MediaService<Series> {
 
     }
 
-    public String readReview(String title, int seasonNumber) {
+    public String readReviewSeason(String title, int seasonNumber) {
 
         try {
             Series series = journal.findSeries(title);
@@ -94,7 +108,7 @@ public class SeriesService extends MediaService<Series> {
         }
     }
 
-    public String showRating(String title, int seasonNumber) {
+    public String showRatingSeason(String title, int seasonNumber) {
 
         try {
             Series series = journal.findSeries(title);
@@ -107,7 +121,7 @@ public class SeriesService extends MediaService<Series> {
         }
     }
 
-    public ArrayList<Series> allSeries(){
+    public ArrayList<Series> getAllSeries(){
         return journal.getSeriesList();
     }
 }
