@@ -4,18 +4,17 @@ import Model.Exceptions.MediaNotFoundException;
 import Model.Genres;
 import Model.Library;
 import Model.Media.Media;
-import Model.Media.Season;
-import Model.Media.Series;
 
 import java.util.*;
 
-public abstract class MediaService<T extends Media> {
+public abstract class CommonService<T extends Media> implements IMediaService<T> {
     protected final Library journal;
 
-    public MediaService(Library journal) {
+    public CommonService(Library journal) {
         this.journal = journal;
     }
 
+    @Override
     public String rate(String title, double rating) {
         try {
             Media media = journal.findMedia(title);
@@ -28,7 +27,7 @@ public abstract class MediaService<T extends Media> {
         }
 
     }
-
+    @Override
     public String writeReview(String title, String review) {
         try {
             Media media = journal.findMedia(title);
@@ -42,6 +41,7 @@ public abstract class MediaService<T extends Media> {
 
     }
 
+    @Override
     public String readReview(String title) {
 
         try {
@@ -53,7 +53,7 @@ public abstract class MediaService<T extends Media> {
 
         }
     }
-
+    @Override
     public String showRating(String title) {
 
         try {
@@ -66,7 +66,7 @@ public abstract class MediaService<T extends Media> {
         }
     }
 
-    //TODO: NECESSARIO CAST AO USAR Os METODOs DE BUSCA
+    @Override
     public List<T> searchByTitle(String title, List<T> mediaList) {
         String titleLower = title.toLowerCase().trim();
         List<T> filteredMedia = mediaList.stream().filter
@@ -75,6 +75,7 @@ public abstract class MediaService<T extends Media> {
         return sortAscending(filteredMedia);
     }
 
+    @Override
     public List<T> searchByYear(int year, List<T> mediaList) {
         List<T> filteredMedia = mediaList.stream().filter
                 (media -> media.getYear() == year).toList();
@@ -82,6 +83,7 @@ public abstract class MediaService<T extends Media> {
         return sortAscending(filteredMedia);
     }
 
+    @Override
     public List<T> searchByGenre(Genres genre, List<T> mediaList) {
         List<T> filteredMedia = mediaList.stream().filter
                 (media -> media.getGenre() == genre).toList();
@@ -90,6 +92,7 @@ public abstract class MediaService<T extends Media> {
     }
 
     //TODO: CRESCENTE E DA MENOR NOTA PARA A MAIOR OU DA MAIOR PARA A MENOR?
+
     public List<T> sortAscending(List<T> mediaList) {
         return mediaList.stream().sorted(Comparator.comparing(Media::getRating)).toList();
     }
@@ -98,58 +101,46 @@ public abstract class MediaService<T extends Media> {
         return mediaList.stream().sorted(Comparator.comparing(Media::getRating)).toList().reversed();
     }
 
-    public Map<Integer, List<T>> mapByAscendingYearAscendingRate(List<T> mediaList) {
-        Map<Integer, List<T>> mapYearMedia = new LinkedHashMap<>();
-
-        for (Integer year : journal.getYearsRegistered()) {
-            List<T> filteredMedia = searchByYear(year, mediaList);
-            if(!filteredMedia.isEmpty())
-                mapYearMedia.put(year, filteredMedia);
-        }
-        return mapYearMedia;
-    }
-
-    public Map<Integer, List<T>> mapByAscendingYearDescendingRate(List<T> mediaList) {
-        Map<Integer, List<T>> mapYearMedia = new LinkedHashMap<>();
-
-        for (Integer year : journal.getYearsRegistered()) {
-            List<T> filteredMedia = sortDescending(searchByYear(year, mediaList));
-            if(!filteredMedia.isEmpty())
-                mapYearMedia.put(year, filteredMedia);
-        }
-        return mapYearMedia;
-    }
-
-    public Map<Integer, List<T>> mapByDescendingYearAscendingRate(List<T> mediaList) {
-        Map<Integer, List<T>> mapYearMedia = new LinkedHashMap<>();
-
-        for (Integer year : journal.getYearsRegistered().reversed()) {
-            List<T> filteredMedia = searchByYear(year, mediaList);
-            if(!filteredMedia.isEmpty())
-                mapYearMedia.put(year, filteredMedia);
-        }
-        return mapYearMedia;
-    }
-
-    public Map<Integer, List<T>> mapByDescendingYearDescendingRate(List<T> mediaList) {
-        Map<Integer, List<T>> mapYearMedia = new LinkedHashMap<>();
-
-        for (Integer year : journal.getYearsRegistered().reversed()) {
-            List<T> filteredMedia = sortDescending(searchByYear(year, mediaList));
-            if(!filteredMedia.isEmpty())
-                mapYearMedia.put(year, filteredMedia);
-        }
-        return mapYearMedia;
-    }
-
-    /*Gera um EnumMap (para manter a ordem) com as chaves sendo
-     os generos e os valores sendo as listas de cada genero.
+    /**Gera um LinkedHashMap com as chaves sendo o ano e
+     * os valores sendo uma lista com midias deste ano.
      */
-    public Map<Genres, List<T>> byGenreAscendingRate(List<T> mediaList) {
+    public Map<Integer, List<T>> mapByYearRate(List<T> mediaList, boolean ascendingYear,boolean
+                                               ascendingRate) {
+        Map<Integer, List<T>> mapYearMedia = new LinkedHashMap<>();
+        List<Integer> years = new ArrayList<>(journal.getYearsRegistered());
+
+        if(!ascendingYear)
+            Collections.reverse(years);
+
+        for (Integer year : years) {
+
+            List<T> filteredMedia;
+            if(ascendingRate) {
+                filteredMedia = searchByYear(year, mediaList);
+            } else{
+                filteredMedia = sortDescending(searchByYear(year, mediaList));
+            }
+
+            if(!filteredMedia.isEmpty())
+                mapYearMedia.put(year, filteredMedia);
+        }
+        return mapYearMedia;
+    }
+
+
+    /**Gera um EnumMap (para manter a ordem) com as chaves sendo
+     *os generos e os valores sendo as listas de cada genero.
+     */
+    public Map<Genres, List<T>> mapByGenreRate(List<T> mediaList, boolean ascendingRate) {
         Map<Genres, List<T>> mapGenreMedia = new EnumMap<>(Genres.class);
 
         for (Genres genre : Genres.values()) {
-            List<T> filteredMedia = searchByGenre(genre, mediaList);
+            List<T> filteredMedia;
+            if(ascendingRate) {
+                filteredMedia = searchByGenre(genre, mediaList);
+            } else{
+                filteredMedia = sortDescending(searchByGenre(genre, mediaList));
+            }
             if(!filteredMedia.isEmpty())
                 mapGenreMedia.put(genre, filteredMedia);
 
@@ -157,15 +148,4 @@ public abstract class MediaService<T extends Media> {
         return mapGenreMedia;
     }
 
-    public Map<Genres, List<T>> byGenreDescendingRate(List<T> mediaList) {
-        Map<Genres, List<T>> mapGenreT = new EnumMap<>(Genres.class);
-
-        for (Genres genre : Genres.values()) {
-            List<T> filteredMedia = sortDescending(searchByGenre(genre, mediaList));
-            if(!filteredMedia.isEmpty())
-                mapGenreT.put(genre, filteredMedia);
-
-        }
-        return mapGenreT;
-    }
 }
