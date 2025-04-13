@@ -74,6 +74,7 @@ public class SearchMenu {
         String author;
         String isbn;
         List<Book> bookList;
+        List<Book> allBooks = bookService.getAllBooks();
 
         do {
             System.out.println(View.Prompts.Colors.green + "--== BUSCAR LIVRO ==--" + View.Prompts.Colors.rst);
@@ -88,23 +89,23 @@ public class SearchMenu {
 
             switch (option) {
                 case 1:
-                    //title
+                    //TODO: EVITAR TER QUE CRIAR ALLBOOKS
                     title = View.Prompts.AskInput.askForTitle(scanner);
-                    bookList = bookService.searchByTitle(title, bookService.allBooks());
+                    bookList = bookService.searchByTitle(title, allBooks);
                     printBookList(bookList);
                     break;
 
                 case 2:
 
                     year = View.Prompts.AskInput.askForYear(scanner);
-                    bookList = bookService.searchByYear(year, bookService.allBooks());
+                    bookList = bookService.searchByYear(year, allBooks);
                     printBookList(bookList);
                     break;
 
                 case 3:
 
                     genre = View.Prompts.AskInput.askForGenre(scanner);
-                    bookList = bookService.searchByGenre(genre, bookService.allBooks());
+                    bookList = bookService.searchByGenre(genre, allBooks);
                     printBookList(bookList);
                     break;
 
@@ -141,6 +142,8 @@ public class SearchMenu {
         String director;
         String actor;
         List<Movie> movieList;
+        List<Movie> allMovies = movieService.getAllMovies();
+
         do {
             System.out.println(View.Prompts.Colors.green + "--== BUSCAR FILME ==--" + View.Prompts.Colors.rst);
             System.out.println("1 - Buscar por título");
@@ -155,19 +158,19 @@ public class SearchMenu {
             switch (option) {
                 case 1:
                     title = View.Prompts.AskInput.askForTitle(scanner);
-                    movieList = movieService.searchByTitle(title, movieService.allMovies());
+                    movieList = movieService.searchByTitle(title, allMovies);
                     printMovieList(movieList);
                     break;
 
                 case 2:
                     year = View.Prompts.AskInput.askForYear(scanner);
-                    movieList = movieService.searchByYear(year, movieService.allMovies());
+                    movieList = movieService.searchByYear(year, allMovies);
                     printMovieList(movieList);
                     break;
 
                 case 3:
                     genre = View.Prompts.AskInput.askForGenre(scanner);
-                    movieList = movieService.searchByGenre(genre, movieService.allMovies());
+                    movieList = movieService.searchByGenre(genre, allMovies);
                     printMovieList(movieList);
                     break;
 
@@ -198,7 +201,7 @@ public class SearchMenu {
         int year;
         Genres genre;
         String actor;
-        List<Series> allSeries = seriesService.allSeries();
+        List<Series> allSeries = seriesService.getAllSeries();
         List<Series> filteredSeriesList;
 
         do {

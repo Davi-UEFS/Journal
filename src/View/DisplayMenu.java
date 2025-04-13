@@ -1,7 +1,7 @@
 package View;
 
 import Controller.BookService;
-import Controller.MediaService;
+import Controller.CommonService;
 import Controller.MovieService;
 import Controller.SeriesService;
 import Model.Media.*;
@@ -65,23 +65,23 @@ public class DisplayMenu {
 
                     title = View.Prompts.AskInput.askForTitle(scanner);
                     seasonNumber = View.Prompts.AskInput.askForSeasonNumber(scanner);
-                    System.out.println(seriesService.readReview(title, seasonNumber));
+                    System.out.println(seriesService.readReviewSeason(title, seasonNumber));
                     //Nota da temporada
-                    System.out.println(seriesService.showRating(title, seasonNumber));
+                    System.out.println(seriesService.showRatingSeason(title, seasonNumber));
                     //Media das notas das temporadas
                     System.out.println(seriesService.showRating(title));
                     break;
 
                 case 4:
-                    listByMiniMenu(bookService, bookService.allBooks());
+                    listByMiniMenu(bookService, bookService.getAllBooks());
                     break;
 
                 case 5:
-                    listByMiniMenu(movieService, movieService.allMovies());
+                    listByMiniMenu(movieService, movieService.getAllMovies());
                     break;
 
                 case 6:
-                    listByMiniMenu(seriesService, seriesService.allSeries());
+                    listByMiniMenu(seriesService, seriesService.getAllSeries());
                     break;
 
                 case 7:
@@ -96,7 +96,7 @@ public class DisplayMenu {
         }while (option!=7);
     }
 
-    private <T extends Media> void listByMiniMenu(MediaService<T> service, List<T> mediaList){
+    private <T extends Media> void listByMiniMenu(CommonService<T> service, List<T> mediaList){
         int option;
         Map<Genres, List<T>> mapGenreMedia;
         Map<Integer, List<T>> mapIntMedia;
@@ -118,32 +118,32 @@ public class DisplayMenu {
 
                 case 3:
 
-                    mapGenreMedia = service.byGenreAscendingRate(mediaList);
+                    mapGenreMedia = service.mapByGenreRate(mediaList, true);
                     printMapGenreMedia(mapGenreMedia);
                     break;
 
                 case 4:
-                    mapGenreMedia = service.byGenreDescendingRate(mediaList);
+                    mapGenreMedia = service.mapByGenreRate(mediaList, false);
                     printMapGenreMedia(mapGenreMedia);
                     break;
 
                 case 5:
-                    mapIntMedia = service.mapByAscendingYearAscendingRate(mediaList);
+                    mapIntMedia = service.mapByYearRate(mediaList, true, true);
                     printMapYearMedia(mapIntMedia);
                     break;
 
                 case 6:
-                    mapIntMedia = service.mapByAscendingYearDescendingRate(mediaList);
+                    mapIntMedia = service.mapByYearRate(mediaList, true, false);
                     printMapYearMedia(mapIntMedia);
                     break;
 
                 case 7:
-                    mapIntMedia = service.mapByDescendingYearAscendingRate(mediaList);
+                    mapIntMedia = service.mapByYearRate(mediaList, false, true);
                     printMapYearMedia(mapIntMedia);
                     break;
 
                 case 8:
-                    mapIntMedia = service.mapByDescendingYearDescendingRate(mediaList);
+                    mapIntMedia = service.mapByYearRate(mediaList, false, false);
                     printMapYearMedia(mapIntMedia);
                     break;
 

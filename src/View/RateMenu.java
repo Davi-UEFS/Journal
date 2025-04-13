@@ -83,7 +83,7 @@ public class RateMenu {
                     seasonNumber = View.Prompts.AskInput.askForSeasonNumber(scanner);
                     review = View.Prompts.AskInput.askForReview(scanner);
 
-                    System.out.println(seriesService.writeReview(title, seasonNumber, review));
+                    System.out.println(seriesService.writeReviewSeason(title, seasonNumber, review));
                     break;
 
                 case 7:
