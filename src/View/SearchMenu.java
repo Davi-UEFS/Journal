@@ -42,15 +42,24 @@ public class SearchMenu {
             switch (option) {
 
                 case 1:
-                    searchBookMiniMenu();
+                    if(bookService.getAllBooks().isEmpty())
+                        System.out.println("Você não possui livros cadastrados.");
+                    else
+                        searchBookMiniMenu();
                     break;
 
                 case 2:
-                    searchMovieMiniMenu();
+                    if(movieService.getAllMovies().isEmpty())
+                        System.out.println("Você não possui filmes cadastrados");
+                    else
+                        searchMovieMiniMenu();
                     break;
 
                 case 3:
-                    searchSeriesMiniMenu();
+                    if(seriesService.getAllSeries().isEmpty())
+                        System.out.println("Você não possui séries cadastradas");
+                    else
+                        searchSeriesMiniMenu();
                     break;
 
                 case 0:
