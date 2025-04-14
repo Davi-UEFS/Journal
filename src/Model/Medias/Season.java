@@ -37,6 +37,14 @@ public class Season implements Comparable<Season>{
         this.review = review;
     }
 
+    public void setSeen(boolean seen) {
+        this.seen = seen;
+    }
+
+    public boolean isSeen() {
+        return seen;
+    }
+
     public int getSeasonNumber(){
         return seasonNumber;
     }
