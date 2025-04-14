@@ -4,9 +4,8 @@ import Model.Exceptions.MediaAlreadyExistsException;
 import Model.Genres;
 import Model.Library;
 
-import Model.Media.Movie;
+import Model.Medias.Movie;
 
-import javax.print.ServiceUI;
 import java.time.Duration;
 import java.util.*;
 
@@ -42,6 +41,15 @@ public class MovieService extends CommonService<Movie> {
         String directorLower = director.toLowerCase().trim();
         List<Movie> filteredMovies = journal.getMovieList().stream().filter
                 (movie -> movie.getDirection().toLowerCase().contains(directorLower)).toList();
+
+        return sortAscending(filteredMovies);
+    }
+
+    public List<Movie> searchByActor(String name){
+        String actorLower = name.toLowerCase().trim();
+        List<Movie> filteredMovies = journal.getMovieList().stream().filter
+                (movie -> movie.getCast().stream().anyMatch(
+                actor-> actor.toLowerCase().contains(actorLower))).toList();
 
         return sortAscending(filteredMovies);
     }
