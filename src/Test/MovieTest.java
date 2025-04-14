@@ -4,7 +4,7 @@ import Controller.MovieService;
 import Model.Genres;
 import Model.Library;
 
-import Model.Media.Movie;
+import Model.Medias.Movie;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

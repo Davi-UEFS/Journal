@@ -3,8 +3,8 @@ package Test;
 import Controller.SeriesService;
 import Model.Genres;
 import Model.Library;
-import Model.Media.Season;
-import Model.Media.Series;
+import Model.Medias.Season;
+import Model.Medias.Series;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

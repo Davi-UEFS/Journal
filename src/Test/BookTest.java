@@ -3,8 +3,8 @@ package Test;
 import Controller.BookService;
 import Model.Genres;
 import Model.Library;
-import Model.Media.Book;
-import Model.Media.Media;
+import Model.Medias.Book;
+import Model.Medias.Media;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
