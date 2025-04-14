@@ -3,6 +3,9 @@ package View;
 import Controller.BookService;
 import Controller.MovieService;
 import Controller.SeriesService;
+import Model.Medias.*;
+import Model.Result.IResult;
+import View.Prompts.*;
 
 import java.util.Scanner;
 
@@ -23,78 +26,140 @@ public class RateMenu {
     public void show() {
 
         int option;
-        String title, review;
+        String review;
         int seasonNumber;
         double rating;
+        Book selectedBook;
+        Movie selectedMovie;
+        Series selectedSeries;
+        IResult result;
 
         do {
-            System.out.println(View.Prompts.Colors.blue + "--== MENU DE AVALIAÇÃO ==--" + View.Prompts.Colors.rst);
+            System.out.println(Colors.blue + "--== MENU DE AVALIAÇÃO ==--" + Colors.rst);
             System.out.println("1 - Avaliar livro");
             System.out.println("2 - Avaliar filme");
             System.out.println("3 - Avaliar temporada");
             System.out.println("4 - Escrever review (livro)");
             System.out.println("5 - Escrever review (filme)");
             System.out.println("6 - Escrever review (temporada)");
-            System.out.println("7 - Marcar como visto");
+            System.out.println("7 - Marcar como visto (livro)");
+            System.out.println("8 - Marcar como visto (filme)");
+            System.out.println("9 - Marcar como visto (temporada)");
 
-            System.out.println(View.Prompts.Colors.red + "7 - Voltar" + View.Prompts.Colors.rst);
+            System.out.println(Colors.red + "0 - Voltar" + Colors.rst);
 
-            option = View.Prompts.Validate.validateInt(scanner);
+            option = Validate.validateInt(scanner);
 
             switch (option) {
                 case 1:
-                    title = View.Prompts.AskInput.askForTitle(scanner);
-                    rating = View.Prompts.AskInput.askForRate(scanner);
-
-                    System.out.println(bookService.rate(title, rating));
+                    if(bookService.getAllBooks().isEmpty())
+                        System.out.println("Você não possui livros cadastrados.");
+                    else {
+                        selectedBook = AskInput.selectFromList(scanner, bookService.getAllBooks());
+                        rating = AskInput.askForRate(scanner);
+                        result = bookService.rate(selectedBook, rating);
+                        System.out.println(result.getMessage());
+                    }
 
                     break;
                 case 2:
-                    title = View.Prompts.AskInput.askForTitle(scanner);
-                    rating = View.Prompts.AskInput.askForRate(scanner);
+                    if(movieService.getAllMovies().isEmpty())
+                        System.out.println("Você não possui filmes cadastrados");
+                    else {
+                        selectedMovie = AskInput.selectFromList(scanner, movieService.getAllMovies());
+                        rating = AskInput.askForRate(scanner);
 
-                    System.out.println(movieService.rate(title, rating));
-
+                        result = movieService.rate(selectedMovie, rating);
+                        System.out.println(result.getMessage());
+                    }
                     break;
 
                 case 3:
-                    title = View.Prompts.AskInput.askForTitle(scanner);
-                    rating = View.Prompts.AskInput.askForRate(scanner);
+                    if(seriesService.getAllSeries().isEmpty())
+                        System.out.println("Você não possui séries cadastradas");
+                    else {
+                        selectedSeries = AskInput.selectFromList(scanner, seriesService.getAllSeries());
+                        rating = AskInput.askForRate(scanner);
+                        seasonNumber = AskInput.askForSeasonNumber(scanner);
 
-                    System.out.println(seriesService.rate(title, rating));
-
+                        result = seriesService.rateSeason(selectedSeries, seasonNumber, rating);
+                        System.out.println(result.getMessage());
+                    }
                     break;
 
                 case 4:
-                    title = View.Prompts.AskInput.askForTitle(scanner);
-                    review = View.Prompts.AskInput.askForReview(scanner);
+                    if(bookService.getAllBooks().isEmpty())
+                        System.out.println("Você não possui livros cadastrados.");
+                    else {
+                        selectedBook = AskInput.selectFromList(scanner, bookService.getAllBooks());
+                        review = AskInput.askForReview(scanner);
 
-                    System.out.println(bookService.writeReview(title, review));
+                        result = bookService.writeReview(selectedBook, review);
+                        System.out.println(result.getMessage());
+                    }
                     break;
 
                 case 5:
-                    title = View.Prompts.AskInput.askForTitle(scanner);
-                    review = View.Prompts.AskInput.askForReview(scanner);
+                    if(movieService.getAllMovies().isEmpty())
+                        System.out.println("Você não possui filmes cadastrados");
+                    else {
+                        selectedMovie = AskInput.selectFromList(scanner, movieService.getAllMovies());
+                        review = AskInput.askForReview(scanner);
 
-                    System.out.println(movieService.writeReview(title, review));
+                        result = movieService.writeReview(selectedMovie, review);
+                        System.out.println(result.getMessage());
+                    }
                     break;
 
                 case 6:
-                    title = View.Prompts.AskInput.askForTitle(scanner);
-                    seasonNumber = View.Prompts.AskInput.askForSeasonNumber(scanner);
-                    review = View.Prompts.AskInput.askForReview(scanner);
+                    if(seriesService.getAllSeries().isEmpty())
+                        System.out.println("Você não possui séries cadastradas");
+                    else {
+                        selectedSeries = AskInput.selectFromList(scanner, seriesService.getAllSeries());
+                        seasonNumber = AskInput.askForSeasonNumber(scanner);
+                        review = AskInput.askForReview(scanner);
 
-                    System.out.println(seriesService.writeReviewSeason(title, seasonNumber, review));
+                        result = seriesService.writeReviewSeason(selectedSeries, seasonNumber, review);
+                        System.out.println(result.getMessage());
+                    }
                     break;
 
                 case 7:
+                    if(bookService.getAllBooks().isEmpty())
+                        System.out.println("Você não possui livros cadastrados.");
+                    else{
+                        selectedBook = AskInput.selectFromList(scanner, bookService.getAllBooks());
+                        result = bookService.markAsSeen(selectedBook);
+                        System.out.println(result.getMessage());
+                    }
+                    break;
+
+                case 8:
+                    if(movieService.getAllMovies().isEmpty())
+                        System.out.println("Você não possui filmes cadastrados");
+                    else {
+                        selectedMovie = AskInput.selectFromList(scanner, movieService.getAllMovies());
+                        result = movieService.markAsSeen(selectedMovie);
+                        System.out.println(result.getMessage());
+                    }
+                case 9:
+                    if(seriesService.getAllSeries().isEmpty())
+                        System.out.println("Você não possui séries cadastradas");
+                    else {
+                        selectedSeries = AskInput.selectFromList(scanner, seriesService.getAllSeries());
+                        seasonNumber = AskInput.askForSeasonNumber(scanner);
+
+                        result = seriesService.markAsSeen(selectedSeries, seasonNumber);
+                        System.out.println(result.getMessage());
+                    }
+                case 0:
                     System.out.println("Retornando...");
                     break;
 
                 default:
-                    System.out.println(View.Prompts.Colors.red + "Opção inválida " + View.Prompts.Colors.rst);
+                    System.out.println(Colors.red + "Opção inválida " + Colors.rst);
                     break;
             }
-        } while (option != 5);
+        } while (option != 0);
     }
 }
