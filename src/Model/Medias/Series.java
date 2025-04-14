@@ -84,6 +84,11 @@ public class Series extends Media {
     }
 
     @Override
+    public String getMediaType(){
+        return "Série";
+    }
+
+    @Override
     public String toString() {
         String endingYear = (yearOfEnding == 9999) ? "Em andamento" : Integer.toString(yearOfEnding);
         return "\n" + title + " (" + year + " - "  + endingYear + ")\nTítulo original: " + originalTitle +

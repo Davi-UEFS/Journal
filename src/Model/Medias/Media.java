@@ -53,6 +53,8 @@ public abstract class Media {
         this.review = review;
     }
 
+    public abstract String getMediaType();
+
     public int getId() {
         return title.hashCode() + 227 *  year;
     }

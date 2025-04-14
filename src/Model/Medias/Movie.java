@@ -53,6 +53,11 @@ public class Movie extends Media {
     }
 
     @Override
+    public String getMediaType(){
+        return "Filme";
+    }
+
+    @Override
     public String toString() {
         return "\n" + title + " (" + year + ")\nDuração: " + duration.toString() + " minutos\nDireção: " +
                 direction + "\nTítulo original: " + originalTitle + "\nElenco: " + cast;
