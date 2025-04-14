@@ -28,6 +28,9 @@ public class DisplayMenu {
         int option;
         String title;
         int seasonNumber;
+        Book selectedBook;
+        Movie selectedMovie;
+        Series selectedSeries;
 
         do{
             System.out.println(Colors.green + "--== MENU DE DISPLAY ==--" + Colors.rst);
@@ -37,52 +40,72 @@ public class DisplayMenu {
             System.out.println("4 - Ver livros cadastrados");
             System.out.println("5 - Ver filmes cadastrados");
             System.out.println("6 - Ver series cadastradas");
-            System.out.println(Colors.red + "7 - Voltar" + Colors.rst);
+            System.out.println(Colors.red + "0 - Voltar" + Colors.rst);
 
             option = Validate.validateInt(scanner);
 
             switch (option) {
 
                 case 1:
+                    if(bookService.getAllBooks().isEmpty())
+                        System.out.println("Você não possui livros cadastrados.");
+                    else {
+                        selectedBook = AskInput.selectFromList(scanner, bookService.getAllBooks());
 
-                    title = AskInput.askForTitle(scanner);
-
-                    System.out.println(bookService.readReview(title));
-                    System.out.println(bookService.showRating(title));
+                        System.out.println(bookService.readReview(selectedBook));
+                        System.out.println(bookService.showRating(selectedBook));
+                    }
                     break;
 
                 case 2:
+                    if(movieService.getAllMovies().isEmpty())
+                        System.out.println("Você não possui filmes cadastrados");
+                    else {
+                        selectedMovie = AskInput.selectFromList(scanner, movieService.getAllMovies());
 
-                    title = AskInput.askForTitle(scanner);
-
-                    System.out.println(movieService.readReview(title));
-                    System.out.println(movieService.showRating(title));
+                        System.out.println(movieService.readReview(selectedMovie));
+                        System.out.println(movieService.showRating(selectedMovie));
+                    }
                     break;
 
                 case 3:
+                    if(seriesService.getAllSeries().isEmpty())
+                        System.out.println("Você não possui séries cadastradas");
 
-                    title = AskInput.askForTitle(scanner);
-                    seasonNumber = AskInput.askForSeasonNumber(scanner);
-                    System.out.println(seriesService.readReviewSeason(title, seasonNumber));
-                    //Nota da temporada
-                    System.out.println(seriesService.showRatingSeason(title, seasonNumber));
-                    //Media das notas das temporadas
-                    System.out.println(seriesService.showRating(title));
+                    else {
+                        selectedSeries = AskInput.selectFromList(scanner, seriesService.getAllSeries());
+                        seasonNumber = AskInput.askForSeasonNumber(scanner);
+                        System.out.println(seriesService.readReviewSeason(selectedSeries, seasonNumber));
+                        //Nota da temporada
+                        System.out.println(seriesService.showRatingSeason(selectedSeries, seasonNumber));
+                        //Media das notas das temporadas
+                        System.out.println(seriesService.showRating(selectedSeries));
+                    }
                     break;
 
                 case 4:
-                    listByMiniMenu(bookService, bookService.getAllBooks());
+                    if(bookService.getAllBooks().isEmpty())
+                        System.out.println("Você não possui livros cadastrados.");
+                    else
+                        listByMiniMenu(bookService, bookService.getAllBooks());
                     break;
 
                 case 5:
-                    listByMiniMenu(movieService, movieService.getAllMovies());
+                    if(movieService.getAllMovies().isEmpty())
+                        System.out.println("Você não possui filmes cadastrados");
+                    else
+                        listByMiniMenu(movieService, movieService.getAllMovies());
                     break;
 
                 case 6:
-                    listByMiniMenu(seriesService, seriesService.getAllSeries());
+                    if(seriesService.getAllSeries().isEmpty())
+                        System.out.println("Você não possui séries cadastradas");
+
+                    else
+                        listByMiniMenu(seriesService, seriesService.getAllSeries());
                     break;
 
-                case 7:
+                case 0:
                     System.out.println("Retornando...");
                     break;
 
@@ -91,7 +114,7 @@ public class DisplayMenu {
                     break;
 
             }
-        }while (option!=7);
+        }while (option!=0);
     }
 
     private <T extends Media> void listByMiniMenu(CommonService<T> service, List<T> mediaList){
@@ -145,7 +168,7 @@ public class DisplayMenu {
                     printMapYearMedia(mapIntMedia);
                     break;
 
-                case 9:
+                case 0:
                     System.out.println("Retornando...");
                     break;
 
@@ -153,7 +176,7 @@ public class DisplayMenu {
                     System.out.println(Colors.red + "Opção inválida" + Colors.rst);
                     break;
             }
-        }while (option!=9);
+        }while (option!=0);
     }
 
     private <T extends Media> void printMapGenreMedia(Map<Genres, List<T>> mapGenreMedia) {
@@ -184,7 +207,7 @@ public class DisplayMenu {
         System.out.println("6 - Por mais recente (decrescente)");
         System.out.println("7 - Por menos recente (crescente)");
         System.out.println("8 - Por menos recente (decrescente)");
-        System.out.println(Colors.red + "9 - Voltar" + Colors.rst);
+        System.out.println(Colors.red + "0 - Voltar" + Colors.rst);
 
     }
 
