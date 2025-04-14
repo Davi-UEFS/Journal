@@ -1,9 +1,9 @@
 package Controller;
 
-import Model.Exceptions.MediaNotFoundException;
 import Model.Genres;
 import Model.Library;
-import Model.Media.Media;
+import Model.Medias.Media;
+import Model.Result.*;
 
 import java.util.*;
 
@@ -14,56 +14,48 @@ public abstract class CommonService<T extends Media> implements IMediaService<T>
         this.journal = journal;
     }
 
-    @Override
-    public String rate(String title, double rating) {
-        try {
-            Media media = journal.findMedia(title);
+    public IResult markAsSeen(T media){
+        if(media.isSeen()){
+            return new Failure(media.getMediaType(), "Já marcado como visto");
+        }else{
             media.setSeen(true);
+            return new Success(media.getMediaType(), "Marcado como visto");
+        }
+    }
+
+    @Override
+    public IResult rate(T media, double rating) {
+        if(media.isSeen()){
             media.setRating(rating);
-            return "Avaliação salva com sucesso";
+            return new Success(media.getMediaType(), "Avaliação salva com sucesso.)");
 
-        } catch (MediaNotFoundException e) {
-            return e.getMessage();
         }
+        return new Failure(media.getMediaType(), "Marque como visto antes de avaliar");
 
     }
     @Override
-    public String writeReview(String title, String review) {
-        try {
-            Media media = journal.findMedia(title);
-            media.setSeen(true);
+    public IResult writeReview(T media, String review) {
+        if(media.isSeen()){
             media.setReview(review);
-            return "Review salva com sucesso";
+            return new Success(media.getMediaType(),"Review salva com sucesso.");
 
-        } catch (MediaNotFoundException e) {
-            return e.getMessage();
         }
+        return new Failure(media.getMediaType(), "Marque como visto antes de escrever uma review");
 
     }
 
     @Override
-    public String readReview(String title) {
+    public String readReview(T media) {
 
-        try {
-            Media media = journal.findMedia(title);
-            return "Review: " + ((media.getReview() == null) ?
-                    "Você ainda não escreveu uma review" : media.getReview());
-        } catch (MediaNotFoundException e) {
-            return e.getMessage();
-
-        }
+        return "Review: " + ((media.getReview() == null) ?
+                "Você ainda não escreveu uma review" : media.getReview());
     }
     @Override
-    public String showRating(String title) {
+    public String showRating(T media){
 
-        try {
-            Media media = journal.findMedia(title);
-            return "Nota: " + ((media.getRating() == 0.0) ?
-                    "Você ainda não avaliou a obra" : media.getRating());
-        } catch (MediaNotFoundException e) {
-            return e.getMessage();
+        return "Nota: " + ((media.getRating() == 0.0) ?
+                "Você ainda não avaliou a obra" : media.getRating());
 
-        }
     }
 
     @Override
