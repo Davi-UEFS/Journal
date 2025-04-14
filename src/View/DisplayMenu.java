@@ -1,11 +1,9 @@
 package View;
 
-import Controller.BookService;
-import Controller.CommonService;
-import Controller.MovieService;
-import Controller.SeriesService;
-import Model.Media.*;
+import Controller.*;
+import Model.Medias.*;
 import Model.Genres;
+import View.Prompts.*;
 
 import java.util.List;
 import java.util.Map;
@@ -32,22 +30,22 @@ public class DisplayMenu {
         int seasonNumber;
 
         do{
-            System.out.println(View.Prompts.Colors.green + "--== MENU DE DISPLAY ==--" + View.Prompts.Colors.rst);
+            System.out.println(Colors.green + "--== MENU DE DISPLAY ==--" + Colors.rst);
             System.out.println("1 - Ver avaliações/reviews (livro)");
             System.out.println("2 - Ver avaliações/reviews (filme)");
             System.out.println("3 - Ver avaliações/reviews (série)");
             System.out.println("4 - Ver livros cadastrados");
             System.out.println("5 - Ver filmes cadastrados");
             System.out.println("6 - Ver series cadastradas");
-            System.out.println(View.Prompts.Colors.red + "7 - Voltar" + View.Prompts.Colors.rst);
+            System.out.println(Colors.red + "7 - Voltar" + Colors.rst);
 
-            option = View.Prompts.Validate.validateInt(scanner);
+            option = Validate.validateInt(scanner);
 
             switch (option) {
 
                 case 1:
 
-                    title = View.Prompts.AskInput.askForTitle(scanner);
+                    title = AskInput.askForTitle(scanner);
 
                     System.out.println(bookService.readReview(title));
                     System.out.println(bookService.showRating(title));
@@ -55,7 +53,7 @@ public class DisplayMenu {
 
                 case 2:
 
-                    title = View.Prompts.AskInput.askForTitle(scanner);
+                    title = AskInput.askForTitle(scanner);
 
                     System.out.println(movieService.readReview(title));
                     System.out.println(movieService.showRating(title));
@@ -63,8 +61,8 @@ public class DisplayMenu {
 
                 case 3:
 
-                    title = View.Prompts.AskInput.askForTitle(scanner);
-                    seasonNumber = View.Prompts.AskInput.askForSeasonNumber(scanner);
+                    title = AskInput.askForTitle(scanner);
+                    seasonNumber = AskInput.askForSeasonNumber(scanner);
                     System.out.println(seriesService.readReviewSeason(title, seasonNumber));
                     //Nota da temporada
                     System.out.println(seriesService.showRatingSeason(title, seasonNumber));
@@ -89,7 +87,7 @@ public class DisplayMenu {
                     break;
 
                 default:
-                    System.out.println(View.Prompts.Colors.red + "Opção inválida" + View.Prompts.Colors.rst);
+                    System.out.println(Colors.red + "Opção inválida" + Colors.rst);
                     break;
 
             }
@@ -103,7 +101,7 @@ public class DisplayMenu {
 
         do{
             showListOptions();
-            option = View.Prompts.Validate.validateInt(scanner);
+            option = Validate.validateInt(scanner);
 
             switch (option) {
 
@@ -152,7 +150,7 @@ public class DisplayMenu {
                     break;
 
                 default:
-                    System.out.println(View.Prompts.Colors.red + "Opção inválida" + View.Prompts.Colors.rst);
+                    System.out.println(Colors.red + "Opção inválida" + Colors.rst);
                     break;
             }
         }while (option!=9);
@@ -177,16 +175,16 @@ public class DisplayMenu {
     }
 
     private void showListOptions(){
-        System.out.println(View.Prompts.Colors.green + "--== MENU DE DISPLAY ==--" + View.Prompts.Colors.rst);
+        System.out.println(Colors.green + "--== MENU DE DISPLAY ==--" + Colors.rst);
         System.out.println("1 - Ver todos (crescente) ");
         System.out.println("2 - Ver todos (decrescente)");
         System.out.println("3 - Por gênero (crescente)");
         System.out.println("4 - Por gênero (decrescente)");
         System.out.println("5 - Por mais recente (crescente)");
         System.out.println("6 - Por mais recente (decrescente)");
-        System.out.println("5 - Por menos recente (crescente)");
-        System.out.println("6 - Por menos recente (decrescente)");
-        System.out.println(View.Prompts.Colors.red + "9 - Voltar" + View.Prompts.Colors.rst);
+        System.out.println("7 - Por menos recente (crescente)");
+        System.out.println("8 - Por menos recente (decrescente)");
+        System.out.println(Colors.red + "9 - Voltar" + Colors.rst);
 
     }
 

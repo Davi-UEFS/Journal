@@ -1,4 +1,4 @@
-package Model.Media;
+package Model.Medias;
 import Model.Genres;
 
 import java.time.LocalDate;

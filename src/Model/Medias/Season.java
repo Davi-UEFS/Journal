@@ -1,4 +1,4 @@
-package Model.Media;
+package Model.Medias;
 
 public class Season implements Comparable<Season>{
     private double rating;

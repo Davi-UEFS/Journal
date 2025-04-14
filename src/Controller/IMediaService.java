@@ -1,7 +1,7 @@
 package Controller;
 
 import Model.Genres;
-import Model.Media.Media;
+import Model.Medias.Media;
 import java.util.List;
 import java.util.Map;
 

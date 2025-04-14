@@ -3,10 +3,10 @@ package Model;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
-import Model.Media.Book;
-import Model.Media.Media;
-import Model.Media.Movie;
-import Model.Media.Series;
+import Model.Medias.Book;
+import Model.Medias.Media;
+import Model.Medias.Movie;
+import Model.Medias.Series;
 
 import Model.Exceptions.MediaAlreadyExistsException;
 import Model.Exceptions.MediaNotFoundException;

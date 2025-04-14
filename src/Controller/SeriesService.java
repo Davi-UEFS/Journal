@@ -5,9 +5,9 @@ import Model.Exceptions.MediaNotFoundException;
 import Model.Exceptions.SeasonNotFoundException;
 import Model.Genres;
 import Model.Library;
-import Model.Media.Media;
-import Model.Media.Season;
-import Model.Media.Series;
+import Model.Medias.Media;
+import Model.Medias.Season;
+import Model.Medias.Series;
 
 import java.util.*;
 
@@ -34,7 +34,7 @@ public class SeriesService extends CommonService<Series> {
             series.addSeason(season);
             journal.addSeries(series);
             journal.addYear(year);
-            return "Série registrada com sucesso!";
+            return "Série registrada com sucesso ✔";
         }catch (MediaAlreadyExistsException e){
             return e.getMessage();
         }
@@ -119,6 +119,15 @@ public class SeriesService extends CommonService<Series> {
             return e.getMessage();
 
         }
+    }
+
+    public List<Series> searchByActor(String name){
+        String actorLower = name.toLowerCase().trim();
+        List<Series> filteredSeries = journal.getSeriesList().stream().filter
+                (series -> series.getCast().stream().anyMatch(
+                        actor-> actor.toLowerCase().contains(actorLower))).toList();
+
+        return sortAscending(filteredSeries);
     }
 
     public ArrayList<Series> getAllSeries(){

@@ -1,5 +1,4 @@
-package Model.Media;
-import Model.Exceptions.MediaNotFoundException;
+package Model.Medias;
 import Model.Exceptions.SeasonNotFoundException;
 import Model.Genres;
 

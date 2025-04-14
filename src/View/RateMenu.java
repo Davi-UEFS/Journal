@@ -35,6 +35,7 @@ public class RateMenu {
             System.out.println("4 - Escrever review (livro)");
             System.out.println("5 - Escrever review (filme)");
             System.out.println("6 - Escrever review (temporada)");
+            System.out.println("7 - Marcar como visto");
 
             System.out.println(View.Prompts.Colors.red + "7 - Voltar" + View.Prompts.Colors.rst);
 
