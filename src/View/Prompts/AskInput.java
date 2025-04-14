@@ -1,7 +1,9 @@
 package View.Prompts;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.Scanner;
+import Model.Medias.Media;
 
 import Model.Genres;
 
@@ -39,7 +41,7 @@ public class AskInput {
         System.out.print("Digite o ano de lançamento (YYYY): ");
         int year = Validate.validateInt(scanner);
         while(year > 2025){
-            System.out.print("Ano inválido! Digite novamente: ");
+            System.out.println("Ano inválido! Digite novamente: ");
             year = Validate.validateInt(scanner);
         }
         return year; // Convertendo para int
@@ -49,7 +51,7 @@ public class AskInput {
         System.out.print("Digite o ano de encerramento (9999 se ainda está em lançamento): ");
         int year = Validate.validateInt(scanner);
         while((year > 2025 && year < 9999) || (year > 9999)){
-            System.out.print("Ano inválido! Digite novamente: ");
+            System.out.println("Ano inválido! Digite novamente: ");
             year = Validate.validateInt(scanner);
         }
         return year; // Convertendo para int
@@ -96,7 +98,7 @@ public class AskInput {
         int wantedGenre = Validate.validateInt(scanner);
         while(wantedGenre < 1 || wantedGenre > 12){
             wantedGenre = Validate.validateInt(scanner);
-            System.out.print("Opção inválida! Digite novamente: ");
+            System.out.println("Opção inválida! Digite novamente: ");
         }
 
         return Genres.values()[wantedGenre - 1];
@@ -123,5 +125,21 @@ public class AskInput {
     public static int askForEpisodeCount(Scanner scanner){
         System.out.print("Digite a quantidade de episódios: ");
         return Validate.validateInt(scanner);
+    }
+
+    public static <T extends Media> T selectFromList(Scanner scanner, List<T> mediaList){
+        int choice;
+        System.out.println("Por favor, selecione uma obra entre as seguintes:");
+
+        for(int i = 0; i < mediaList.size(); i++){
+            Media media = mediaList.get(i);
+            System.out.printf("%d - %s (%s)\n", i+1, media.getTitle(), media.getMediaType());
+        }
+
+        choice = Validate.validateInt(scanner);
+        while (choice < 1 || choice > mediaList.size()){
+            System.out.printf("Escoha de 1 a %d.\n", mediaList.size());
+        }
+        return mediaList.get(choice - 1);
     }
 }
