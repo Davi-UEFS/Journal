@@ -66,6 +66,11 @@ public class AskInput {
         return Validate.validateString(scanner).split(", ");
     }
 
+    public static String askForActor(Scanner scanner){
+        System.out.println("Digite o nome do ator/atriz:");
+        return Validate.validateString(scanner);
+    }
+
     public static String askForOriginalTitle(Scanner scanner) {
         System.out.println("Digite o título original da obra: ");
         return Validate.validateString(scanner);
