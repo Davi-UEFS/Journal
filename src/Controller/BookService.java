@@ -3,7 +3,8 @@ package Controller;
 import Model.Exceptions.MediaAlreadyExistsException;
 import Model.Genres;
 import Model.Library;
-import Model.Media.Book;
+import Model.Medias.Book;
+import Model.Result.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +15,8 @@ public class BookService extends CommonService<Book>{
         super(journal);
     }
 
-    public String register(String name, int year, Genres genre, String isbn,
-                           String author, String publisher, boolean owned) {
+    public IResult register(String name, int year, Genres genre, String isbn,
+                            String author, String publisher, boolean owned) {
 
         Book book = new Book(name, year, genre, isbn, author, publisher, owned);
 
@@ -23,9 +24,9 @@ public class BookService extends CommonService<Book>{
             journal.exists(book);
             journal.addBook(book);
             journal.addYear(year);
-            return "Livro registrado com sucesso!";
+            return new Success("Livro", "Registrado com sucesso!");
         } catch (MediaAlreadyExistsException e){
-            return e.getMessage();
+            return new Failure("Livro", e.getMessage());
         }
     }
 
