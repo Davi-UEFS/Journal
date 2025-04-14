@@ -2,15 +2,16 @@ package Controller;
 
 import Model.Genres;
 import Model.Medias.Media;
+import Model.Result.IResult;
 import java.util.List;
 import java.util.Map;
 
 public interface IMediaService <T extends Media> {
     //TODO: IDEIA, USAR BUILDER
-    String rate(String title, double rating);
-    String writeReview(String title, String review);
-    String showRating(String title);
-    String readReview(String title);
+    IResult rate(T media, double rating);
+    IResult writeReview(T media, String review);
+    String showRating(T media);
+    String readReview(T media);
 
     List<T> searchByTitle(String title, List<T> mediaList);
     List<T> searchByYear(int year, List<T> mediaList);
