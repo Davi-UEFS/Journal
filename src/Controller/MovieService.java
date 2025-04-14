@@ -5,6 +5,7 @@ import Model.Genres;
 import Model.Library;
 
 import Model.Medias.Movie;
+import Model.Result.*;
 
 import java.time.Duration;
 import java.util.*;
@@ -15,9 +16,9 @@ public class MovieService extends CommonService<Movie> {
         super(journal);
     }
 
-    public String register(String name, int year, Genres genre, String[] castBuffer,
-                           Duration duration, String direction, String script,
-                           String originalTitle, String[] whereToWatchBuffer){
+    public IResult register(String name, int year, Genres genre, String[] castBuffer,
+                            Duration duration, String direction, String script,
+                            String originalTitle, String[] whereToWatchBuffer){
 
         ArrayList<String> cast = new ArrayList<>(Arrays.asList(castBuffer));//add todos os nomes na lista
         ArrayList<String> whereToWatch = new ArrayList<>(Arrays.asList(whereToWatchBuffer));
@@ -29,12 +30,11 @@ public class MovieService extends CommonService<Movie> {
             journal.exists(movie);
             journal.addMovie(movie);
             journal.addYear(year);
-            return "Filme registrado com sucesso!";
+            return new Success("Filme","Registrado com sucesso!");
 
         }catch (MediaAlreadyExistsException e){
-            return e.getMessage();
+            return new Failure("Filme",e.getMessage());
         }
-
     }
 
     public List<Movie> searchByDirector(String director){
