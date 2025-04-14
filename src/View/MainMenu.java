@@ -34,7 +34,7 @@ public class MainMenu {
             System.out.println("2 - Avaliar ");
             System.out.println("3 - Ver");
             System.out.println("4 - Buscar");
-            System.out.println(View.Prompts.Colors.red + "5 - Encerrar " + View.Prompts.Colors.rst);
+            System.out.println(View.Prompts.Colors.red + "0 - Encerrar " + View.Prompts.Colors.rst);
 
             option = Validate.validateInt(scanner);
 
@@ -54,7 +54,7 @@ public class MainMenu {
                 case 4:
                     searchMenu.show();
 
-                case 5:
+                case 0:
                     System.out.println("Encerrando...");
                     break;
 
@@ -63,7 +63,7 @@ public class MainMenu {
                     break;
             }
             
-        }while(option != 5);
+        }while(option != 0);
         scanner.close();
     }
 

@@ -35,7 +35,7 @@ public class SearchMenu {
             System.out.println("1 - Buscar livros");
             System.out.println("2 - Buscar filmes");
             System.out.println("3 - Buscar series");
-            System.out.println(Colors.red + "4 - Voltar" + Colors.rst);
+            System.out.println(Colors.red + "0 - Voltar" + Colors.rst);
 
             option = Validate.validateInt(scanner);
 
@@ -53,7 +53,7 @@ public class SearchMenu {
                     searchSeriesMiniMenu();
                     break;
 
-                case 4:
+                case 0:
                     System.out.println("Retornando...");
                     break;
 
@@ -62,7 +62,7 @@ public class SearchMenu {
                     break;
 
             }
-        }while (option!=4);
+        }while (option!=0);
     }
 
     private void searchBookMiniMenu(){
@@ -82,7 +82,7 @@ public class SearchMenu {
             System.out.println("3 - Buscar por gênero");
             System.out.println("4 - Buscar por autor");
             System.out.println("5 - Buscar por ISBN");
-            System.out.println(Colors.red + "6 - Voltar" + Colors.rst);
+            System.out.println(Colors.red + "0 - Voltar" + Colors.rst);
 
             option = Validate.validateInt(scanner);
 
@@ -122,7 +122,7 @@ public class SearchMenu {
                     printBookList(filteredBookList);
                     break;
 
-                case 6:
+                case 0:
                     System.out.println("Retornando...");
                     break;
 
@@ -130,7 +130,7 @@ public class SearchMenu {
                     System.out.println(Colors.red + "Opção inválida" + Colors.rst);
                     break;
             }
-        } while (option!=6);
+        } while (option!=0);
     }
 
     private void searchMovieMiniMenu(){
@@ -150,7 +150,7 @@ public class SearchMenu {
             System.out.println("3 - Buscar por gênero");
             System.out.println("4 - Buscar por diretor");
             System.out.println("5 - Buscar por ator no elenco");
-            System.out.println(Colors.red + "6 - Voltar" + Colors.rst);
+            System.out.println(Colors.red + "0 - Voltar" + Colors.rst);
 
             option = Validate.validateInt(scanner);
 
@@ -185,7 +185,7 @@ public class SearchMenu {
                     printMovieList(filteredMovieList);
                     break;
 
-                case 6:
+                case 0:
                     System.out.println("Retornando...");
                     break;
 
@@ -193,7 +193,7 @@ public class SearchMenu {
                     System.out.println(Colors.red + "Opção inválida " + Colors.rst);
                     break;
             }
-        } while(option != 6);
+        } while(option != 0);
     }
 
     private void searchSeriesMiniMenu(){
@@ -211,7 +211,7 @@ public class SearchMenu {
             System.out.println("2 - Buscar por ano de lançamento");
             System.out.println("3 - Buscar por gênero");
             System.out.println("4 - Buscar por ator no elenco");
-            System.out.println(Colors.red + "5 - Voltar" + Colors.rst);
+            System.out.println(Colors.red + "0 - Voltar" + Colors.rst);
 
             option = Validate.validateInt(scanner);
 
@@ -240,7 +240,7 @@ public class SearchMenu {
                     printSeriesList(filteredSeriesList);
                     break;
 
-                case 5:
+                case 0:
                     System.out.println("Retornando...");
                     break;
 
@@ -248,7 +248,7 @@ public class SearchMenu {
                     System.out.println(Colors.red + "Opção inválida " + Colors.rst);
                     break;
             }
-        } while(option != 5);
+        } while(option != 0);
     }
 
     private void printBookList(List<Book> bookList) {
