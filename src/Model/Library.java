@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.TreeSet;
 
 import Model.Medias.Book;
-import Model.Medias.Media;
 import Model.Medias.Movie;
 import Model.Medias.Series;
 
 import Model.Exceptions.MediaAlreadyExistsException;
-import Model.Exceptions.MediaNotFoundException;
+
 
 public class Library{
     private final ArrayList<Book> bookList;
@@ -23,48 +22,6 @@ public class Library{
         this.seriesList = new ArrayList<>();
         this.yearsRegistered = new TreeSet<>();
 
-    }
-
-    public Book findBook(String name) throws MediaNotFoundException {
-        String lowerName = name.toLowerCase();
-
-        for(Book book:bookList) {
-            if (lowerName.equals(book.getTitle().toLowerCase()))
-                return book;
-        }
-        throw new MediaNotFoundException("Obra não encontrada");
-    }
-
-    public Movie findMovie(String name) throws MediaNotFoundException {
-        String lowerName = name.toLowerCase();
-
-        for(Movie movie:movieList) {
-            if (lowerName.equals(movie.getTitle().toLowerCase()))
-                return movie;
-        }
-        throw new MediaNotFoundException("Obra não encontrada");
-    }
-
-    public Series findSeries(String name) throws MediaNotFoundException{
-        String lowerName = name.toLowerCase();
-
-        for(Series series:seriesList) {
-            if (lowerName.equals(series.getTitle().toLowerCase()))
-                return series;
-        }
-        throw new MediaNotFoundException("Obra não encontrada");
-    }
-
-    public Media findMedia(String name) throws MediaNotFoundException {
-        try {
-            return findBook(name);
-        } catch (MediaNotFoundException e) {
-            try {
-                return findMovie(name);
-            } catch (MediaNotFoundException e2) {
-                return findSeries(name);
-            }
-        }
     }
 
     public void exists(Book book) throws MediaAlreadyExistsException {
@@ -86,7 +43,7 @@ public class Library{
     public void exists(Series series) throws MediaAlreadyExistsException {
         for(Series seriesE: seriesList){
             if(series.getId() == seriesE.getId())
-                throw new MediaAlreadyExistsException("Esse livro já foi cadastrado!");
+                throw new MediaAlreadyExistsException("Essa série já foi cadastrada!");
 
         }
     }
