@@ -5,6 +5,9 @@ import Model.Genres;
 import Model.Library;
 import Model.Medias.Season;
 import Model.Medias.Series;
+import Model.Result.Failure;
+import Model.Result.IResult;
+import Model.Result.Success;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -18,22 +21,22 @@ public class SeriesTest {
         Library journal = new Library();
         SeriesService seriesService = new SeriesService(journal);
 
-        String result1 = seriesService.register(
+        IResult result1 = seriesService.register(
                 "Missão Explosiva", 2021, Genres.TERROR, 2024,
                 new String[]{"João", "Maria", "Lucas"},
                 "Ação Total",
                 new String[]{"Netflix", "HBO Max"},
                 1, 5);
 
-        String result2 = seriesService.register(
+        IResult result2 = seriesService.register(
                 "Amor em Paris", 2019, Genres.AVENTURA, 2020,
                 new String[]{"Pedro", "Ana"},
                 "Filmes Românticos",
                 new String[]{"Prime Video", "Disney+"},
                 1, 7);
 
-        assertEquals("Série registrada com sucesso!", result1);
-        assertEquals("Série registrada com sucesso!", result2);
+        assertEquals(Success.class, result1.getClass());
+        assertEquals(Success.class, result2.getClass());
         assertEquals(2, seriesService.getAllSeries().size());
     }
 
@@ -69,18 +72,23 @@ public class SeriesTest {
                 new String[]{"Netflix", "HBO Max"},
                 1, 5);
 
+        Series testSeries = journal.getSeriesList().getFirst();
+        assertEquals("Missão Explosiva", testSeries.getTitle());
+
+        seriesService.markAsSeen(testSeries, 1);
+
         // Testar avaliação de temporada
-        String ratingResult = seriesService.rateSeason("Missão Explosiva", 1, 4.5);
-        assertEquals("Avaliação salva com sucesso", ratingResult);
+        IResult ratingResult = seriesService.rateSeason(testSeries, 1, 4.5);
+        assertEquals(Success.class, ratingResult.getClass());
 
         // Testar review de temporada
-        String reviewResult = seriesService.writeReviewSeason("Missão Explosiva", 1, "Excelente primeira temporada!");
-        assertEquals("Review salva com sucesso", reviewResult);
+        IResult reviewResult = seriesService.writeReviewSeason(testSeries, 1, "Excelente primeira temporada!");
+        assertEquals(Success.class, reviewResult.getClass());
 
         // Verificar avaliação e review
-        System.out.println(seriesService.showRating("Missão Explosiva"));
-        System.out.println(seriesService.showRatingSeason("Missão Explosiva", 1));
-        System.out.println(seriesService.readReviewSeason("Missão Explosiva", 1));
+        System.out.println(seriesService.showRating(testSeries));
+        System.out.println(seriesService.showRatingSeason(testSeries, 1));
+        System.out.println(seriesService.readReviewSeason(testSeries, 1));
     }
 
     @Test
@@ -126,18 +134,23 @@ public class SeriesTest {
                 1, 8);
 
         // Adicionar temporadas adicionais
-        Series series = seriesService.getAllSeries().getFirst();
-        series.addSeason(new Season(2, 10));
-        series.addSeason(new Season(3, 12));
+        Series testSeries = seriesService.getAllSeries().getFirst();
+        testSeries.addSeason(new Season(2, 10));
+        testSeries.addSeason(new Season(3, 12));
+
+        //Marcar apenas temporadas 1 e 2 como vistas
+        seriesService.markAsSeen(testSeries, 1);
+        seriesService.markAsSeen(testSeries, 2);
 
         // Avaliar diferentes temporadas
-        seriesService.rateSeason("Série Completa", 1, 3.5);
-        seriesService.rateSeason("Série Completa", 2, 4.0);
-        seriesService.rateSeason("Série Completa", 3, 4.5);
+        seriesService.rateSeason(testSeries, 1, 2.0);
+        seriesService.rateSeason(testSeries, 2, 4.0);
+        IResult result = seriesService.rateSeason(testSeries, 3, 4.5);
 
-        // Verificar avaliação geral
-        assertEquals(4.0, journal.getSeriesList().getFirst().getRating());
-        assertEquals(3, series.getNumberOfSeasons());
+        // Verificar avaliação geral (temporada nao avaliada tambem conta)
+        assertEquals(2.0, journal.getSeriesList().getFirst().getRating());
+        // Verificar que a temporada 3 nao foi avaliada
+        assertEquals(Failure.class, result.getClass());
     }
 
     private void printSeriesList(List<Series> seriesList) {
