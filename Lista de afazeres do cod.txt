@@ -39,3 +39,5 @@
 	( ) ordenar por avaliação
 	( ) filtrar por gênero
 	( ) filtrar por ano de lançamento
+
+( ) Tratar da avaliação
