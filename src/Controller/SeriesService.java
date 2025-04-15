@@ -51,7 +51,7 @@ public class SeriesService extends CommonService<Series> {
         } //TODO: MUDAR ANO DA SERIE?
     }
 
-    public IResult markAsSeen(Series series, int seasonNumber) {
+    public IResult markAsSeenSeason(Series series, int seasonNumber) {
         try{
             Season season = series.findSeason(seasonNumber);
             if(season.isSeen()) {

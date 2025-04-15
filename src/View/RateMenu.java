@@ -149,7 +149,7 @@ public class RateMenu {
                         selectedSeries = AskInput.selectFromList(scanner, seriesService.getAllSeries());
                         seasonNumber = AskInput.askForSeasonNumber(scanner);
 
-                        result = seriesService.markAsSeen(selectedSeries, seasonNumber);
+                        result = seriesService.markAsSeenSeason(selectedSeries, seasonNumber);
                         System.out.println(result.getMessage());
                     }
                 case 0:

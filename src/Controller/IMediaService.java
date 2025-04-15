@@ -8,6 +8,7 @@ import java.util.Map;
 
 public interface IMediaService <T extends Media> {
     //TODO: IDEIA, USAR BUILDER
+    IResult markAsSeen(T media);
     IResult rate(T media, double rating);
     IResult writeReview(T media, String review);
     String showRating(T media);

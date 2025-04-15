@@ -75,7 +75,7 @@ public class SeriesTest {
         Series testSeries = journal.getSeriesList().getFirst();
         assertEquals("Missão Explosiva", testSeries.getTitle());
 
-        seriesService.markAsSeen(testSeries, 1);
+        seriesService.markAsSeenSeason(testSeries, 1);
 
         // Testar avaliação de temporada
         IResult ratingResult = seriesService.rateSeason(testSeries, 1, 4.5);
@@ -139,8 +139,8 @@ public class SeriesTest {
         testSeries.addSeason(new Season(3, 12));
 
         //Marcar apenas temporadas 1 e 2 como vistas
-        seriesService.markAsSeen(testSeries, 1);
-        seriesService.markAsSeen(testSeries, 2);
+        seriesService.markAsSeenSeason(testSeries, 1);
+        seriesService.markAsSeenSeason(testSeries, 2);
 
         // Avaliar diferentes temporadas
         seriesService.rateSeason(testSeries, 1, 2.0);
