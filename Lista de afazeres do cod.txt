@@ -40,4 +40,4 @@
 	( ) filtrar por gênero
 	( ) filtrar por ano de lançamento
 
-( ) Tratar da avaliação (Usar inteiro)
+( ) Tratar da avaliação (Usar inteiro).
