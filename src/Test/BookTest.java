@@ -109,6 +109,36 @@ public class BookTest {
 
     }
 
+    @Test
+    public void testBookReadDate() {
+        bookService.register(
+                "Alpha", 2000, Genres.OUTROS,
+                "123", "Gui", "Omega", false);
+
+        Book book = bookService.getAllBooks().getFirst();
+
+        IResult result1 = bookService.markAsSeen(book, 1999, 8);
+        IResult result2 = bookService.markAsSeen(book, 2026, 8);
+
+        // Ambos falham: Anos inválidos
+        assertEquals(Failure.class, result1.getClass());
+        assertEquals(Failure.class, result2.getClass());
+
+        IResult result3 = bookService.markAsSeen(book, 2005, 0);
+        IResult result4 = bookService.markAsSeen(book, 2005, 13);
+
+        // Ambos falham: Meses inválidos
+        assertEquals(Failure.class, result3.getClass());
+        assertEquals(Failure.class, result4.getClass());
+
+        IResult result5 = bookService.markAsSeen(book, 2015, 8);
+
+        // Sucesso
+        assertEquals(Success.class, result5.getClass());
+        System.out.println(book.getReadDate());
+
+    }
+
     private void printAllBooks(BookService bookService) {
         ArrayList<Book> bookList = bookService.getAllBooks();
         for(Book book: bookList)

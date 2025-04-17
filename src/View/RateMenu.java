@@ -129,7 +129,11 @@ public class RateMenu {
                         System.out.println("Você não possui livros cadastrados.");
                     else{
                         selectedBook = AskInput.selectFromList(scanner, bookService.getAllBooks());
-                        result = bookService.markAsSeen(selectedBook);
+
+                        int ano = AskInput.askForReadYear(scanner);
+                        int mes = AskInput.askForReadMonth(scanner);
+
+                        result = bookService.markAsSeen(selectedBook, ano, mes);
                         System.out.println(result.getMessage());
                     }
                     break;

@@ -59,7 +59,7 @@ public class AskInput {
 
 
     public static boolean askForOwned(Scanner scanner){
-        System.out.print("Você já leu este livro? (S/N): ");
+        System.out.print("Você possui uma cópia deste livro? (S/N): ");
         return Validate.validateBoolean(scanner);
     }
 
@@ -133,5 +133,15 @@ public class AskInput {
             System.out.printf("Escolha de 1 a %d.\n", mediaList.size());
         }
         return mediaList.get(choice - 1);
+    }
+
+    public static int askForReadYear(Scanner scanner) {
+        System.out.println("Digite o ano em que foi lido: ");
+        return Validate.validateInt(scanner);
+    }
+
+    public static int askForReadMonth(Scanner scanner) {
+        System.out.println("Digite o mes em que foi lido (número do mês): ");
+        return Validate.validateInt(scanner);
     }
 }
