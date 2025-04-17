@@ -8,6 +8,7 @@ import Model.Medias.Series;
 import Model.Result.Failure;
 import Model.Result.IResult;
 import Model.Result.Success;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -15,11 +16,15 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SeriesTest {
+    Library journal;
+    SeriesService seriesService;
+    @BeforeEach void setUp() {
+        journal = new Library();
+        seriesService = new SeriesService(journal);
+    }
 
     @Test
     public void testRegisterSeries() {
-        Library journal = new Library();
-        SeriesService seriesService = new SeriesService(journal);
 
         IResult result1 = seriesService.register(
                 "Missão Explosiva", 2021, Genres.TERROR, 2024,
@@ -50,8 +55,6 @@ public class SeriesTest {
 
     @Test
     public void testAddSeason() {
-        Library journal = new Library();
-        SeriesService seriesService = new SeriesService(journal);
 
         seriesService.register(
                 "Missão Explosiva", 2021, Genres.TERROR, 2024,
@@ -70,8 +73,6 @@ public class SeriesTest {
 
     @Test
     public void testRateAndReview() {
-        Library journal = new Library();
-        SeriesService seriesService = new SeriesService(journal);
 
         seriesService.register(
                 "Missão Explosiva", 2021, Genres.TERROR, 2024,
@@ -101,8 +102,6 @@ public class SeriesTest {
 
     @Test
     public void testSearchMethods() {
-        Library journal = new Library();
-        SeriesService seriesService = new SeriesService(journal);
 
         // Adicionar várias séries para testar buscas
         seriesService.register("Série A", 2020, Genres.AÇÃO, 2022,
@@ -131,8 +130,6 @@ public class SeriesTest {
 
     @Test
     public void testSeasonOperations() {
-        Library journal = new Library();
-        SeriesService seriesService = new SeriesService(journal);
 
         seriesService.register(
                 "Série Completa", 2020, Genres.ESPORTES, 2023,

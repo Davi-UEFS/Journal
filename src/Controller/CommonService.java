@@ -25,12 +25,14 @@ public abstract class CommonService<T extends Media> implements IMediaService<T>
 
     @Override
     public IResult rate(T media, double rating) {
-        if(media.isSeen()){
+        if(rating <= 0 || rating > 5) {
+            return new Failure(media.getMediaType(), "Avaliação deve ser maior que 0 e menor ou igual a 5.");
+        }else if(!media.isSeen()) {
+            return new Failure(media.getMediaType(), "Marque como visto antes de avaliar");
+        }else{
             media.setRating(rating);
-            return new Success(media.getMediaType(), "Avaliação salva com sucesso.)");
-
+            return new Success(media.getMediaType(), "Avaliação salva com sucesso.");
         }
-        return new Failure(media.getMediaType(), "Marque como visto antes de avaliar");
 
     }
     @Override

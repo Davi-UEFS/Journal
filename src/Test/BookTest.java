@@ -5,8 +5,11 @@ import Model.Genres;
 import Model.Library;
 import Model.Medias.Book;
 import Model.Medias.Media;
+import Model.Result.Failure;
 import Model.Result.IResult;
 
+import Model.Result.Success;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,12 +18,16 @@ import java.util.List;
 import java.util.Map;
 
 public class BookTest {
+    Library journal;
+    BookService bookService;
+
+    @BeforeEach void setUp() {
+        journal = new Library();
+        bookService = new BookService(journal);
+    }
 
     @Test
     public void testAddBook() {
-        Library journal = new Library();
-        BookService bookService = new BookService(journal);
-
         IResult result1 = bookService.register("Alpha", 2025, Genres.AÇÃO, "12345", "Davi", "PBL Books", true);
         System.out.println(result1.getMessage());
 
@@ -33,8 +40,6 @@ public class BookTest {
 
     @Test
     public void testSearchBook() {
-        Library journal = new Library();
-        BookService bookService = new BookService(journal);
 
         bookService.register("Alpha", 1999, Genres.ROMANCE, "978-3161484100", "Carlos Drummond", "PBL Books", true);
         bookService.register("Beta", 2015, Genres.AÇÃO, "978-0451524935", "Clarice Lispector", "PBL Books", false);
@@ -57,8 +62,6 @@ public class BookTest {
 
     @Test
     public void checkHash() {
-        Library journal = new Library();
-        BookService bookService = new BookService(journal);
 
         IResult result = bookService.register("Alpha", 1999, Genres.FICÇÃO, "978-3161484100", "Carlos Drummond", "PBL Books", true);
         System.out.println(result.getMessage());
@@ -67,8 +70,6 @@ public class BookTest {
 
     @Test
     public void testBooksByGenre() {
-        Library journal = new Library();
-        BookService bookService = new BookService(journal);
 
         bookService.register("Alpha", 1999, Genres.ROMANCE, "978-3161484100", "Carlos Drummond", "PBL Books", true);
         bookService.register("Beta", 2015, Genres.AÇÃO, "978-0451524935", "Clarice Lispector", "PBL Books", false);
@@ -77,6 +78,35 @@ public class BookTest {
 
         System.out.println("Por genero crescente");
         printMapGenreMedia(bookService.mapByGenreRate(bookService.getAllBooks(), true));
+    }
+
+    @Test
+    public void testBookRating() {
+
+        bookService.register(
+                "Alpha", 2000, Genres.OUTROS,
+                "123", "Gui", "Omega", false);
+
+        Book book = bookService.getAllBooks().getFirst();
+        IResult result1 = bookService.rate(book, 3.5);
+
+        // Falha: Não foi marcado como visto
+        assertEquals(Failure.class, result1.getClass());
+
+        bookService.markAsSeen(book);
+        IResult result2 = bookService.rate(book, 0);
+        IResult result3 = bookService.rate(book, 5.1);
+
+        // Ambos falham: Fora do limite
+        assertEquals(Failure.class, result2.getClass());
+        assertEquals(Failure.class, result3.getClass());
+
+        IResult result4 = bookService.rate(book, 2.5);
+
+        // Sucesso
+        assertEquals(Success.class, result4.getClass());
+        assertEquals(2.5, book.getRating());
+
     }
 
     private void printAllBooks(BookService bookService) {

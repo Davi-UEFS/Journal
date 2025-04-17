@@ -105,16 +105,8 @@ public class AskInput {
     }
 
     public static double askForRate(Scanner scanner){
-
         System.out.println("Digite a nota (0 a 5) ");
-
-        double rate = Validate.validateDouble(scanner);
-
-        while(rate < 0 || rate > 5) {
-            rate = Validate.validateDouble(scanner);
-            System.out.println("Digite uma nota entre 0 e 5 ");
-        }
-        return rate;
+        return Validate.validateDouble(scanner);
     }
 
     public static String askForReview(Scanner scanner){

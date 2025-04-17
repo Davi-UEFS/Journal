@@ -4,10 +4,12 @@ import Controller.MovieService;
 import Model.Genres;
 import Model.Library;
 
+import Model.Medias.Book;
 import Model.Medias.Movie;
 import Model.Result.Failure;
 import Model.Result.IResult;
 import Model.Result.Success;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,11 +17,16 @@ import java.time.Duration;
 import java.util.ArrayList;
 
 public class MovieTest {
+    Library journal;
+    MovieService movieService;
+    @BeforeEach
+    void setUp() {
+        journal = new Library();
+        movieService = new MovieService(journal);
+    }
 
     @Test
     public void addMovieTest() {
-        Library journal = new Library();
-        MovieService movieService = new MovieService(journal);
 
         IResult result1 = movieService.register(
                 "Aventuras no Espaço", 2021, Genres.AVENTURA, new String[]{"Carlos", "Mariana", "João"},
@@ -42,8 +49,6 @@ public class MovieTest {
 
     @Test
     public void testRateAndReviewMovie() {
-        Library journal = new Library();
-        MovieService movieService = new MovieService(journal);
 
         movieService.register(
                 "Aventuras no Espaço", 2021, Genres.AVENTURA, new String[]{"Carlos", "Mariana", "João"},
@@ -66,6 +71,36 @@ public class MovieTest {
         // Verificar avaliação e review
         System.out.println(movieService.showRating(testMovie));
         System.out.println(movieService.readReview(testMovie));
+    }
+
+    @Test
+    public void testMovieRating() {
+
+        movieService.register(
+                "Alpha", 2000, Genres.OUTROS, new String[]{"One, Two"},
+                Duration.ofMinutes(125), "Omega", "Roteiro",
+                "Omega", new String[]{"One, Two"});
+
+        Movie movie = movieService.getAllMovies().getFirst();
+        IResult result1 = movieService.rate(movie, 3.5);
+
+        // Falha: Não foi marcado como visto
+        assertEquals(Failure.class, result1.getClass());
+
+        movieService.markAsSeen(movie);
+        IResult result2 = movieService.rate(movie, 0);
+        IResult result3 = movieService.rate(movie, 5.1);
+
+        // Ambos falham: Fora do limite
+        assertEquals(Failure.class, result2.getClass());
+        assertEquals(Failure.class, result3.getClass());
+
+        IResult result4 = movieService.rate(movie, 2.5);
+
+        // Sucesso
+        assertEquals(Success.class, result4.getClass());
+        assertEquals(2.5, movie.getRating());
+
     }
 
     private void printMovieList(ArrayList<Movie> movieList){
