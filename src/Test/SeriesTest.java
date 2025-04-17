@@ -35,8 +35,16 @@ public class SeriesTest {
                 new String[]{"Prime Video", "Disney+"},
                 1, 7);
 
+        IResult result3 = seriesService.register(
+                "Amor em Paris", 2019, Genres.ROMANCE, 9999,
+                new String[]{"Guilherme"},
+                "Love in Paris",
+                new String[]{"Netflix"},
+                1, 10);
+
         assertEquals(Success.class, result1.getClass());
         assertEquals(Success.class, result2.getClass());
+        assertEquals(Failure.class, result3.getClass());
         assertEquals(2, seriesService.getAllSeries().size());
     }
 

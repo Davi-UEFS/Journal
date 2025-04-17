@@ -261,11 +261,15 @@ public class SearchMenu {
     }
 
     private void printBookList(List<Book> bookList) {
+        if(bookList.isEmpty())
+            System.out.println(Colors.red + "Nenhum livro encontrado!" + Colors.rst);
         for(Book book: bookList)
             System.out.println(book);
     }
 
     private void printMovieList(List<Movie> movieList) {
+        if(movieList.isEmpty())
+            System.out.println(Colors.red + "Nenhum filme encontrado!" + Colors.rst);
         for(Movie movie: movieList)
             System.out.println(movie);
 
@@ -273,6 +277,8 @@ public class SearchMenu {
 
     //TODO: PRINT DE TEMPORADAS NO TOSTRING DE SERIE?
     private void printSeriesList(List<Series> seriesList) {
+        if(seriesList.isEmpty())
+            System.out.println(Colors.red + "Nenhuma série encontrada!" + Colors.rst);
         for(Series series: seriesList){
             System.out.println(series);
             for(Season season: series.getSeasons()) {
