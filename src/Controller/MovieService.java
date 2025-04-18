@@ -5,6 +5,7 @@ import Model.Genres;
 import Model.Library;
 
 import Model.Medias.Movie;
+import Model.Months;
 import Model.Result.*;
 
 import java.time.Duration;
@@ -52,6 +53,20 @@ public class MovieService extends CommonService<Movie> {
                 actor-> actor.toLowerCase().contains(actorLower))).toList();
 
         return sortAscending(filteredMovies);
+    }
+
+    public IResult markAsSeen(Movie movie, int ano, Months mes){
+
+        if(movie.isSeen())
+            return new Failure("Filme", "Já marcado como visto");
+
+        if(ano < movie.getYear() || ano > 2025)
+            return new Failure("Filme", "Ano inválido!");
+
+        String date = mes.toString() + " de " + ano;
+        movie.setSeen(true);
+        movie.setSeenDate(date);
+        return new Success("Filme", "Marcado como visto e data registrada.");
     }
 
     public ArrayList<Movie> getAllMovies(){
