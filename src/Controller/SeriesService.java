@@ -18,13 +18,16 @@ public class SeriesService extends CommonService<Series> {
     }
 
     public IResult register(String title, int year, Genres genre, int yearOfEnding,
-                           String[] castBuffer, String originalTitle, String[] whereToWatchBuffer,
-                           int seasonNumber, int episodeCount){
+                            String[] castBuffer, String originalTitle, String[] whereToWatchBuffer,
+                            int seasonNumber, int episodeCount, int seasonYear) {
+
+        if(seasonYear < year || seasonYear > yearOfEnding)
+            return new Failure("Série", "Ano de temporada inválido");
 
         ArrayList<String> cast = new ArrayList<>(Arrays.asList(castBuffer));
         ArrayList<String> whereToWatch = new ArrayList<>(Arrays.asList(whereToWatchBuffer));
 
-        Season season = new Season(seasonNumber, episodeCount);
+        Season season = new Season(seasonNumber, episodeCount, seasonYear);
 
         Series series = new Series(title, year, genre, yearOfEnding, cast,
                 originalTitle, whereToWatch);
@@ -40,8 +43,13 @@ public class SeriesService extends CommonService<Series> {
         }
     }
 
-    public IResult registerSeason(Series series, int seasonNumber, int episodeCount){
-        Season season = new Season(seasonNumber, episodeCount);
+    public IResult registerSeason(Series series, int seasonNumber, int episodeCount, int seasonYear){
+
+        if (seasonYear < series.getYear() || seasonYear > series.getYearOfEnding())
+            return new Failure("Temporada", "Ano inválido");
+
+        Season season = new Season(seasonNumber, episodeCount, seasonYear);
+
         try{
             series.findSeason(seasonNumber);
             return new Failure("Temporada", "Já existe");

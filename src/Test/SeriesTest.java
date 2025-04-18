@@ -31,21 +31,21 @@ public class SeriesTest {
                 new String[]{"João", "Maria", "Lucas"},
                 "Ação Total",
                 new String[]{"Netflix", "HBO Max"},
-                1, 5);
+                1, 5, 2021);
 
         IResult result2 = seriesService.register(
                 "Amor em Paris", 2019, Genres.AVENTURA, 2020,
                 new String[]{"Pedro", "Ana"},
                 "Filmes Românticos",
                 new String[]{"Prime Video", "Disney+"},
-                1, 7);
+                1, 7, 2019);
 
         IResult result3 = seriesService.register(
                 "Amor em Paris", 2019, Genres.ROMANCE, 9999,
                 new String[]{"Guilherme"},
                 "Love in Paris",
                 new String[]{"Netflix"},
-                1, 10);
+                1, 10, 2019);
 
         assertEquals(Success.class, result1.getClass());
         assertEquals(Success.class, result2.getClass());
@@ -61,12 +61,12 @@ public class SeriesTest {
                 new String[]{"João", "Maria", "Lucas"},
                 "Ação Total",
                 new String[]{"Netflix", "HBO Max"},
-                1, 5);
+                1, 5, 2021);
 
         Series series = seriesService.getAllSeries().getFirst();
         int initialSeasons = series.getNumberOfSeasons();
 
-        series.addSeason(new Season(2, 8));
+        series.addSeason(new Season(2, 8, 2023));
 
         assertEquals(initialSeasons + 1, series.getNumberOfSeasons());
     }
@@ -79,7 +79,7 @@ public class SeriesTest {
                 new String[]{"João", "Maria", "Lucas"},
                 "Ação Total",
                 new String[]{"Netflix", "HBO Max"},
-                1, 5);
+                1, 5, 2021);
 
         Series testSeries = journal.getSeriesList().getFirst();
         assertEquals("Missão Explosiva", testSeries.getTitle());
@@ -106,13 +106,13 @@ public class SeriesTest {
         // Adicionar várias séries para testar buscas
         seriesService.register("Série A", 2020, Genres.AÇÃO, 2022,
                 new String[]{"Ator 1"}, "Original A",
-                new String[]{"Platform A"}, 1, 10);
+                new String[]{"Platform A"}, 1, 10, 2020);
         seriesService.register("Série B", 2021, Genres.COMÉDIA, 2023,
                 new String[]{"Ator 2"}, "Original B",
-                new String[]{"Platform B"}, 1, 8);
+                new String[]{"Platform B"}, 1, 8, 2021);
         seriesService.register("Série C", 2020, Genres.AÇÃO, 2021,
                 new String[]{"Ator 3"}, "Original C",
-                new String[]{"Platform C"}, 1, 12);
+                new String[]{"Platform C"}, 1, 12, 2020);
 
         // Testar busca por título
         List<Series> searchResults = seriesService.searchByTitle("Série", seriesService.getAllSeries());
@@ -136,12 +136,12 @@ public class SeriesTest {
                 new String[]{"Ator X", "Atriz Y"},
                 "Original X",
                 new String[]{"Platform X"},
-                1, 8);
+                1, 8, 2020);
 
         // Adicionar temporadas adicionais
         Series testSeries = seriesService.getAllSeries().getFirst();
-        testSeries.addSeason(new Season(2, 10));
-        testSeries.addSeason(new Season(3, 12));
+        testSeries.addSeason(new Season(2, 10, 2021));
+        testSeries.addSeason(new Season(3, 12, 2022));
 
         //Marcar apenas temporadas 1 e 2 como vistas
         seriesService.markAsSeenSeason(testSeries, 1);

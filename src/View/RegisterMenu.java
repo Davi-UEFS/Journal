@@ -4,7 +4,6 @@ import Controller.BookService;
 import Controller.MovieService;
 import Controller.SeriesService;
 import Model.Genres;
-import Model.Medias.Season;
 import Model.Medias.Series;
 import Model.Result.IResult;
 import View.Prompts.*;
@@ -34,8 +33,7 @@ public class RegisterMenu {
         String originalTitle;
         String[] castBuffer;
         String[] whereToWatch;
-        int seasonNumber;
-        int episodeCount;
+        int seasonNumber, episodeCount, seasonYear;
 
         IResult result;
         int option;
@@ -96,10 +94,11 @@ public class RegisterMenu {
                     whereToWatch = AskInput.askForWhereToWatch(scanner);
                     seasonNumber = AskInput.askForSeasonNumber(scanner);
                     episodeCount = AskInput.askForEpisodeCount(scanner);
+                    seasonYear = AskInput.askForSeasonYear(scanner);
 
                     result = seriesService.register(
                             title, year, genre, yearOfEnding, castBuffer,
-                            originalTitle, whereToWatch, seasonNumber, episodeCount
+                            originalTitle, whereToWatch, seasonNumber, episodeCount, seasonYear
                     );
                     System.out.println(result.getMessage());
 
@@ -113,8 +112,9 @@ public class RegisterMenu {
                         Series selectedSeries = AskInput.selectFromList(scanner, seriesService.getAllSeries());
                         seasonNumber = AskInput.askForSeasonNumber(scanner);
                         episodeCount = AskInput.askForEpisodeCount(scanner);
+                        seasonYear = AskInput.askForSeasonYear(scanner);
 
-                        result = seriesService.registerSeason(selectedSeries, seasonNumber, episodeCount);
+                        result = seriesService.registerSeason(selectedSeries, seasonNumber, episodeCount, seasonYear);
 
                         System.out.println(result.getMessage());
                     }

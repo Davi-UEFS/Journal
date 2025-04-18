@@ -9,9 +9,9 @@
 	(X) Marcar filme como visto
 	(X) Filmes assistidos podem ser avaliados de 1 a 5
 	(X) Escrever reviews
-( ) Cadastrar séries
+(X) Cadastrar séries
 	(X) Cadastrar temporadas, indicando ano e n° de episódios
-	( ) Cadastrar ano de série
+	(X) Cadastrar ano de série
 (X) Avaliar séries
 	(X) Avaliar temporadas individualmente
 	(X) Escrever reviews para cada temporada

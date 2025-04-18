@@ -120,6 +120,11 @@ public class AskInput {
         return Validate.validateInt(scanner);
     }
 
+    public static int askForSeasonYear(Scanner scanner){
+        System.out.print("Digite o ano da temporada: ");
+        return Validate.validateInt(scanner);
+    }
+
     public static <T extends Media> T selectFromList(Scanner scanner, List<T> mediaList){
         int choice;
         System.out.println("Por favor, selecione uma obra entre as seguintes:");

@@ -6,10 +6,12 @@ public class Season implements Comparable<Season>{
     private String review;
     private boolean seen;
     private final int episodeCount;
+    private final int year;
 
-    public Season(int seasonNumber, int episodeCount) {
+    public Season(int seasonNumber, int episodeCount, int year) {
         this.seasonNumber = seasonNumber;
         this.episodeCount = episodeCount;
+        this.year = year;
     }
 
     @Override
@@ -18,7 +20,7 @@ public class Season implements Comparable<Season>{
     }
 
     public String toString() {
-        return "Temporada: " + seasonNumber + " - " + episodeCount + " Episódios";
+        return "Temporada: " + seasonNumber + " (" + year + ") - " + episodeCount + " Episódios";
     }
 
     public double getRating() {
