@@ -6,6 +6,7 @@ import java.util.Scanner;
 import Model.Medias.Media;
 
 import Model.Genres;
+import Model.Months;
 
 public class AskInput {
 
@@ -97,8 +98,8 @@ public class AskInput {
         System.out.print("Digite um dos gêneros acima: ");
         int wantedGenre = Validate.validateInt(scanner);
         while(wantedGenre < 1 || wantedGenre > 12){
-            wantedGenre = Validate.validateInt(scanner);
             System.out.println("Opção inválida! Digite novamente: ");
+            wantedGenre = Validate.validateInt(scanner);
         }
 
         return Genres.values()[wantedGenre - 1];
@@ -135,13 +136,18 @@ public class AskInput {
         return mediaList.get(choice - 1);
     }
 
-    public static int askForReadYear(Scanner scanner) {
+    public static int askForSeenYear(Scanner scanner) {
         System.out.println("Digite o ano em que foi lido: ");
         return Validate.validateInt(scanner);
     }
 
-    public static int askForReadMonth(Scanner scanner) {
+    public static Months askForSeenMonth(Scanner scanner) {
         System.out.println("Digite o mes em que foi lido (número do mês): ");
-        return Validate.validateInt(scanner);
+        int wantedValue = Validate.validateInt(scanner);
+        if(wantedValue < 1 || wantedValue > 12){
+            System.out.println("Mês inválido! Digite novamente: ");
+            wantedValue = Validate.validateInt(scanner);
+        }
+        return Months.values()[wantedValue - 1];
     }
 }
