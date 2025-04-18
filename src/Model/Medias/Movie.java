@@ -11,6 +11,7 @@ public class Movie extends Media {
     private final String script;
     private final String originalTitle;
     private final List<String> whereToWatch;
+    private String seenDate;
 
     
     public Movie(String name, int year, Genres genre, List<String> cast, Duration duration, String direction,
@@ -22,6 +23,7 @@ public class Movie extends Media {
         this.script = script;
         this.originalTitle = originalTitle;
         this.whereToWatch = whereToWatch;
+        this.seenDate = null;
     }
 
     public void showCast(){
@@ -52,6 +54,14 @@ public class Movie extends Media {
         return whereToWatch;
     }
 
+    public String getSeenDate() {
+        return seenDate;
+    }
+
+    public void setSeenDate(String seenDate) {
+        this.seenDate = seenDate;
+    }
+
     @Override
     public String getMediaType(){
         return "Filme";
@@ -59,8 +69,12 @@ public class Movie extends Media {
 
     @Override
     public String toString() {
-        return "\n" + title + " (" + year + ")\nDuração: " + duration.toString() + " minutos\nDireção: " +
+        String string = "\n" + title + " (" + year + ")\nDuração: " + duration.toString() + " minutos\nDireção: " +
                 direction + "\nTítulo original: " + originalTitle + "\nElenco: " + cast;
+        if(seenDate != null){
+            string += "\nVisto em: " + seenDate;
+        }
+        return string;
     }
 
 }

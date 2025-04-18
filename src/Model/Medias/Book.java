@@ -1,14 +1,12 @@
 package Model.Medias;
 import Model.Genres;
 
-import java.time.LocalDate;
-
 public class Book extends Media{
     private final String isbn;
     private final String author;
     private final String publisher;
     private boolean owned;
-    private String readDate;
+    private String seenDate;
 
     public Book(String title, int year, Genres genre, String isbn, String author, String publisher, boolean owned) {
         super(title, year, genre);
@@ -16,6 +14,7 @@ public class Book extends Media{
         this.author = author;
         this.publisher = publisher;
         this.owned = owned;
+        this.seenDate = null;
     }
 
     
@@ -35,12 +34,12 @@ public class Book extends Media{
         this.owned = owned;
     }
 
-    public String getReadDate() {
-        return readDate;
+    public String getSeenDate() {
+        return seenDate;
     }
 
-    public void setReadDate(String readDate) {
-        this.readDate = readDate;
+    public void setSeenDate(String readDate) {
+        this.seenDate = readDate;
     }
 
     @Override
@@ -55,7 +54,11 @@ public class Book extends Media{
 
     @Override
     public String toString() {
-        return "\n" + title + " (" + this.year + ")\nAutor: " + author + "\nEditora: " + publisher + "\nISBN: " + isbn;
+        String string = "\n" + title + " (" + this.year + ")\nAutor: " + author + "\nEditora: " + publisher + "\nISBN: " + isbn;
+        if(seenDate != null){
+            string += "\nVisto em: " + seenDate;
+        }
+        return string;
     }
 
 }
