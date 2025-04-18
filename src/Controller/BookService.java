@@ -4,17 +4,13 @@ import Model.Exceptions.MediaAlreadyExistsException;
 import Model.Genres;
 import Model.Library;
 import Model.Medias.Book;
+import Model.Months;
 import Model.Result.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BookService extends CommonService<Book>{
-    private enum Months {
-        JANEIRO, FEVEREIRO, MARÇO, APRIL,
-        MAIO, JUNHO, JULHO, AGOSTO,
-        SETEMBRO, OUTUBRO, NOVEMBRO, DEZEMBRO
-    }
 
     public BookService(Library journal){
         super(journal);
@@ -51,25 +47,22 @@ public class BookService extends CommonService<Book>{
         return sortAscending(filteredBooks);
     }
 
+    public IResult markAsSeen(Book book,  int ano, Months mes){
+
+        if(book.isSeen())
+            return new Failure("Livro", "Já marcado como lido");
+
+        if(ano < book.getYear() || ano > 2025)
+            return new Failure("Livro", "Ano inválido!");
+
+        String date = mes.toString() + " de " + ano;
+        book.setSeen(true);
+        book.setSeenDate(date);
+        return new Success("Livro", "Data de leitura registrada.");
+    }
+
     public ArrayList<Book> getAllBooks(){
         return journal.getBookList();
     }
 
-    public IResult markAsSeen(Book book, int year, int month){
-
-        if(book.isSeen())
-            return new Failure("Livro", "Já marcado como visto");
-
-        if(month < 1 || month > 12)
-            return new Failure("Livro", "Mês inválido!");
-
-        if(year < book.getYear() || year > 2025)
-            return new Failure("Livro", "Ano inválido!");
-
-        Months monthEnum = Months.values()[month];
-        String date = monthEnum.toString() + " de " + year;
-        book.setSeen(true);
-        book.setReadDate(date);
-        return new Success("Livro", "Data de leitura registrada.");
-    }
 }
