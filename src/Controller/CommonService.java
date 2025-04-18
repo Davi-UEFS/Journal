@@ -14,15 +14,6 @@ public abstract class CommonService<T extends Media> implements IMediaService<T>
         this.journal = journal;
     }
 
-    public IResult markAsSeen(T media){
-        if(media.isSeen()){
-            return new Failure(media.getMediaType(), "Já marcado como visto");
-        }else{
-            media.setSeen(true);
-            return new Success(media.getMediaType(), "Marcado como visto");
-        }
-    }
-
     @Override
     public IResult rate(T media, double rating) {
         if(rating <= 0 || rating > 5) {
