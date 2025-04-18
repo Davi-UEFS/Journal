@@ -6,6 +6,7 @@ import Model.Library;
 
 import Model.Medias.Book;
 import Model.Medias.Movie;
+import Model.Months;
 import Model.Result.Failure;
 import Model.Result.IResult;
 import Model.Result.Success;
@@ -57,7 +58,7 @@ public class MovieTest {
         );
 
         Movie testMovie = journal.getMovieList().getFirst();
-        movieService.markAsSeen(testMovie);
+        movieService.markAsSeen(testMovie, 2023, Months.SETEMBRO);
         // Testar avaliação
         IResult ratingResult = movieService.rate(testMovie, 4.5);
         assertEquals(Success.class, ratingResult.getClass());
@@ -87,7 +88,7 @@ public class MovieTest {
         // Falha: Não foi marcado como visto
         assertEquals(Failure.class, result1.getClass());
 
-        movieService.markAsSeen(movie);
+        movieService.markAsSeen(movie, 2003, Months.SETEMBRO);
         IResult result2 = movieService.rate(movie, 0);
         IResult result3 = movieService.rate(movie, 5.1);
 

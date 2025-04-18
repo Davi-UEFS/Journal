@@ -5,6 +5,7 @@ import Model.Genres;
 import Model.Library;
 import Model.Medias.Book;
 import Model.Medias.Media;
+import Model.Months;
 import Model.Result.Failure;
 import Model.Result.IResult;
 
@@ -93,7 +94,7 @@ public class BookTest {
         // Falha: Não foi marcado como visto
         assertEquals(Failure.class, result1.getClass());
 
-        bookService.markAsSeen(book);
+        bookService.markAsSeen(book, 2005, Months.AGOSTO);
         IResult result2 = bookService.rate(book, 0);
         IResult result3 = bookService.rate(book, 5.1);
 
@@ -110,32 +111,26 @@ public class BookTest {
     }
 
     @Test
-    public void testBookReadDate() {
+    public void testBookSeenDate() {
         bookService.register(
                 "Alpha", 2000, Genres.OUTROS,
                 "123", "Gui", "Omega", false);
 
         Book book = bookService.getAllBooks().getFirst();
 
-        IResult result1 = bookService.markAsSeen(book, 1999, 8);
-        IResult result2 = bookService.markAsSeen(book, 2026, 8);
+        IResult result1 = bookService.markAsSeen(book, 1999, Months.AGOSTO);
+        IResult result2 = bookService.markAsSeen(book, 2026, Months.AGOSTO);
 
         // Ambos falham: Anos inválidos
         assertEquals(Failure.class, result1.getClass());
         assertEquals(Failure.class, result2.getClass());
 
-        IResult result3 = bookService.markAsSeen(book, 2005, 0);
-        IResult result4 = bookService.markAsSeen(book, 2005, 13);
-
-        // Ambos falham: Meses inválidos
-        assertEquals(Failure.class, result3.getClass());
-        assertEquals(Failure.class, result4.getClass());
-
-        IResult result5 = bookService.markAsSeen(book, 2015, 8);
+        IResult result5 = bookService.markAsSeen(book, 2015, Months.AGOSTO);
 
         // Sucesso
         assertEquals(Success.class, result5.getClass());
-        System.out.println(book.getReadDate());
+        System.out.println(book.getSeenDate());
+        // Output: AGOSTO de 2015
 
     }
 
