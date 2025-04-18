@@ -4,6 +4,7 @@ import Controller.BookService;
 import Controller.MovieService;
 import Controller.SeriesService;
 import Model.Medias.*;
+import Model.Months;
 import Model.Result.IResult;
 import View.Prompts.*;
 
@@ -64,7 +65,7 @@ public class RateMenu {
                     break;
                 case 2:
                     if(movieService.getAllMovies().isEmpty())
-                        System.out.println("Você não possui filmes cadastrados");
+                        System.out.println("Você não possui filmes cadastrados.");
                     else {
                         selectedMovie = AskInput.selectFromList(scanner, movieService.getAllMovies());
                         rating = AskInput.askForRate(scanner);
@@ -76,7 +77,7 @@ public class RateMenu {
 
                 case 3:
                     if(seriesService.getAllSeries().isEmpty())
-                        System.out.println("Você não possui séries cadastradas");
+                        System.out.println("Você não possui séries cadastradas.");
                     else {
                         selectedSeries = AskInput.selectFromList(scanner, seriesService.getAllSeries());
                         rating = AskInput.askForRate(scanner);
@@ -101,7 +102,7 @@ public class RateMenu {
 
                 case 5:
                     if(movieService.getAllMovies().isEmpty())
-                        System.out.println("Você não possui filmes cadastrados");
+                        System.out.println("Você não possui filmes cadastrados.");
                     else {
                         selectedMovie = AskInput.selectFromList(scanner, movieService.getAllMovies());
                         review = AskInput.askForReview(scanner);
@@ -113,7 +114,7 @@ public class RateMenu {
 
                 case 6:
                     if(seriesService.getAllSeries().isEmpty())
-                        System.out.println("Você não possui séries cadastradas");
+                        System.out.println("Você não possui séries cadastradas.");
                     else {
                         selectedSeries = AskInput.selectFromList(scanner, seriesService.getAllSeries());
                         seasonNumber = AskInput.askForSeasonNumber(scanner);
@@ -130,8 +131,8 @@ public class RateMenu {
                     else{
                         selectedBook = AskInput.selectFromList(scanner, bookService.getAllBooks());
 
-                        int ano = AskInput.askForReadYear(scanner);
-                        int mes = AskInput.askForReadMonth(scanner);
+                        int ano = AskInput.askForSeenYear(scanner);
+                        Months mes = AskInput.askForSeenMonth(scanner);
 
                         result = bookService.markAsSeen(selectedBook, ano, mes);
                         System.out.println(result.getMessage());
@@ -140,15 +141,21 @@ public class RateMenu {
 
                 case 8:
                     if(movieService.getAllMovies().isEmpty())
-                        System.out.println("Você não possui filmes cadastrados");
+                        System.out.println("Você não possui filmes cadastrados.");
                     else {
                         selectedMovie = AskInput.selectFromList(scanner, movieService.getAllMovies());
-                        result = movieService.markAsSeen(selectedMovie);
+
+                        int ano = AskInput.askForSeenYear(scanner);
+                        Months mes = AskInput.askForSeenMonth(scanner);
+
+                        result = movieService.markAsSeen(selectedMovie, ano, mes);
                         System.out.println(result.getMessage());
                     }
+                    break;
+
                 case 9:
                     if(seriesService.getAllSeries().isEmpty())
-                        System.out.println("Você não possui séries cadastradas");
+                        System.out.println("Você não possui séries cadastradas.");
                     else {
                         selectedSeries = AskInput.selectFromList(scanner, seriesService.getAllSeries());
                         seasonNumber = AskInput.askForSeasonNumber(scanner);
@@ -156,12 +163,14 @@ public class RateMenu {
                         result = seriesService.markAsSeenSeason(selectedSeries, seasonNumber);
                         System.out.println(result.getMessage());
                     }
+                    break;
+
                 case 0:
                     System.out.println("Retornando...");
                     break;
 
                 default:
-                    System.out.println(Colors.red + "Opção inválida " + Colors.rst);
+                    System.out.println(Colors.red + "Opção inválida." + Colors.rst);
                     break;
             }
         } while (option != 0);
