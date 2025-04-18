@@ -129,16 +129,18 @@ public class DisplayMenu {
             switch (option) {
 
                 case 1:
-
-                    System.out.println(service.sortAscending(mediaList));
+                    List<T> listA = service.sortAscending(mediaList);
+                    for(Media i:listA)
+                        System.out.println(i.toString());
                     break;
 
                 case 2:
-                    System.out.println(service.sortDescending(mediaList));
+                    List<T> listD = service.sortAscending(mediaList);
+                    for(Media i:listD)
+                        System.out.println(i.toString());
                     break;
 
                 case 3:
-
                     mapGenreMedia = service.mapByGenreRate(mediaList, true);
                     printMapGenreMedia(mapGenreMedia);
                     break;
