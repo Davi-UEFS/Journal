@@ -134,6 +134,31 @@ public class BookTest {
 
     }
 
+    @Test
+    public void testBookPrint(){
+        bookService.register("Alpha", 1999, Genres.ROMANCE, "978-3161484100", "Carlos Drummond", "PBL Books", true);
+        bookService.register("Beta", 2015, Genres.AÇÃO, "978-0451524935", "Clarice Lispector", "PBL Books", false);
+        bookService.register("Gamma", 1980, Genres.MISTÉRIO, "978-0553103540", "Jorge Amado", "PBL Books", true);
+        bookService.register("Delta", 2022, Genres.OUTROS, "978-0743273565", "Machado de Assis", "PBL Books", false);
+
+        List<Book> books = bookService.getAllBooks();
+        Book book1 = books.get(0);
+        Book book2 = books.get(1);
+        Book book3 = books.get(2);
+
+        bookService.markAsSeen(book1, 2005, Months.AGOSTO);
+        bookService.markAsSeen(book2, 2016, Months.SETEMBRO);
+        bookService.markAsSeen(book3, 1999, Months.MARÇO);
+
+        bookService.rate(book1, 3.8);
+        bookService.rate(book2, 2.2);
+
+        books = bookService.sortDescending(books);
+
+        for(Book i: books)
+            System.out.println(i.toString());
+    }
+
     private void printAllBooks(BookService bookService) {
         ArrayList<Book> bookList = bookService.getAllBooks();
         for(Book book: bookList)

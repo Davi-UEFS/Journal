@@ -71,9 +71,10 @@ public class Movie extends Media {
     public String toString() {
         String string = "\n" + title + " (" + year + ")\nDuração: " + duration.toString() + " minutos\nDireção: " +
                 direction + "\nTítulo original: " + originalTitle + "\nElenco: " + cast;
-        if(seenDate != null){
+        if(seenDate != null)
             string += "\nVisto em: " + seenDate;
-        }
+        if(rating != 0.0)
+            string += "\nAvaliação: " + rating + " ★";
         return string;
     }
 

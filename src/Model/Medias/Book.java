@@ -55,9 +55,10 @@ public class Book extends Media{
     @Override
     public String toString() {
         String string = "\n" + title + " (" + this.year + ")\nAutor: " + author + "\nEditora: " + publisher + "\nISBN: " + isbn;
-        if(seenDate != null){
+        if(seenDate != null)
             string += "\nVisto em: " + seenDate;
-        }
+        if(rating != 0.0)
+            string += "\nAvaliação: " + rating + " ★";
         return string;
     }
 

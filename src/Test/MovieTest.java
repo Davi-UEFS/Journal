@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MovieTest {
     Library journal;
@@ -102,6 +103,43 @@ public class MovieTest {
         assertEquals(Success.class, result4.getClass());
         assertEquals(2.5, movie.getRating());
 
+    }
+
+    @Test
+    public void testMoviePrint(){
+        movieService.register(
+                "Alpha", 2000, Genres.OUTROS, new String[]{"One, Two"},
+                Duration.ofMinutes(125), "Plato", "Roteiro",
+                "Omega", new String[]{"One, Two"});
+        movieService.register(
+                "Beta", 1999, Genres.ROMANCE, new String[]{"One, Two, Three"},
+                Duration.ofMinutes(160), "Socrates", "Roteiro",
+                "Phi", new String[]{"One"});
+        movieService.register(
+                "Gamma", 2011, Genres.TERROR, new String[]{"One, Three"},
+                Duration.ofMinutes(125), "Aristotle", "Roteiro",
+                "Theta", new String[]{"Two"});
+        movieService.register(
+                "Delta", 2001, Genres.AÇÃO, new String[]{"Two, Three"},
+                Duration.ofMinutes(200), "Caesar", "Roteiro",
+                "Rho", new String[]{"Three"});
+
+        List<Movie> movies = movieService.getAllMovies();
+        Movie movie1 = movies.get(0);
+        Movie movie2 = movies.get(1);
+        Movie movie3 = movies.get(2);
+
+        movieService.markAsSeen(movie1, 2005, Months.AGOSTO);
+        movieService.markAsSeen(movie2, 2016, Months.SETEMBRO);
+        movieService.markAsSeen(movie3, 2012, Months.MARÇO);
+
+        movieService.rate(movie1, 3.8);
+        movieService.rate(movie2, 2.2);
+
+        movies = movieService.sortDescending(movies);
+
+        for(Movie i: movies)
+            System.out.println(i.toString());
     }
 
     private void printMovieList(ArrayList<Movie> movieList){
