@@ -1,12 +1,14 @@
 package View.Prompts;
 
+import Model.Medias.Media;
+import Model.Enums.Genres;
+import Model.Enums.Months;
+
+import java.time.LocalDate;
 import java.time.Duration;
 import java.util.List;
 import java.util.Scanner;
-import Model.Medias.Media;
 
-import Model.Enums.Genres;
-import Model.Enums.Months;
 
 public class AskInput {
 
@@ -41,7 +43,7 @@ public class AskInput {
     public static int askForYear(Scanner scanner) {
         System.out.print("Digite o ano de lançamento (YYYY): ");
         int year = Validate.validateInt(scanner);
-        while(year > 2025){
+        while(year > LocalDate.now().getYear()){
             System.out.println("Ano inválido! Digite novamente: ");
             year = Validate.validateInt(scanner);
         }
@@ -51,7 +53,7 @@ public class AskInput {
     public static int askForYearOfEnding(Scanner scanner) {
         System.out.print("Digite o ano de encerramento (9999 se ainda está em lançamento): ");
         int year = Validate.validateInt(scanner);
-        while((year > 2025 && year < 9999) || (year > 9999)){
+        while((year > LocalDate.now().getYear() && year < 9999) || (year > 9999)){
             System.out.println("Ano inválido! Digite novamente: ");
             year = Validate.validateInt(scanner);
         }
