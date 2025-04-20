@@ -55,15 +55,15 @@ public class MovieService extends CommonService<Movie> {
         return sortAscending(filteredMovies);
     }
 
-    public IResult markAsSeen(Movie movie, int ano, Months mes){
+    public IResult markAsSeen(Movie movie, int year, Months month){
 
         if(movie.isSeen())
             return new Failure("Filme", "Já marcado como visto");
 
-        if(ano < movie.getYear() || ano > 2025)
+        if(year < movie.getYear() || year > 2025)
             return new Failure("Filme", "Ano inválido!");
 
-        String date = mes.toString() + " de " + ano;
+        String date = month.toString() + " de " + year;
         movie.setSeen(true);
         movie.setSeenDate(date);
         return new Success("Filme", "Marcado como visto e data registrada.");
