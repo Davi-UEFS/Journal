@@ -44,7 +44,7 @@ public class Book extends Media{
 
     @Override
     public int getId(){
-        return title.hashCode() + isbn.hashCode() + 227*year;
+        return isbn.hashCode();
     }
 
     @Override
