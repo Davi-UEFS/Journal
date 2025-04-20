@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Scanner;
 import Model.Medias.Media;
 
-import Model.Genres;
-import Model.Months;
+import Model.Enums.Genres;
+import Model.Enums.Months;
 
 public class AskInput {
 

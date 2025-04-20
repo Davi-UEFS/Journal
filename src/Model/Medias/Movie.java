@@ -1,5 +1,5 @@
 package Model.Medias;
-import Model.Genres;
+import Model.Enums.Genres;
 
 import java.time.Duration;
 import java.util.List;

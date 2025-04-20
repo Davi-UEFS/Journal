@@ -1,5 +1,5 @@
 package Test;
-import Model.Genres;
+import Model.Enums.Genres;
 import org.junit.jupiter.api.Test;
 
 public class GenresTest {

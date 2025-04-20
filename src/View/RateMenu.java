@@ -4,7 +4,7 @@ import Controller.BookService;
 import Controller.MovieService;
 import Controller.SeriesService;
 import Model.Medias.*;
-import Model.Months;
+import Model.Enums.Months;
 import Model.Result.IResult;
 import View.Prompts.*;
 

@@ -1,7 +1,7 @@
 package Test;
 
 import Controller.SeriesService;
-import Model.Genres;
+import Model.Enums.Genres;
 import Model.Library;
 import Model.Medias.Season;
 import Model.Medias.Series;

@@ -1,11 +1,11 @@
 package Controller;
 
 import Model.Exceptions.MediaAlreadyExistsException;
-import Model.Genres;
+import Model.Enums.Genres;
 import Model.Library;
 
 import Model.Medias.Movie;
-import Model.Months;
+import Model.Enums.Months;
 import Model.Result.*;
 
 import java.time.Duration;

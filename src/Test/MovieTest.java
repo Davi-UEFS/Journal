@@ -1,12 +1,11 @@
 package Test;
 
 import Controller.MovieService;
-import Model.Genres;
+import Model.Enums.Genres;
 import Model.Library;
 
-import Model.Medias.Book;
 import Model.Medias.Movie;
-import Model.Months;
+import Model.Enums.Months;
 import Model.Result.Failure;
 import Model.Result.IResult;
 import Model.Result.Success;

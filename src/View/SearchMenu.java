@@ -3,7 +3,7 @@ package View;
 import Controller.BookService;
 import Controller.MovieService;
 import Controller.SeriesService;
-import Model.Genres;
+import Model.Enums.Genres;
 import Model.Medias.*;
 import View.Prompts.Colors;
 

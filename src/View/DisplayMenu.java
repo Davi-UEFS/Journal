@@ -2,7 +2,7 @@ package View;
 
 import Controller.*;
 import Model.Medias.*;
-import Model.Genres;
+import Model.Enums.Genres;
 import View.Prompts.*;
 
 import java.util.List;

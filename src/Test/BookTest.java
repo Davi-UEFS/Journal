@@ -1,11 +1,11 @@
 package Test;
 
 import Controller.BookService;
-import Model.Genres;
+import Model.Enums.Genres;
 import Model.Library;
 import Model.Medias.Book;
 import Model.Medias.Media;
-import Model.Months;
+import Model.Enums.Months;
 import Model.Result.Failure;
 import Model.Result.IResult;
 

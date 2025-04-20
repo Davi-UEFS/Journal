@@ -1,6 +1,6 @@
 package Model.Medias;
 
-import Model.Genres;
+import Model.Enums.Genres;
 
 
 public abstract class Media {

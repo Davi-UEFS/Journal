@@ -1,5 +1,5 @@
 package Model.Medias;
-import Model.Genres;
+import Model.Enums.Genres;
 
 public class Book extends Media{
     private final String isbn;

@@ -1,6 +1,6 @@
 package Model.Medias;
 import Model.Exceptions.SeasonNotFoundException;
-import Model.Genres;
+import Model.Enums.Genres;
 
 
 import java.util.TreeSet;

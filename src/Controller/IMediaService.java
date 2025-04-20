@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.Genres;
+import Model.Enums.Genres;
 import Model.Medias.Media;
 import Model.Result.IResult;
 import java.util.List;
