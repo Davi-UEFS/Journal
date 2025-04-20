@@ -1,4 +1,4 @@
-package View;
+package View.Menus;
 
 import Controller.*;
 import Model.Medias.*;

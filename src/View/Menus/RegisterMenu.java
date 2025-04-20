@@ -1,4 +1,4 @@
-package View;
+package View.Menus;
 
 import Controller.BookService;
 import Controller.MovieService;

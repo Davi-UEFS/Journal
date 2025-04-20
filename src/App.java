@@ -2,7 +2,7 @@ import Controller.BookService;
 import Controller.MovieService;
 import Controller.SeriesService;
 import Model.Library;
-import View.MainMenu;
+import View.Menus.MainMenu;
 
 import java.util.Scanner;
 
