@@ -189,7 +189,7 @@ public class SearchMenu {
                     break;
 
                 case 5:
-                    actor = AskInput.askForAuthor(scanner);
+                    actor = AskInput.askForActor(scanner);
                     filteredMovieList = movieService.searchByActor(actor);
                     printMovieList(filteredMovieList);
                     break;
@@ -244,7 +244,7 @@ public class SearchMenu {
                     break;
 
                 case 4:
-                    actor = AskInput.askForAuthor(scanner);
+                    actor = AskInput.askForActor(scanner);
                     filteredSeriesList = seriesService.searchByActor(actor);
                     printSeriesList(filteredSeriesList);
                     break;
