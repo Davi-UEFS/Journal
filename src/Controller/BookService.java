@@ -47,15 +47,15 @@ public class BookService extends CommonService<Book>{
         return sortAscending(filteredBooks);
     }
 
-    public IResult markAsSeen(Book book,  int ano, Months mes){
+    public IResult markAsSeen(Book book,  int year, Months month){
 
         if(book.isSeen())
             return new Failure("Livro", "Já marcado como lido");
 
-        if(ano < book.getYear() || ano > 2025)
+        if(year < book.getYear() || year > 2025)
             return new Failure("Livro", "Ano inválido!");
 
-        String date = mes.toString() + " de " + ano;
+        String date = month.toString() + " de " + year;
         book.setSeen(true);
         book.setSeenDate(date);
         return new Success("Livro", "Data de leitura registrada.");
