@@ -3,6 +3,7 @@ package Test;
 import Controller.SeriesService;
 import Model.Enums.Genres;
 import Model.Library;
+import Model.Medias.Movie;
 import Model.Medias.Season;
 import Model.Medias.Series;
 import Model.Result.Failure;
@@ -11,6 +12,9 @@ import Model.Result.Success;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.Duration;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -156,6 +160,38 @@ public class SeriesTest {
         assertEquals(2.0, journal.getSeriesList().getFirst().getRating());
         // Verificar que a temporada 3 nao foi avaliada
         assertEquals(Failure.class, result.getClass());
+    }
+
+    @Test
+    public void testSearchByActor() {
+        seriesService.register("Série A", 2020, Genres.AÇÃO, 2022,
+                new String[]{"Ator 1, Ator 2"}, "Original A",
+                new String[]{"Platform A"}, 1, 10, 2020);
+        seriesService.register("Série B", 2021, Genres.COMÉDIA, 2023,
+                new String[]{"Ator 2, Ator 3"}, "Original B",
+                new String[]{"Platform B"}, 1, 8, 2021);
+
+        Series seriesA = seriesService.getAllSeries().getFirst(); // Série A
+        Series seriesB = seriesService.getAllSeries().getLast(); // Série B
+
+        List<Series> seriesList1 = seriesService.searchByActor("Ator 1"); // Série A
+        List<Series> seriesList2 = seriesService.searchByActor("Ator 2"); // Séries A e B
+        List<Series> seriesList3 = seriesService.searchByActor("Ator 3"); // Série B
+        List<Series> seriesList4 = seriesService.searchByActor("Ator 4"); // N/A
+
+        assertEquals(1, seriesList1.size());
+        assertEquals(2, seriesList2.size());
+        assertEquals(1, seriesList3.size());
+        assertEquals(0, seriesList4.size());
+
+        List<Series> seriesListA = Collections.singletonList(seriesA); // Lista com Série A
+        List<Series> seriesListB = Collections.singletonList(seriesB); // Lista com Série B
+        List<Series> seriesListAB = Arrays.asList(seriesA, seriesB); // Lista com Séries A e B
+
+        assertEquals(seriesListA, seriesList1);
+        assertEquals(seriesListAB, seriesList2);
+        assertEquals(seriesListB, seriesList3);
+        assertTrue(seriesList4.isEmpty());
     }
 
     private void printSeriesList(List<Series> seriesList) {

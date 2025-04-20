@@ -15,6 +15,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class MovieTest {
@@ -139,6 +141,41 @@ public class MovieTest {
 
         for(Movie i: movies)
             System.out.println(i.toString());
+    }
+
+    @Test
+    public void testSearchByActor() {
+        movieService.register(
+                "Alpha", 2021, Genres.AVENTURA, new String[]{"Carlos", "Mariana", "João"},
+                Duration.ofMinutes(125), "Maria Silva", "Roteiro etc etc",
+                "Space Adventures", new String[]{"Netflix", "HBO Max"});
+
+        movieService.register(
+                "Beta", 2021, Genres.COMÉDIA, new String[]{"Lucas", "Clara", "Carlos"},
+                Duration.ofMinutes(98), "Fernanda Costa", "Roteiro etc etc",
+                "Forest Mystery", new String[]{"Amazon Prime", "GloboPlay"});
+
+        Movie movie1 = movieService.getAllMovies().getFirst(); //Alpha
+        Movie movie2 = movieService.getAllMovies().getLast(); //Beta
+
+        List<Movie> movies1 = movieService.searchByActor("João"); // Alpha
+        List<Movie> movies2 = movieService.searchByActor("Clara"); // Beta
+        List<Movie> movies3 = movieService.searchByActor("Carlos"); // Alpha e Beta
+        List<Movie> movies4 = movieService.searchByActor("Fernanda"); // N/A
+
+        assertEquals(1, movies1.size());
+        assertEquals(1, movies2.size());
+        assertEquals(2, movies3.size());
+        assertEquals(0, movies4.size());
+
+        List<Movie> alpha = Collections.singletonList(movie1); // Lista com Alpha
+        List<Movie> beta = Collections.singletonList(movie2); // Lista com Beta
+        List<Movie> alphaAndBeta = Arrays.asList(movie1, movie2); // Lista com Alpha e Beta
+
+        assertEquals(alpha, movies1);
+        assertEquals(beta, movies2);
+        assertEquals(alphaAndBeta, movies3);
+        assertTrue(movies4.isEmpty());
     }
 
     private void printMovieList(ArrayList<Movie> movieList){
