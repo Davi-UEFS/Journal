@@ -1,4 +1,5 @@
 package Model.Result;
+import View.Prompts.Colors;
 
 public class Success implements IResult{
     private final String message;
@@ -10,7 +11,7 @@ public class Success implements IResult{
     }
 
     public String getMessage(){
-        return mediaType + ":" + message + "✔";
+        return  Colors.green + mediaType + " : " + message + " ✔" + Colors.rst;
     }
 
 

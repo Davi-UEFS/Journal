@@ -1,8 +1,9 @@
 package Model.Result;
+import View.Prompts.Colors;
 
 public class Failure implements IResult{
     private final String message;
-    private final String mediaType;;
+    private final String mediaType;
 
     public Failure(String mediaType, String message){
         this.message = message;
@@ -10,6 +11,6 @@ public class Failure implements IResult{
     }
 
     public String getMessage(){
-        return "ERRO. " + message;
+        return Colors.red + mediaType + " : " + "ERRO. " + message + Colors.rst;
     }
 }

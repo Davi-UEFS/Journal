@@ -9,7 +9,7 @@ import java.util.List;
 public class Series extends Media {
     private int yearOfEnding;
     private final List<String> cast;
-    private final TreeSet<Season> seasons; //TODO: Usar priority queue?
+    private final TreeSet<Season> seasons;
     private final String originalTitle;
     private final List<String> whereToWatch;
 
