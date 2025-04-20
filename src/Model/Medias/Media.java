@@ -8,13 +8,14 @@ public abstract class Media {
     protected final int year;
     protected final Genres genre;
     protected double rating;
-    protected boolean seen = false;
+    protected boolean seen;
     protected String review;
 
     public Media(String title, int year, Genres genre) {
         this.title = title;
         this.year = year;
         this.genre = genre;
+        this.seen = false;
     }
 
     public double getRating(){
