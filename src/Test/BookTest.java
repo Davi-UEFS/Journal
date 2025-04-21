@@ -63,10 +63,10 @@ public class BookTest {
 
     @Test
     public void checkHash() {
-
-        IResult result = bookService.register("Alpha", 1999, Genres.FICÇÃO, "978-3161484100", "Carlos Drummond", "PBL Books", true);
+        String isbn = "978-3161484100";
+        IResult result = bookService.register("Alpha", 1999, Genres.FICÇÃO, isbn, "Carlos Drummond", "PBL Books", true);
         System.out.println(result.getMessage());
-        System.out.println(journal.getBookList().getFirst().getId());
+        assertEquals(isbn.hashCode(), journal.getBookList().getFirst().getId());
     }
 
     @Test
