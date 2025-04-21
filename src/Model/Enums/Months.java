@@ -1,16 +1,20 @@
 package Model.Enums;
 
+/**
+ * O enum Months representa os meses do ano para marcar como visto.
+ * Ele inclui todos os meses, de Janeiro a Dezembro.
+ */
 public enum Months {
-    JANEIRO,
-    FEVEREIRO,
-    MARÇO,
-    APRIL,
-    MAIO,
-    JUNHO,
-    JULHO,
-    AGOSTO,
-    SETEMBRO,
-    OUTUBRO,
-    NOVEMBRO,
-    DEZEMBRO
+    JANEIRO,     // Mês de Janeiro
+    FEVEREIRO,   // Mês de Fevereiro
+    MARÇO,       // Mês de Março
+    APRIL,       // Mês de Abril
+    MAIO,        // Mês de Maio
+    JUNHO,       // Mês de Junho
+    JULHO,       // Mês de Julho
+    AGOSTO,      // Mês de Agosto
+    SETEMBRO,    // Mês de Setembro
+    OUTUBRO,     // Mês de Outubro
+    NOVEMBRO,    // Mês de Novembro
+    DEZEMBRO     // Mês de Dezembro
 }

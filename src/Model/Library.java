@@ -9,75 +9,139 @@ import Model.Medias.Series;
 
 import Model.Exceptions.MediaAlreadyExistsException;
 
-
-public class Library{
+/**
+ * A classe Library representa uma biblioteca que gerencia listas de livros, filmes e séries,
+ * além de registrar os anos associados às mídias cadastradas.
+ */
+public class Library {
+    // Lista de livros cadastrados na biblioteca
     private final ArrayList<Book> bookList;
+    // Lista de filmes cadastrados na biblioteca
     private final ArrayList<Movie> movieList;
+    // Lista de séries cadastradas na biblioteca
     private final ArrayList<Series> seriesList;
+    // Conjunto de anos registrados na biblioteca
     private final TreeSet<Integer> yearsRegistered;
 
-    public Library(){
+    /**
+     * Construtor da classe Library.
+     * Inicializa as listas de livros, filmes, séries e o conjunto de anos registrados.
+     */
+    public Library() {
         this.bookList = new ArrayList<>();
         this.movieList = new ArrayList<>();
         this.seriesList = new ArrayList<>();
         this.yearsRegistered = new TreeSet<>();
-
     }
 
+    /**
+     * Verifica se um livro já está cadastrado na biblioteca.
+     *
+     * @param book O livro a ser verificado.
+     * @throws MediaAlreadyExistsException Se o livro já estiver cadastrado.
+     */
     public void exists(Book book) throws MediaAlreadyExistsException {
-        for(Book bookE: bookList){
-            if(book.getId() == bookE.getId())
+        for (Book bookE : bookList) {
+            if (book.getId() == bookE.getId())
                 throw new MediaAlreadyExistsException("Esse livro já foi cadastrado!");
-
         }
     }
 
+    /**
+     * Verifica se um filme já está cadastrado na biblioteca.
+     *
+     * @param movie O filme a ser verificado.
+     * @throws MediaAlreadyExistsException Se o filme já estiver cadastrado.
+     */
     public void exists(Movie movie) throws MediaAlreadyExistsException {
-        for(Movie movieE: movieList){
-            if(movie.getId() == movieE.getId())
+        for (Movie movieE : movieList) {
+            if (movie.getId() == movieE.getId())
                 throw new MediaAlreadyExistsException("Esse filme já foi cadastrado!");
-
         }
     }
 
+    /**
+     * Verifica se uma série já está cadastrada na biblioteca.
+     *
+     * @param series A série a ser verificada.
+     * @throws MediaAlreadyExistsException Se a série já estiver cadastrada.
+     */
     public void exists(Series series) throws MediaAlreadyExistsException {
-        for(Series seriesE: seriesList){
-            if(series.getId() == seriesE.getId())
+        for (Series seriesE : seriesList) {
+            if (series.getId() == seriesE.getId())
                 throw new MediaAlreadyExistsException("Essa série já foi cadastrada!");
-
         }
     }
 
-    public void addBook(Book book){
+    /**
+     * Adiciona um livro à lista de livros da biblioteca.
+     *
+     * @param book O livro a ser adicionado.
+     */
+    public void addBook(Book book) {
         bookList.add(book);
     }
 
-    public void addMovie(Movie movie){
+    /**
+     * Adiciona um filme à lista de filmes da biblioteca.
+     *
+     * @param movie O filme a ser adicionado.
+     */
+    public void addMovie(Movie movie) {
         movieList.add(movie);
     }
 
-    public void addSeries(Series series){
+    /**
+     * Adiciona uma série à lista de séries da biblioteca.
+     *
+     * @param series A série a ser adicionada.
+     */
+    public void addSeries(Series series) {
         seriesList.add(series);
     }
 
-    public void addYear(int year){
+    /**
+     * Adiciona um ano ao conjunto de anos registrados na biblioteca.
+     *
+     * @param year O ano a ser adicionado.
+     */
+    public void addYear(int year) {
         yearsRegistered.add(year);
     }
+
+    /**
+     * Obtém a lista de livros cadastrados na biblioteca.
+     *
+     * @return Uma lista de livros.
+     */
     public ArrayList<Book> getBookList() {
         return bookList;
     }
 
+    /**
+     * Obtém a lista de séries cadastradas na biblioteca.
+     *
+     * @return Uma lista de séries.
+     */
     public ArrayList<Series> getSeriesList() {
         return seriesList;
     }
 
+    /**
+     * Obtém a lista de filmes cadastrados na biblioteca.
+     *
+     * @return Uma lista de filmes.
+     */
     public ArrayList<Movie> getMovieList() {
         return movieList;
     }
 
+    /**
+     * Obtém o conjunto de anos registrados na biblioteca.
+     *
+     * @return Um conjunto de anos.
+     */
     public TreeSet<Integer> getYearsRegistered() {
         return yearsRegistered;
     }
 }
-
-

@@ -1,13 +1,34 @@
 package Model.Medias;
 import Model.Enums.Genres;
 
-public class Book extends Media{
+/**
+ * A classe Book representa um livro como uma mídia, estendendo a classe base Media.
+ * Ela contém informações específicas de livros, como ISBN, autor, editora,
+ * se o livro é de propriedade do usuário e a data em que foi visto.
+ */
+public class Book extends Media {
+    // O ISBN do livro
     private final String isbn;
+    // O autor do livro
     private final String author;
+    // A editora do livro
     private final String publisher;
-    private boolean owned;
+    // Indica se o livro é de propriedade do usuário
+    private final boolean owned;
+    // A data em que o livro foi visto
     private String seenDate;
 
+    /**
+     * Construtor da classe Book.
+     *
+     * @param title     O título do livro.
+     * @param year      O ano de publicação do livro.
+     * @param genre     O gênero do livro.
+     * @param isbn      O ISBN do livro.
+     * @param author    O autor do livro.
+     * @param publisher A editora do livro.
+     * @param owned     Indica se o livro é de propriedade do usuário.
+     */
     public Book(String title, int year, Genres genre, String isbn, String author, String publisher, boolean owned) {
         super(title, year, genre);
         this.isbn = isbn;
@@ -17,49 +38,75 @@ public class Book extends Media{
         this.seenDate = null;
     }
 
-    
+    /**
+     * Obtém o ISBN do livro.
+     *
+     * @return O ISBN do livro.
+     */
     public String getIsbn() {
         return isbn;
     }
 
+    /**
+     * Obtém o autor do livro.
+     *
+     * @return O autor do livro.
+     */
     public String getAuthor() {
         return author;
     }
 
-    public boolean isOwned() {
-        return owned;
-    }
-
-    public void setOwned(boolean owned) {
-        this.owned = owned;
-    }
-
+    /**
+     * Obtém a data em que o livro foi visto.
+     *
+     * @return A data em que o livro foi visto, ou null se não foi visto.
+     */
     public String getSeenDate() {
         return seenDate;
     }
 
+    /**
+     * Define a data em que o livro foi visto.
+     *
+     * @param readDate A data em que o livro foi visto.
+     */
     public void setSeenDate(String readDate) {
         this.seenDate = readDate;
     }
 
+    /**
+     * Obtém o identificador único do livro com base no hash do ISBN.
+     *
+     * @return O identificador único do livro.
+     */
     @Override
-    public int getId(){
+    public int getId() {
         return isbn.hashCode();
     }
 
+    /**
+     * Obtém o tipo de mídia, que neste caso é "Livro".
+     *
+     * @return Uma string representando o tipo de mídia.
+     */
     @Override
-    public String getMediaType(){
+    public String getMediaType() {
         return "Livro";
     }
 
+    /**
+     * Retorna uma representação em string do livro, incluindo título, ano, autor,
+     * editora, ISBN, data em que foi visto (se disponível) e avaliação (se disponível).
+     *
+     * @return Uma string representando o livro.
+     */
     @Override
     public String toString() {
         String string = "\n" + title + " (" + this.year + ")\nAutor: " + author + "\nEditora: " + publisher + "\nISBN: " + isbn;
-        if(seenDate != null)
+        if (seenDate != null)
             string += "\nVisto em: " + seenDate;
-        if(rating != 0.0)
+        if (rating != 0.0)
             string += "\nAvaliação: " + rating + " ★";
         return string;
     }
-
 }
