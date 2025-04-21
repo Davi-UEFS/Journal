@@ -211,11 +211,11 @@ public class AskInput {
      * Solicita ao usuário uma nota para uma obra.
      *
      * @param scanner O objeto Scanner para leitura da entrada do usuário.
-     * @return A nota como um valor double.
+     * @return A nota como um valor int.
      */
-    public static double askForRate(Scanner scanner) {
+    public static int askForRate(Scanner scanner) {
         System.out.println("Digite a nota (1 a 5) ");
-        return Validate.validateDouble(scanner);
+        return Validate.validateInt(scanner);
     }
 
     /**

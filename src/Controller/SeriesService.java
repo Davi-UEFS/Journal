@@ -104,7 +104,7 @@ public class SeriesService extends CommonService<Series> {
      * @throws UnsupportedOperationException Sempre que o método é chamado.
      */
     @Override
-    public IResult rate(Series series, double rating) {
+    public IResult rate(Series series, int rating) {
         throw new UnsupportedOperationException("Método não suportado para séries.");
     }
 
@@ -154,7 +154,7 @@ public class SeriesService extends CommonService<Series> {
         }
     }
 
-    public IResult rateSeason(Series series, int seasonNumber, double rating) {
+    public IResult rateSeason(Series series, int seasonNumber, int rating) {
         try {
 
             Season season = series.findSeason(seasonNumber);
@@ -220,7 +220,7 @@ public class SeriesService extends CommonService<Series> {
     @Override
     public String showRating(Series series) {
 
-        return "Nota geral: " + ((series.getRating() == 0.0) ?
+        return "Nota geral: " + ((series.getRating() == 0) ?
                 "Sem temporadas avaliadas" : series.getRating());
 
     }
@@ -236,7 +236,7 @@ public class SeriesService extends CommonService<Series> {
 
         try {
             Season season = series.findSeason(seasonNumber);
-            return "Nota: " + ((season.getRating() == 0.0) ?
+            return "Nota: " + ((season.getRating() == 0) ?
                     "Você ainda não avaliou esta temporada" : season.getRating());
         } catch (SeasonNotFoundException e) {
             return e.getMessage();

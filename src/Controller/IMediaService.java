@@ -20,7 +20,7 @@ public interface IMediaService <T extends Media> {
      * @param rating A nota atribuída à mídia.
      * @return Um resultado indicando sucesso ou falha na operação.
      */
-    IResult rate(T media, double rating);
+    IResult rate(T media, int rating);
 
     /**
      * Escreve uma review para uma mídia.

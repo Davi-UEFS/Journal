@@ -15,7 +15,7 @@ public abstract class Media {
     // O gênero da mídia
     protected final Genres genre;
     // A avaliação da mídia (nota)
-    protected double rating;
+    protected int rating;
     // Indica se a mídia foi vista
     protected boolean seen;
     // A review da mídia
@@ -40,7 +40,7 @@ public abstract class Media {
      *
      * @return A nota da mídia.
      */
-    public double getRating() {
+    public int getRating() {
         return rating;
     }
 
@@ -49,7 +49,7 @@ public abstract class Media {
      *
      * @param rating A nota a ser atribuída à mídia.
      */
-    public void setRating(double rating) {
+    public void setRating(int rating) {
         this.rating = rating;
     }
 

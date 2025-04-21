@@ -107,7 +107,7 @@ public class RateMenu {
             return;
         }
         Book selectedBook = AskInput.selectFromList(scanner, bookService.getAllBooks());
-        double rating = AskInput.askForRate(scanner);
+        int rating = AskInput.askForRate(scanner);
         IResult result = bookService.rate(selectedBook, rating);
         System.out.println(result.getMessage());
     }
@@ -123,7 +123,7 @@ public class RateMenu {
             return;
         }
         Movie selectedMovie = AskInput.selectFromList(scanner, movieService.getAllMovies());
-        double rating = AskInput.askForRate(scanner);
+        int rating = AskInput.askForRate(scanner);
         IResult result = movieService.rate(selectedMovie, rating);
         System.out.println(result.getMessage());
     }
@@ -139,7 +139,7 @@ public class RateMenu {
             return;
         }
         Series selectedSeries = AskInput.selectFromList(scanner, seriesService.getAllSeries());
-        double rating = AskInput.askForRate(scanner);
+        int rating = AskInput.askForRate(scanner);
         int seasonNumber = AskInput.askForSeasonNumber(scanner);
         IResult result = seriesService.rateSeason(selectedSeries, seasonNumber, rating);
         System.out.println(result.getMessage());

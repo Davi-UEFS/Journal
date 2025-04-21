@@ -105,8 +105,8 @@ public class Book extends Media {
         String string = "\n" + title + " (" + this.year + ")\nAutor: " + author + "\nEditora: " + publisher + "\nISBN: " + isbn;
         if (seenDate != null)
             string += "\nVisto em: " + seenDate;
-        if (rating != 0.0)
-            string += "\nAvaliação: " + rating + " ★";
+        if (rating != 0)
+            string += "\nAvaliação: " + "★".repeat(rating);
         return string;
     }
 }

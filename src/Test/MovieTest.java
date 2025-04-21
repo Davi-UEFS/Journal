@@ -62,7 +62,7 @@ public class MovieTest {
         Movie testMovie = journal.getMovieList().getFirst();
         movieService.markAsSeen(testMovie, 2023, Months.SETEMBRO);
         // Testar avaliação
-        IResult ratingResult = movieService.rate(testMovie, 4.5);
+        IResult ratingResult = movieService.rate(testMovie, 4);
         assertEquals(Success.class, ratingResult.getClass());
         System.out.println(ratingResult.getMessage());
 
@@ -85,24 +85,24 @@ public class MovieTest {
                 "Omega", new String[]{"One, Two"});
 
         Movie movie = movieService.getAllMovies().getFirst();
-        IResult result1 = movieService.rate(movie, 3.5);
+        IResult result1 = movieService.rate(movie, 3);
 
         // Falha: Não foi marcado como visto
         assertEquals(Failure.class, result1.getClass());
 
         movieService.markAsSeen(movie, 2003, Months.SETEMBRO);
         IResult result2 = movieService.rate(movie, 0);
-        IResult result3 = movieService.rate(movie, 5.1);
+        IResult result3 = movieService.rate(movie, 6);
 
         // Ambos falham: Fora do limite
         assertEquals(Failure.class, result2.getClass());
         assertEquals(Failure.class, result3.getClass());
 
-        IResult result4 = movieService.rate(movie, 2.5);
+        IResult result4 = movieService.rate(movie, 2);
 
         // Sucesso
         assertEquals(Success.class, result4.getClass());
-        assertEquals(2.5, movie.getRating());
+        assertEquals(2, movie.getRating());
 
     }
 
@@ -134,8 +134,8 @@ public class MovieTest {
         movieService.markAsSeen(movie2, 2016, Months.SETEMBRO);
         movieService.markAsSeen(movie3, 2012, Months.MARÇO);
 
-        movieService.rate(movie1, 3.8);
-        movieService.rate(movie2, 2.2);
+        movieService.rate(movie1, 3);
+        movieService.rate(movie2, 2);
 
         movies = movieService.sortDescending(movies);
 

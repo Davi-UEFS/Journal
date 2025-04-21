@@ -35,7 +35,7 @@ public abstract class CommonService<T extends Media> implements IMediaService<T>
      * @return Um objeto IResult indicando sucesso ou falha da operação.
      */
     @Override
-    public IResult rate(T media, double rating) {
+    public IResult rate(T media, int rating) {
         if (rating <= 0 || rating > 5) {
             return new Failure(media.getMediaType(), "Avaliação deve ser maior que 0 e menor ou igual a 5.");
         } else if (!media.isSeen()) {
@@ -82,7 +82,7 @@ public abstract class CommonService<T extends Media> implements IMediaService<T>
      */
     @Override
     public String showRating(T media) {
-        return "Nota: " + ((media.getRating() == 0.0) ?
+        return "Nota: " + ((media.getRating() == 0) ?
                 "Você ainda não avaliou a obra" : media.getRating());
     }
 

@@ -99,8 +99,8 @@ public class Movie extends Media {
                 direction + "\nTítulo original: " + originalTitle + "\nElenco: " + cast;
         if(seenDate != null)
             string += "\nVisto em: " + seenDate;
-        if(rating != 0.0)
-            string += "\nAvaliação: " + rating + " ★";
+        if(rating != 0)
+            string += "\nAvaliação: " + "★".repeat(rating);
         return string;
     }
 }

@@ -7,7 +7,7 @@ package Model.Medias;
  */
 public class Season implements Comparable<Season> {
     // Avaliação da temporada
-    private double rating;
+    private int rating;
     // Número da temporada
     private final int seasonNumber;
     // Review da temporada
@@ -30,6 +30,7 @@ public class Season implements Comparable<Season> {
         this.seasonNumber = seasonNumber;
         this.episodeCount = episodeCount;
         this.year = year;
+        this.rating = 0;
     }
 
     /**
@@ -59,7 +60,7 @@ public class Season implements Comparable<Season> {
      *
      * @return A avaliação da temporada.
      */
-    public double getRating() {
+    public int getRating() {
         return rating;
     }
 
@@ -68,7 +69,7 @@ public class Season implements Comparable<Season> {
      *
      * @param rating A avaliação a ser atribuída à temporada.
      */
-    public void setRating(double rating) {
+    public void setRating(int rating) {
         this.rating = rating;
     }
 

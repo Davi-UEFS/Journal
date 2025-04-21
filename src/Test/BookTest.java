@@ -89,24 +89,24 @@ public class BookTest {
                 "123", "Gui", "Omega", false);
 
         Book book = bookService.getAllBooks().getFirst();
-        IResult result1 = bookService.rate(book, 3.5);
+        IResult result1 = bookService.rate(book, 3);
 
         // Falha: Não foi marcado como visto
         assertEquals(Failure.class, result1.getClass());
 
         bookService.markAsSeen(book, 2005, Months.AGOSTO);
         IResult result2 = bookService.rate(book, 0);
-        IResult result3 = bookService.rate(book, 5.1);
+        IResult result3 = bookService.rate(book, 6);
 
         // Ambos falham: Fora do limite
         assertEquals(Failure.class, result2.getClass());
         assertEquals(Failure.class, result3.getClass());
 
-        IResult result4 = bookService.rate(book, 2.5);
+        IResult result4 = bookService.rate(book, 2);
 
         // Sucesso
         assertEquals(Success.class, result4.getClass());
-        assertEquals(2.5, book.getRating());
+        assertEquals(2, book.getRating());
 
     }
 
@@ -150,8 +150,8 @@ public class BookTest {
         bookService.markAsSeen(book2, 2016, Months.SETEMBRO);
         bookService.markAsSeen(book3, 1999, Months.MARÇO);
 
-        bookService.rate(book1, 3.8);
-        bookService.rate(book2, 2.2);
+        bookService.rate(book1, 3);
+        bookService.rate(book2, 2);
 
         books = bookService.sortDescending(books);
 

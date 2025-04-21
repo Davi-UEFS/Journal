@@ -71,7 +71,7 @@ public class Series extends Media {
      * Se não houver temporadas, a avaliação será definida como 0.
      */
     public void updateRate() {
-        double sum = 0;
+        int sum = 0;
 
         if (seasons.isEmpty())
             setRating(0);
@@ -140,8 +140,8 @@ public class Series extends Media {
         String endingYear = (yearOfEnding == 9999) ? "Em andamento" : Integer.toString(yearOfEnding);
         String string = "\n" + title + " (" + year + " - "  + endingYear + ")\nTítulo original: " + originalTitle +
                 "\nOnde assistir: " + whereToWatch + "\nElenco: " + cast;
-        if (rating != 0.0)
-            string += "\nAvaliação: " + rating + " ★";
+        if (rating != 0)
+            string += "\nAvaliação: " + "★".repeat(rating);
         return string;
     }
 }

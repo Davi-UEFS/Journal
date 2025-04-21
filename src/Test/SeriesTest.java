@@ -91,7 +91,7 @@ public class SeriesTest {
         seriesService.markAsSeenSeason(testSeries, 1);
 
         // Testar avaliação de temporada
-        IResult ratingResult = seriesService.rateSeason(testSeries, 1, 4.5);
+        IResult ratingResult = seriesService.rateSeason(testSeries, 1, 4);
         assertEquals(Success.class, ratingResult.getClass());
 
         // Testar review de temporada
@@ -152,12 +152,12 @@ public class SeriesTest {
         seriesService.markAsSeenSeason(testSeries, 2);
 
         // Avaliar diferentes temporadas
-        seriesService.rateSeason(testSeries, 1, 2.0);
-        seriesService.rateSeason(testSeries, 2, 4.0);
-        IResult result = seriesService.rateSeason(testSeries, 3, 4.5);
+        seriesService.rateSeason(testSeries, 1, 2);
+        seriesService.rateSeason(testSeries, 2, 4);
+        IResult result = seriesService.rateSeason(testSeries, 3, 4);
 
         // Verificar avaliação geral (temporada nao avaliada tambem conta)
-        assertEquals(2.0, journal.getSeriesList().getFirst().getRating());
+        assertEquals(2, journal.getSeriesList().getFirst().getRating());
         // Verificar que a temporada 3 nao foi avaliada
         assertEquals(Failure.class, result.getClass());
     }
