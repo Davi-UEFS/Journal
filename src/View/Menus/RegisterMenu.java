@@ -11,13 +11,24 @@ import View.Prompts.*;
 import java.time.Duration;
 import java.util.Scanner;
 
-
+/**
+ * A classe RegisterMenu é responsável por gerenciar o menu de registro de mídias.
+ * Permite ao usuário registrar livros, filmes, séries e temporadas de séries.
+ */
 public class RegisterMenu {
-    private final Scanner scanner;
-    private final BookService bookService;
-    private final MovieService movieService;
-    private final SeriesService seriesService;
+    private final Scanner scanner; // Scanner para leitura de entradas do usuário.
+    private final BookService bookService; // Serviço para gerenciamento de livros.
+    private final MovieService movieService; // Serviço para gerenciamento de filmes.
+    private final SeriesService seriesService; // Serviço para gerenciamento de séries.
 
+    /**
+     * Construtor da classe RegisterMenu.
+     *
+     * @param bookService Serviço para gerenciamento de livros.
+     * @param movieService Serviço para gerenciamento de filmes.
+     * @param seriesService Serviço para gerenciamento de séries.
+     * @param scanner Objeto Scanner para leitura de entradas do usuário.
+     */
     public RegisterMenu(BookService bookService, MovieService movieService,
                         SeriesService seriesService, Scanner scanner) {
         this.bookService = bookService;
@@ -26,18 +37,13 @@ public class RegisterMenu {
         this.scanner = scanner;
     }
 
+    /**
+     * Exibe o menu de registro e gerencia as interações do usuário.
+     * O menu permite registrar livros, filmes, séries e temporadas de séries.
+     * O loop continua até que o usuário escolha a opção de voltar.
+     */
     public void show() {
-        String title;
-        int year;
-        Genres genre;
-        String originalTitle;
-        String[] castBuffer;
-        String[] whereToWatch;
-        int seasonNumber, episodeCount, seasonYear;
-
-        IResult result;
         int option;
-
         do {
             System.out.println(Colors.purple + "--== MENU DE REGISTRO ==--" + Colors.rst);
             System.out.println("1 - Registrar livro");
@@ -47,88 +53,110 @@ public class RegisterMenu {
             System.out.println(Colors.red + "0 - Voltar" + Colors.rst);
             option = Validate.validateInt(scanner);
 
-            /*TODO: TRATAR EXCECOES NA VIEW?
-                    DECLARAR VARIAVEIS FORA DOS CASES*/
-
             switch (option) {
-                case 1: // Livro
-                    title = AskInput.askForTitle(scanner);
-                    year = AskInput.askForYear(scanner);
-                    genre = AskInput.askForGenre(scanner);
-                    String isbn = AskInput.askForISBN(scanner);
-                    String author = AskInput.askForAuthor(scanner);
-                    String publisher = AskInput.askForPublisher(scanner);
-                    boolean owned = AskInput.askForOwned(scanner);
-
-                    result = bookService.register(
-                            title, year, genre, isbn, author, publisher, owned
-                    );
-                    System.out.println(result.getMessage());
+                case 1:
+                    handleRegisterBook();
                     break;
-
-                case 2: // Filme
-                    title = AskInput.askForTitle(scanner);
-                    year = AskInput.askForYear(scanner);
-                    genre = AskInput.askForGenre(scanner);
-                    castBuffer = AskInput.askForCast(scanner);
-                    Duration duration = AskInput.askForDuration(scanner);
-                    String director = AskInput.askForDirector(scanner);
-                    String script = AskInput.askForScript(scanner);
-                    originalTitle = AskInput.askForOriginalTitle(scanner);
-                    whereToWatch = AskInput.askForWhereToWatch(scanner);
-
-                    result = movieService.register(
-                            title, year, genre, castBuffer, duration, director,
-                            script, originalTitle, whereToWatch
-                    );
-                    System.out.println(result.getMessage());
+                case 2:
+                    handleRegisterMovie();
                     break;
-
-                case 3: // Série
-                    title = AskInput.askForTitle(scanner);
-                    year = AskInput.askForYear(scanner);
-                    genre = AskInput.askForGenre(scanner);
-                    int yearOfEnding = AskInput.askForYearOfEnding(scanner);
-                    castBuffer = AskInput.askForCast(scanner);
-                    originalTitle = AskInput.askForOriginalTitle(scanner);
-                    whereToWatch = AskInput.askForWhereToWatch(scanner);
-                    seasonNumber = AskInput.askForSeasonNumber(scanner);
-                    episodeCount = AskInput.askForEpisodeCount(scanner);
-                    seasonYear = AskInput.askForSeasonYear(scanner);
-
-                    result = seriesService.register(
-                            title, year, genre, yearOfEnding, castBuffer,
-                            originalTitle, whereToWatch, seasonNumber, episodeCount, seasonYear
-                    );
-                    System.out.println(result.getMessage());
-
+                case 3:
+                    handleRegisterSeries();
                     break;
-
-                case 4:// Temporada
-                    if(seriesService.getAllSeries().isEmpty())
-                        System.out.println("Você não possui séries cadastradas");
-
-                    else {
-                        Series selectedSeries = AskInput.selectFromList(scanner, seriesService.getAllSeries());
-                        seasonNumber = AskInput.askForSeasonNumber(scanner);
-                        episodeCount = AskInput.askForEpisodeCount(scanner);
-                        seasonYear = AskInput.askForSeasonYear(scanner);
-
-                        result = seriesService.registerSeason(selectedSeries, seasonNumber, episodeCount, seasonYear);
-
-                        System.out.println(result.getMessage());
-                    }
+                case 4:
+                    handleRegisterSeason();
                     break;
-
                 case 0:
                     System.out.println("Retornando...");
                     break;
-
                 default:
-                    System.out.println(Colors.red + "Opção inválida " + Colors.rst);
+                    System.out.println(Colors.red + "Opção inválida" + Colors.rst);
                     break;
-
             }
         } while (option != 0);
+    }
+
+    /**
+     * Registra um novo livro no sistema.
+     * Solicita ao usuário informações como título, ano, gênero, ISBN, autor, editora e posse.
+     */
+    private void handleRegisterBook() {
+        String title = AskInput.askForTitle(scanner);
+        int year = AskInput.askForYear(scanner);
+        Genres genre = AskInput.askForGenre(scanner);
+        String isbn = AskInput.askForISBN(scanner);
+        String author = AskInput.askForAuthor(scanner);
+        String publisher = AskInput.askForPublisher(scanner);
+        boolean owned = AskInput.askForOwned(scanner);
+
+        IResult result = bookService.register(
+                title, year, genre, isbn, author, publisher, owned
+        );
+        System.out.println(result.getMessage());
+    }
+
+    /**
+     * Registra um novo filme no sistema.
+     * Solicita ao usuário informações como título, ano, gênero, elenco, duração, diretor, roteiro, título original e onde assistir.
+     */
+    private void handleRegisterMovie() {
+        String title = AskInput.askForTitle(scanner);
+        int year = AskInput.askForYear(scanner);
+        Genres genre = AskInput.askForGenre(scanner);
+        String[] castBuffer = AskInput.askForCast(scanner);
+        Duration duration = AskInput.askForDuration(scanner);
+        String director = AskInput.askForDirector(scanner);
+        String script = AskInput.askForScript(scanner);
+        String originalTitle = AskInput.askForOriginalTitle(scanner);
+        String[] whereToWatch = AskInput.askForWhereToWatch(scanner);
+
+        IResult result = movieService.register(
+                title, year, genre, castBuffer, duration, director,
+                script, originalTitle, whereToWatch
+        );
+        System.out.println(result.getMessage());
+    }
+
+    /**
+     * Registra uma nova série no sistema.
+     * Solicita ao usuário informações como título, ano, gênero, ano de término, elenco, título original, onde assistir, número de temporadas, número de episódios e ano da temporada.
+     */
+    private void handleRegisterSeries() {
+        String title = AskInput.askForTitle(scanner);
+        int year = AskInput.askForYear(scanner);
+        Genres genre = AskInput.askForGenre(scanner);
+        int yearOfEnding = AskInput.askForYearOfEnding(scanner);
+        String[] castBuffer = AskInput.askForCast(scanner);
+        String originalTitle = AskInput.askForOriginalTitle(scanner);
+        String[] whereToWatch = AskInput.askForWhereToWatch(scanner);
+        int seasonNumber = AskInput.askForSeasonNumber(scanner);
+        int episodeCount = AskInput.askForEpisodeCount(scanner);
+        int seasonYear = AskInput.askForSeasonYear(scanner);
+
+        IResult result = seriesService.register(
+                title, year, genre, yearOfEnding, castBuffer,
+                originalTitle, whereToWatch, seasonNumber, episodeCount, seasonYear
+        );
+        System.out.println(result.getMessage());
+    }
+
+    /**
+     * Registra uma nova temporada para uma série existente no sistema.
+     * Solicita ao usuário informações como número da temporada, número de episódios e ano da temporada.
+     * Caso não existam séries cadastradas, exibe uma mensagem de erro.
+     */
+    private void handleRegisterSeason() {
+        if (seriesService.getAllSeries().isEmpty()) {
+            System.out.println("Você não possui séries cadastradas");
+            return;
+        }
+
+        Series selectedSeries = AskInput.selectFromList(scanner, seriesService.getAllSeries());
+        int seasonNumber = AskInput.askForSeasonNumber(scanner);
+        int episodeCount = AskInput.askForEpisodeCount(scanner);
+        int seasonYear = AskInput.askForSeasonYear(scanner);
+
+        IResult result = seriesService.registerSeason(selectedSeries, seasonNumber, episodeCount, seasonYear);
+        System.out.println(result.getMessage());
     }
 }

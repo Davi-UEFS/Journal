@@ -8,13 +8,25 @@ import View.Prompts.*;
 
 import java.util.Scanner;
 
+/**
+ * A classe MainMenu é responsável por exibir o menu principal do sistema e gerenciar
+ * a navegação entre os diferentes submenus, como registro, avaliação, exibição e busca.
+ */
 public class MainMenu {
-    private final Scanner scanner;  //TODO: FINAL?
-    private final DisplayMenu displayMenu;
-    private final RegisterMenu registerMenu;
-    private final RateMenu rateMenu;
-    private final SearchMenu searchMenu;
-    
+    private final Scanner scanner;  // Scanner para leitura de entradas do usuário.
+    private final DisplayMenu displayMenu;  // Menu para exibição de informações.
+    private final RegisterMenu registerMenu;  // Menu para registro de mídias.
+    private final RateMenu rateMenu;  // Menu para avaliação de mídias.
+    private final SearchMenu searchMenu;  // Menu para busca de mídias.
+
+    /**
+     * Construtor da classe MainMenu.
+     *
+     * @param bookService Serviço para gerenciamento de livros.
+     * @param movieService Serviço para gerenciamento de filmes.
+     * @param seriesService Serviço para gerenciamento de séries.
+     * @param scanner Objeto Scanner para leitura de entradas do usuário.
+     */
     public MainMenu(BookService bookService, MovieService movieService,
                     SeriesService seriesService, Scanner scanner) {
 
@@ -25,6 +37,11 @@ public class MainMenu {
         this.scanner = scanner;
     }
 
+    /**
+     * Exibe o menu principal e gerencia a navegação entre os submenus.
+     * O menu principal oferece opções para registrar, avaliar, visualizar e buscar mídias.
+     * O loop continua até que o usuário escolha a opção de encerrar.
+     */
     public void showMenu(){
         int option;
 
@@ -53,6 +70,7 @@ public class MainMenu {
 
                 case 4:
                     searchMenu.show();
+                    break;
 
                 case 0:
                     System.out.println("Encerrando...");
@@ -62,10 +80,8 @@ public class MainMenu {
                     System.out.println(View.Prompts.Colors.red + "Opção inválida " + View.Prompts.Colors.rst);
                     break;
             }
-            
+
         }while(option != 0);
         scanner.close();
     }
-
-
 }

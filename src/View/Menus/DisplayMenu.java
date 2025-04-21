@@ -9,100 +9,75 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * A classe DisplayMenu é responsável por gerenciar o menu de exibição de mídias.
+ * Permite ao usuário visualizar avaliações, reviews e listas de mídias cadastradas,
+ * com diferentes critérios de ordenação.
+ */
 public class DisplayMenu {
-    private final Scanner scanner;
-    private final BookService bookService;
-    private final MovieService movieService;
-    private final SeriesService seriesService;
+    private final Scanner scanner; // Scanner para leitura de entradas do usuário.
+    private final BookService bookService; // Serviço para gerenciamento de livros.
+    private final MovieService movieService; // Serviço para gerenciamento de filmes.
+    private final SeriesService seriesService; // Serviço para gerenciamento de séries.
 
+    /**
+     * Construtor da classe DisplayMenu.
+     *
+     * @param bookService Serviço para gerenciamento de livros.
+     * @param movieService Serviço para gerenciamento de filmes.
+     * @param seriesService Serviço para gerenciamento de séries.
+     * @param scanner Objeto Scanner para leitura de entradas do usuário.
+     */
     public DisplayMenu(BookService bookService, MovieService movieService,
-                        SeriesService seriesService, Scanner scanner) {
+                       SeriesService seriesService, Scanner scanner) {
         this.bookService = bookService;
         this.movieService = movieService;
         this.seriesService = seriesService;
         this.scanner = scanner;
     }
 
+    /**
+     * Exibe o menu de exibição e gerencia as interações do usuário.
+     * O menu permite visualizar avaliações, reviews e listas de mídias cadastradas.
+     * O loop continua até que o usuário escolha a opção de voltar.
+     */
     public void show() {
-
         int option;
-        String title;
-        int seasonNumber;
-        Book selectedBook;
-        Movie selectedMovie;
-        Series selectedSeries;
-
-        do{
+        do {
             System.out.println(Colors.green + "--== MENU DE DISPLAY ==--" + Colors.rst);
             System.out.println("1 - Ver avaliações/reviews (livro)");
             System.out.println("2 - Ver avaliações/reviews (filme)");
             System.out.println("3 - Ver avaliações/reviews (série)");
             System.out.println("4 - Ver livros cadastrados");
             System.out.println("5 - Ver filmes cadastrados");
-            System.out.println("6 - Ver series cadastradas");
+            System.out.println("6 - Ver séries cadastradas");
             System.out.println(Colors.red + "0 - Voltar" + Colors.rst);
 
             option = Validate.validateInt(scanner);
 
             switch (option) {
-
                 case 1:
-                    if(bookService.getAllBooks().isEmpty())
-                        System.out.println("Você não possui livros cadastrados.");
-                    else {
-                        selectedBook = AskInput.selectFromList(scanner, bookService.getAllBooks());
-
-                        System.out.println(bookService.readReview(selectedBook));
-                        System.out.println(bookService.showRating(selectedBook));
-                    }
+                    showBookReviewsAndRatings();
                     break;
 
                 case 2:
-                    if(movieService.getAllMovies().isEmpty())
-                        System.out.println("Você não possui filmes cadastrados");
-                    else {
-                        selectedMovie = AskInput.selectFromList(scanner, movieService.getAllMovies());
-
-                        System.out.println(movieService.readReview(selectedMovie));
-                        System.out.println(movieService.showRating(selectedMovie));
-                    }
+                    showMovieReviewsAndRatings();
                     break;
 
                 case 3:
-                    if(seriesService.getAllSeries().isEmpty())
-                        System.out.println("Você não possui séries cadastradas");
-
-                    else {
-                        selectedSeries = AskInput.selectFromList(scanner, seriesService.getAllSeries());
-                        seasonNumber = AskInput.askForSeasonNumber(scanner);
-                        System.out.println(seriesService.readReviewSeason(selectedSeries, seasonNumber));
-                        //Nota da temporada
-                        System.out.println(seriesService.showRatingSeason(selectedSeries, seasonNumber));
-                        //Media das notas das temporadas
-                        System.out.println(seriesService.showRating(selectedSeries));
-                    }
+                    showSeriesReviewsAndRatings();
                     break;
 
                 case 4:
-                    if(bookService.getAllBooks().isEmpty())
-                        System.out.println("Você não possui livros cadastrados.");
-                    else
-                        listByMiniMenu(bookService, bookService.getAllBooks());
+                    showAllBooks();
                     break;
 
                 case 5:
-                    if(movieService.getAllMovies().isEmpty())
-                        System.out.println("Você não possui filmes cadastrados");
-                    else
-                        listByMiniMenu(movieService, movieService.getAllMovies());
+                    showAllMovies();
                     break;
 
                 case 6:
-                    if(seriesService.getAllSeries().isEmpty())
-                        System.out.println("Você não possui séries cadastradas");
-
-                    else
-                        listByMiniMenu(seriesService, seriesService.getAllSeries());
+                    showAllSeries();
                     break;
 
                 case 0:
@@ -112,32 +87,118 @@ public class DisplayMenu {
                 default:
                     System.out.println(Colors.red + "Opção inválida" + Colors.rst);
                     break;
-
             }
-        }while (option!=0);
+        } while (option != 0);
     }
 
-    private <T extends Media> void listByMiniMenu(CommonService<T> service, List<T> mediaList){
+    /**
+     * Exibe as avaliações e reviews de um livro selecionado.
+     * Caso não existam livros cadastrados, exibe uma mensagem de erro.
+     */
+    private void showBookReviewsAndRatings() {
+        if (bookService.getAllBooks().isEmpty()) {
+            System.out.println("Você não possui livros cadastrados.");
+            return;
+        }
+        Book selectedBook = AskInput.selectFromList(scanner, bookService.getAllBooks());
+        System.out.println(bookService.readReview(selectedBook));
+        System.out.println(bookService.showRating(selectedBook));
+    }
+
+    /**
+     * Exibe as avaliações e reviews de um filme selecionado.
+     * Caso não existam filmes cadastrados, exibe uma mensagem de erro.
+     */
+    private void showMovieReviewsAndRatings() {
+        if (movieService.getAllMovies().isEmpty()) {
+            System.out.println("Você não possui filmes cadastrados");
+            return;
+        }
+        Movie selectedMovie = AskInput.selectFromList(scanner, movieService.getAllMovies());
+        System.out.println(movieService.readReview(selectedMovie));
+        System.out.println(movieService.showRating(selectedMovie));
+    }
+
+    /**
+     * Exibe as avaliações e reviews de uma temporada de série selecionada.
+     * Caso não existam séries cadastradas, exibe uma mensagem de erro.
+     */
+    private void showSeriesReviewsAndRatings() {
+        if (seriesService.getAllSeries().isEmpty()) {
+            System.out.println("Você não possui séries cadastradas");
+            return;
+        }
+        Series selectedSeries = AskInput.selectFromList(scanner, seriesService.getAllSeries());
+        int seasonNumber = AskInput.askForSeasonNumber(scanner);
+        System.out.println(seriesService.readReviewSeason(selectedSeries, seasonNumber));
+        System.out.println(seriesService.showRatingSeason(selectedSeries, seasonNumber));
+        System.out.println(seriesService.showRating(selectedSeries));
+    }
+
+    /**
+     * Exibe todos os livros cadastrados, com opções de ordenação.
+     * Caso não existam livros cadastrados, exibe uma mensagem de erro.
+     */
+    private void showAllBooks() {
+        if (bookService.getAllBooks().isEmpty()) {
+            System.out.println("Você não possui livros cadastrados.");
+            return;
+        }
+        listByMiniMenu(bookService, bookService.getAllBooks());
+    }
+
+    /**
+     * Exibe todos os filmes cadastrados, com opções de ordenação.
+     * Caso não existam filmes cadastrados, exibe uma mensagem de erro.
+     */
+    private void showAllMovies() {
+        if (movieService.getAllMovies().isEmpty()) {
+            System.out.println("Você não possui filmes cadastrados");
+            return;
+        }
+        listByMiniMenu(movieService, movieService.getAllMovies());
+    }
+
+    /**
+     * Exibe todas as séries cadastradas, com opções de ordenação.
+     * Caso não existam séries cadastradas, exibe uma mensagem de erro.
+     */
+    private void showAllSeries() {
+        if (seriesService.getAllSeries().isEmpty()) {
+            System.out.println("Você não possui séries cadastradas");
+            return;
+        }
+        listByMiniMenu(seriesService, seriesService.getAllSeries());
+    }
+
+    /**
+     * Exibe um menu secundário para listar mídias com diferentes critérios de ordenação.
+     *
+     * @param service Serviço responsável pelo gerenciamento das mídias.
+     * @param mediaList Lista de mídias a ser exibida.
+     * @param <T> Tipo de mídia que estende a classe Media.
+     */
+    private <T extends Media> void listByMiniMenu(CommonService<T> service, List<T> mediaList) {
         int option;
         Map<Genres, List<T>> mapGenreMedia;
         Map<Integer, List<T>> mapIntMedia;
 
-        do{
+        do {
             showListOptions();
             option = Validate.validateInt(scanner);
 
             switch (option) {
 
                 case 1:
-                    List<T> listA = service.sortAscending(mediaList);
-                    for(Media i:listA)
-                        System.out.println(i.toString());
+                    List<T> listAsc = service.sortAscending(mediaList);
+                    for (Media media : listAsc)
+                        System.out.println(media);
                     break;
 
                 case 2:
-                    List<T> listD = service.sortAscending(mediaList);
-                    for(Media i:listD)
-                        System.out.println(i.toString());
+                    List<T> listDesc = service.sortAscending(mediaList);
+                    for (Media media : listDesc)
+                        System.out.println(media);
                     break;
 
                 case 3:
@@ -178,9 +239,15 @@ public class DisplayMenu {
                     System.out.println(Colors.red + "Opção inválida" + Colors.rst);
                     break;
             }
-        }while (option!=0);
+        } while (option != 0);
     }
 
+    /**
+     * Imprime um mapa de mídias agrupadas por gênero.
+     *
+     * @param mapGenreMedia Mapa contendo gêneros como chave e listas de mídias como valor.
+     * @param <T> Tipo de mídia que estende a classe Media.
+     */
     private <T extends Media> void printMapGenreMedia(Map<Genres, List<T>> mapGenreMedia) {
 
         for (Map.Entry<Genres, List<T>> thisGenreMedia : mapGenreMedia.entrySet()) {
@@ -190,6 +257,12 @@ public class DisplayMenu {
         }
     }
 
+    /**
+     * Imprime um mapa de mídias agrupadas por ano.
+     *
+     * @param mapYearMedia Mapa contendo anos como chave e listas de mídias como valor.
+     * @param <T> Tipo de mídia que estende a classe Media.
+     */
     private <T extends Media> void printMapYearMedia(Map<Integer, List<T>> mapYearMedia) {
         for (Map.Entry<Integer, List<T>> thisYearMedia : mapYearMedia.entrySet()) {
 
@@ -199,7 +272,10 @@ public class DisplayMenu {
         }
     }
 
-    private void showListOptions(){
+    /**
+     * Exibe as opções de listagem disponíveis no menu secundário.
+     */
+    private void showListOptions() {
         System.out.println(Colors.green + "--== MENU DE DISPLAY ==--" + Colors.rst);
         System.out.println("1 - Ver todos (crescente) ");
         System.out.println("2 - Ver todos (decrescente)");

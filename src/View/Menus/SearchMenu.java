@@ -12,12 +12,24 @@ import View.Prompts.*;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * A classe SearchMenu é responsável por gerenciar o menu de busca de mídias.
+ * Permite ao usuário buscar livros, filmes e séries com base em diferentes critérios.
+ */
 public class SearchMenu {
-    private final Scanner scanner;
-    private final BookService bookService;
-    private final MovieService movieService;
-    private final SeriesService seriesService;
+    private final Scanner scanner; // Scanner para leitura de entradas do usuário.
+    private final BookService bookService; // Serviço para gerenciamento de livros.
+    private final MovieService movieService; // Serviço para gerenciamento de filmes.
+    private final SeriesService seriesService; // Serviço para gerenciamento de séries.
 
+    /**
+     * Construtor da classe SearchMenu.
+     *
+     * @param bookService Serviço para gerenciamento de livros.
+     * @param movieService Serviço para gerenciamento de filmes.
+     * @param seriesService Serviço para gerenciamento de séries.
+     * @param scanner Objeto Scanner para leitura de entradas do usuário.
+     */
     public SearchMenu(BookService bookService, MovieService movieService,
                       SeriesService seriesService, Scanner scanner) {
         this.bookService = bookService;
@@ -26,37 +38,40 @@ public class SearchMenu {
         this.scanner = scanner;
     }
 
+    /**
+     * Exibe o menu de busca e gerencia as interações do usuário.
+     * O menu permite buscar livros, filmes e séries com base em critérios específicos.
+     * O loop continua até que o usuário escolha a opção de voltar.
+     */
     public void show() {
-
         int option;
 
-        do{
+        do {
             System.out.println(Colors.green + "--== MENU DE DISPLAY ==--" + Colors.rst);
             System.out.println("1 - Buscar livros");
             System.out.println("2 - Buscar filmes");
-            System.out.println("3 - Buscar series");
+            System.out.println("3 - Buscar séries");
             System.out.println(Colors.red + "0 - Voltar" + Colors.rst);
 
             option = Validate.validateInt(scanner);
 
             switch (option) {
-
                 case 1:
-                    if(bookService.getAllBooks().isEmpty())
+                    if (bookService.getAllBooks().isEmpty())
                         System.out.println("Você não possui livros cadastrados.");
                     else
                         searchBookMiniMenu();
                     break;
 
                 case 2:
-                    if(movieService.getAllMovies().isEmpty())
+                    if (movieService.getAllMovies().isEmpty())
                         System.out.println("Você não possui filmes cadastrados");
                     else
                         searchMovieMiniMenu();
                     break;
 
                 case 3:
-                    if(seriesService.getAllSeries().isEmpty())
+                    if (seriesService.getAllSeries().isEmpty())
                         System.out.println("Você não possui séries cadastradas");
                     else
                         searchSeriesMiniMenu();
@@ -69,12 +84,15 @@ public class SearchMenu {
                 default:
                     System.out.println(Colors.red + "Opção inválida" + Colors.rst);
                     break;
-
             }
-        }while (option!=0);
+        } while (option != 0);
     }
 
-    private void searchBookMiniMenu(){
+    /**
+     * Exibe o menu de busca de livros e gerencia as interações do usuário.
+     * Permite buscar livros por título, ano, gênero, autor ou ISBN.
+     */
+    private void searchBookMiniMenu() {
         int option;
         String title;
         int year;
@@ -97,35 +115,30 @@ public class SearchMenu {
 
             switch (option) {
                 case 1:
-                    //TODO: EVITAR TER QUE CRIAR ALLBOOKS? VALE PARA FILME E SERIE
                     title = AskInput.askForTitle(scanner);
                     filteredBookList = bookService.searchByTitle(title, allBooks);
                     printBookList(filteredBookList);
                     break;
 
                 case 2:
-
                     year = AskInput.askForYear(scanner);
                     filteredBookList = bookService.searchByYear(year, allBooks);
                     printBookList(filteredBookList);
                     break;
 
                 case 3:
-
                     genre = AskInput.askForGenre(scanner);
                     filteredBookList = bookService.searchByGenre(genre, allBooks);
                     printBookList(filteredBookList);
                     break;
 
                 case 4:
-
                     author = AskInput.askForAuthor(scanner);
                     filteredBookList = bookService.searchBookByAuthor(author);
                     printBookList(filteredBookList);
                     break;
 
                 case 5:
-                    //isbn
                     isbn = AskInput.askForISBN(scanner);
                     filteredBookList = bookService.searchBookByIsbn(isbn);
                     printBookList(filteredBookList);
@@ -139,10 +152,14 @@ public class SearchMenu {
                     System.out.println(Colors.red + "Opção inválida" + Colors.rst);
                     break;
             }
-        } while (option!=0);
+        } while (option != 0);
     }
 
-    private void searchMovieMiniMenu(){
+    /**
+     * Exibe o menu de busca de filmes e gerencia as interações do usuário.
+     * Permite buscar filmes por título, ano, gênero, diretor ou ator no elenco.
+     */
+    private void searchMovieMiniMenu() {
         int option;
         String title;
         int year;
@@ -202,10 +219,14 @@ public class SearchMenu {
                     System.out.println(Colors.red + "Opção inválida " + Colors.rst);
                     break;
             }
-        } while(option != 0);
+        } while (option != 0);
     }
 
-    private void searchSeriesMiniMenu(){
+    /**
+     * Exibe o menu de busca de séries e gerencia as interações do usuário.
+     * Permite buscar séries por título, ano de lançamento, gênero ou ator no elenco.
+     */
+    private void searchSeriesMiniMenu() {
         int option;
         String title;
         int year;
@@ -257,35 +278,47 @@ public class SearchMenu {
                     System.out.println(Colors.red + "Opção inválida " + Colors.rst);
                     break;
             }
-        } while(option != 0);
+        } while (option != 0);
     }
 
+    /**
+     * Imprime a lista de livros encontrados.
+     *
+     * @param bookList Lista de livros a ser exibida.
+     */
     private void printBookList(List<Book> bookList) {
-        if(bookList.isEmpty())
+        if (bookList.isEmpty())
             System.out.println(Colors.red + "Nenhum livro encontrado!" + Colors.rst);
-        for(Book book: bookList)
+        for (Book book : bookList)
             System.out.println(book);
     }
 
+    /**
+     * Imprime a lista de filmes encontrados.
+     *
+     * @param movieList Lista de filmes a ser exibida.
+     */
     private void printMovieList(List<Movie> movieList) {
-        if(movieList.isEmpty())
+        if (movieList.isEmpty())
             System.out.println(Colors.red + "Nenhum filme encontrado!" + Colors.rst);
-        for(Movie movie: movieList)
+        for (Movie movie : movieList)
             System.out.println(movie);
-
     }
 
-    //TODO: PRINT DE TEMPORADAS NO TOSTRING DE SERIE?
+    /**
+     * Imprime a lista de séries encontradas, incluindo suas temporadas.
+     *
+     * @param seriesList Lista de séries a ser exibida.
+     */
     private void printSeriesList(List<Series> seriesList) {
-        if(seriesList.isEmpty())
+        if (seriesList.isEmpty())
             System.out.println(Colors.red + "Nenhuma série encontrada!" + Colors.rst);
-        for(Series series: seriesList){
+        for (Series series : seriesList) {
             System.out.println(series);
-            for(Season season: series.getSeasons()) {
+            for (Season season : series.getSeasons()) {
                 System.out.print("\t");
                 System.out.println(season);
             }
-
         }
     }
 }
