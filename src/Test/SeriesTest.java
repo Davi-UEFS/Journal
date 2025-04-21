@@ -3,7 +3,6 @@ package Test;
 import Controller.SeriesService;
 import Model.Enums.Genres;
 import Model.Library;
-import Model.Medias.Movie;
 import Model.Medias.Season;
 import Model.Medias.Series;
 import Model.Result.Failure;
@@ -12,7 +11,6 @@ import Model.Result.Success;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
