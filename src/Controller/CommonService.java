@@ -7,50 +7,92 @@ import Model.Result.*;
 
 import java.util.*;
 
+/**
+ * A classe abstrata CommonService fornece uma implementação base para serviços que manipulam
+ * objetos do tipo Media. Ela implementa a interface IMediaService e define métodos comuns
+ * para avaliação, escrita e leitura de reviews, busca e ordenação de mídias.
+ *
+ * @param <T> O tipo de mídia que será manipulado, que deve estender a classe Media.
+ */
 public abstract class CommonService<T extends Media> implements IMediaService<T> {
+    // Biblioteca que armazena as mídias
     protected final Library journal;
 
+    /**
+     * Construtor da classe CommonService.
+     *
+     * @param journal A biblioteca que contém as mídias.
+     */
     public CommonService(Library journal) {
         this.journal = journal;
     }
 
+    /**
+     * Avalia uma mídia com uma nota.
+     *
+     * @param media  A mídia a ser avaliada.
+     * @param rating A nota a ser atribuída (deve ser entre 0 e 5).
+     * @return Um objeto IResult indicando sucesso ou falha da operação.
+     */
     @Override
     public IResult rate(T media, double rating) {
-        if(rating <= 0 || rating > 5) {
+        if (rating <= 0 || rating > 5) {
             return new Failure(media.getMediaType(), "Avaliação deve ser maior que 0 e menor ou igual a 5.");
-        }else if(!media.isSeen()) {
+        } else if (!media.isSeen()) {
             return new Failure(media.getMediaType(), "Marque como visto antes de avaliar");
-        }else{
+        } else {
             media.setRating(rating);
             return new Success(media.getMediaType(), "Avaliação salva com sucesso.");
         }
-
     }
+
+    /**
+     * Escreve uma review para uma mídia.
+     *
+     * @param media  A mídia para a qual a review será escrita.
+     * @param review O texto da review.
+     * @return Um objeto IResult indicando sucesso ou falha da operação.
+     */
     @Override
     public IResult writeReview(T media, String review) {
-        if(media.isSeen()){
+        if (media.isSeen()) {
             media.setReview(review);
-            return new Success(media.getMediaType(),"Review salva com sucesso.");
-
+            return new Success(media.getMediaType(), "Review salva com sucesso.");
         }
         return new Failure(media.getMediaType(), "Marque como visto antes de escrever uma review");
-
     }
 
+    /**
+     * Lê a review de uma mídia.
+     *
+     * @param media A mídia cuja review será lida.
+     * @return Uma string contendo a review ou uma mensagem indicando que não há review.
+     */
     @Override
     public String readReview(T media) {
-
         return "Review: " + ((media.getReview() == null) ?
                 "Você ainda não escreveu uma review" : media.getReview());
     }
-    @Override
-    public String showRating(T media){
 
+    /**
+     * Mostra a nota de uma mídia.
+     *
+     * @param media A mídia cuja nota será exibida.
+     * @return Uma string contendo a nota ou uma mensagem indicando que não há nota.
+     */
+    @Override
+    public String showRating(T media) {
         return "Nota: " + ((media.getRating() == 0.0) ?
                 "Você ainda não avaliou a obra" : media.getRating());
-
     }
 
+    /**
+     * Busca mídias por título.
+     *
+     * @param title     O título a ser buscado.
+     * @param mediaList A lista de mídias onde a busca será realizada.
+     * @return Uma lista de mídias que correspondem ao título, ordenadas de forma crescente.
+     */
     @Override
     public List<T> searchByTitle(String title, List<T> mediaList) {
         String titleLower = title.toLowerCase().trim();
@@ -60,6 +102,13 @@ public abstract class CommonService<T extends Media> implements IMediaService<T>
         return sortAscending(filteredMedia);
     }
 
+    /**
+     * Busca mídias por ano.
+     *
+     * @param year      O ano a ser buscado.
+     * @param mediaList A lista de mídias onde a busca será realizada.
+     * @return Uma lista de mídias que correspondem ao ano, ordenadas de forma crescente.
+     */
     @Override
     public List<T> searchByYear(int year, List<T> mediaList) {
         List<T> filteredMedia = mediaList.stream().filter
@@ -68,6 +117,13 @@ public abstract class CommonService<T extends Media> implements IMediaService<T>
         return sortAscending(filteredMedia);
     }
 
+    /**
+     * Busca mídias por gênero.
+     *
+     * @param genre     O gênero a ser buscado.
+     * @param mediaList A lista de mídias onde a busca será realizada.
+     * @return Uma lista de mídias que correspondem ao gênero, ordenadas de forma crescente.
+     */
     @Override
     public List<T> searchByGenre(Genres genre, List<T> mediaList) {
         List<T> filteredMedia = mediaList.stream().filter
@@ -76,61 +132,77 @@ public abstract class CommonService<T extends Media> implements IMediaService<T>
         return sortAscending(filteredMedia);
     }
 
-    //TODO: CRESCENTE E DA MENOR NOTA PARA A MAIOR OU DA MAIOR PARA A MENOR?
-
+    /**
+     * Ordena uma lista de mídias de forma crescente com base na nota.
+     *
+     * @param mediaList A lista de mídias a ser ordenada.
+     * @return A lista ordenada de forma crescente.
+     */
     public List<T> sortAscending(List<T> mediaList) {
         return mediaList.stream().sorted(Comparator.comparing(Media::getRating)).toList();
     }
 
+    /**
+     * Ordena uma lista de mídias de forma decrescente com base na nota.
+     *
+     * @param mediaList A lista de mídias a ser ordenada.
+     * @return A lista ordenada de forma decrescente.
+     */
     public List<T> sortDescending(List<T> mediaList) {
         return mediaList.stream().sorted(Comparator.comparing(Media::getRating)).toList().reversed();
     }
 
-    /**Gera um LinkedHashMap com as chaves sendo o ano e
-     * os valores sendo uma lista com midias deste ano.
+    /**
+     * Gera um mapa onde as chaves são os anos e os valores são listas de mídias
+     * correspondentes a cada ano, ordenadas por nota.
+     *
+     * @param mediaList     A lista de mídias a ser mapeada.
+     * @param ascendingYear Indica se os anos devem ser ordenados de forma crescente.
+     * @param ascendingRate Indica se as notas devem ser ordenadas de forma crescente.
+     * @return Um mapa contendo as mídias agrupadas por ano.
      */
-    public Map<Integer, List<T>> mapByYearRate(List<T> mediaList, boolean ascendingYear,boolean
-                                               ascendingRate) {
+    public Map<Integer, List<T>> mapByYearRate(List<T> mediaList, boolean ascendingYear, boolean ascendingRate) {
         Map<Integer, List<T>> mapYearMedia = new LinkedHashMap<>();
         List<Integer> years = new ArrayList<>(journal.getYearsRegistered());
 
-        if(!ascendingYear)
+        if (!ascendingYear)
             Collections.reverse(years);
 
         for (Integer year : years) {
-
             List<T> filteredMedia;
-            if(ascendingRate) {
+            if (ascendingRate) {
                 filteredMedia = searchByYear(year, mediaList);
-            } else{
+            } else {
                 filteredMedia = sortDescending(searchByYear(year, mediaList));
             }
 
-            if(!filteredMedia.isEmpty())
+            if (!filteredMedia.isEmpty())
                 mapYearMedia.put(year, filteredMedia);
         }
         return mapYearMedia;
     }
 
-
-    /**Gera um EnumMap (para manter a ordem) com as chaves sendo
-     *os generos e os valores sendo as listas de cada genero.
+    /**
+     * Gera um mapa onde as chaves são os gêneros e os valores são listas de mídias
+     * correspondentes a cada gênero, ordenadas por nota.
+     *
+     * @param mediaList     A lista de mídias a ser mapeada.
+     * @param ascendingRate Indica se as notas devem ser ordenadas de forma crescente.
+     * @return Um mapa contendo as mídias agrupadas por gênero.
      */
     public Map<Genres, List<T>> mapByGenreRate(List<T> mediaList, boolean ascendingRate) {
         Map<Genres, List<T>> mapGenreMedia = new EnumMap<>(Genres.class);
 
         for (Genres genre : Genres.values()) {
             List<T> filteredMedia;
-            if(ascendingRate) {
+            if (ascendingRate) {
                 filteredMedia = searchByGenre(genre, mediaList);
-            } else{
+            } else {
                 filteredMedia = sortDescending(searchByGenre(genre, mediaList));
             }
-            if(!filteredMedia.isEmpty())
+            if (!filteredMedia.isEmpty())
                 mapGenreMedia.put(genre, filteredMedia);
-
         }
         return mapGenreMedia;
     }
-
 }

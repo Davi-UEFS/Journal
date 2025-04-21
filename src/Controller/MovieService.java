@@ -11,17 +11,40 @@ import Model.Result.*;
 import java.time.Duration;
 import java.util.*;
 
+/**
+ * A classe MovieService fornece serviços relacionados ao gerenciamento de filmes.
+ * Ela estende a classe CommonService e utiliza a biblioteca para registrar, buscar e manipular filmes.
+ */
 public class MovieService extends CommonService<Movie> {
 
+    /**
+     * Construtor da classe MovieService.
+     *
+     * @param journal A biblioteca que será utilizada para gerenciar os filmes.
+     */
     public MovieService(Library journal){
         super(journal);
     }
 
+    /**
+     * Registra um novo filme na biblioteca.
+     *
+     * @param name O nome do filme.
+     * @param year O ano de lançamento do filme.
+     * @param genre O gênero do filme.
+     * @param castBuffer O elenco do filme.
+     * @param duration A duração do filme.
+     * @param direction O diretor do filme.
+     * @param script O roteirista do filme.
+     * @param originalTitle O título original do filme.
+     * @param whereToWatchBuffer As plataformas onde o filme pode ser assistido.
+     * @return Um resultado indicando sucesso ou falha no registro.
+     */
     public IResult register(String name, int year, Genres genre, String[] castBuffer,
                             Duration duration, String direction, String script,
                             String originalTitle, String[] whereToWatchBuffer){
 
-        ArrayList<String> cast = new ArrayList<>(Arrays.asList(castBuffer));//add todos os nomes na lista
+        ArrayList<String> cast = new ArrayList<>(Arrays.asList(castBuffer)); // Adiciona todos os nomes ao elenco
         ArrayList<String> whereToWatch = new ArrayList<>(Arrays.asList(whereToWatchBuffer));
 
         Movie movie = new Movie(name, year, genre, cast, duration, direction,
@@ -38,6 +61,12 @@ public class MovieService extends CommonService<Movie> {
         }
     }
 
+    /**
+     * Busca filmes pelo nome do diretor.
+     *
+     * @param director O nome do diretor a ser buscado.
+     * @return Uma lista de filmes que possuem o diretor especificado.
+     */
     public List<Movie> searchByDirector(String director){
         String directorLower = director.toLowerCase().trim();
         List<Movie> filteredMovies = journal.getMovieList().stream().filter
@@ -46,15 +75,29 @@ public class MovieService extends CommonService<Movie> {
         return sortAscending(filteredMovies);
     }
 
+    /**
+     * Busca filmes pelo nome de um ator.
+     *
+     * @param name O nome do ator a ser buscado.
+     * @return Uma lista de filmes que possuem o ator no elenco.
+     */
     public List<Movie> searchByActor(String name){
         String actorLower = name.toLowerCase().trim();
         List<Movie> filteredMovies = journal.getMovieList().stream().filter
                 (movie -> movie.getCast().stream().anyMatch(
-                actor-> actor.toLowerCase().contains(actorLower))).toList();
+                        actor-> actor.toLowerCase().contains(actorLower))).toList();
 
         return sortAscending(filteredMovies);
     }
 
+    /**
+     * Marca um filme como visto e registra a data de visualização.
+     *
+     * @param movie O filme a ser marcado como visto.
+     * @param year O ano em que o filme foi visto.
+     * @param month O mês em que o filme foi visto.
+     * @return Um resultado indicando sucesso ou falha na operação.
+     */
     public IResult markAsSeen(Movie movie, int year, Months month){
 
         if(movie.isSeen())
@@ -69,6 +112,11 @@ public class MovieService extends CommonService<Movie> {
         return new Success("Filme", "Marcado como visto e data registrada.");
     }
 
+    /**
+     * Obtém todos os filmes registrados na biblioteca.
+     *
+     * @return Uma lista contendo todos os filmes.
+     */
     public ArrayList<Movie> getAllMovies(){
         return journal.getMovieList();
     }

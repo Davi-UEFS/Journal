@@ -3,6 +3,7 @@ package Controller;
 import Model.Exceptions.MediaAlreadyExistsException;
 import Model.Exceptions.SeasonNotFoundException;
 import Model.Enums.Genres;
+import Model.Exceptions.UnsupportedOperationException;
 import Model.Library;
 
 import Model.Medias.Season;
@@ -11,12 +12,36 @@ import Model.Result.*;
 
 import java.util.*;
 
+/**
+ * A classe SeriesService fornece serviços relacionados ao gerenciamento de séries.
+ * Ela estende a classe CommonService e utiliza a biblioteca para registrar, buscar e manipular séries.
+ */
 public class SeriesService extends CommonService<Series> {
 
+    /**
+     * Construtor da classe SeriesService.
+     *
+     * @param journal A biblioteca que será utilizada para gerenciar as séries.
+     */
     public SeriesService(Library journal){
         super(journal);
     }
 
+    /**
+     * Registra uma nova série na biblioteca.
+     *
+     * @param title O título da série.
+     * @param year O ano de início da série.
+     * @param genre O gênero da série.
+     * @param yearOfEnding O ano de término da série.
+     * @param castBuffer O elenco da série.
+     * @param originalTitle O título original da série.
+     * @param whereToWatchBuffer As plataformas onde a série pode ser assistida.
+     * @param seasonNumber O número da temporada inicial.
+     * @param episodeCount A quantidade de episódios da temporada inicial.
+     * @param seasonYear O ano da temporada inicial.
+     * @return Um resultado indicando sucesso ou falha no registro.
+     */
     public IResult register(String title, int year, Genres genre, int yearOfEnding,
                             String[] castBuffer, String originalTitle, String[] whereToWatchBuffer,
                             int seasonNumber, int episodeCount, int seasonYear) {
@@ -43,6 +68,15 @@ public class SeriesService extends CommonService<Series> {
         }
     }
 
+    /**
+     * Registra uma nova temporada para uma série existente.
+     *
+     * @param series A série à qual a temporada será adicionada.
+     * @param seasonNumber O número da temporada.
+     * @param episodeCount A quantidade de episódios da temporada.
+     * @param seasonYear O ano da temporada.
+     * @return Um resultado indicando sucesso ou falha no registro.
+     */
     public IResult registerSeason(Series series, int seasonNumber, int episodeCount, int seasonYear){
 
         if (seasonYear < series.getYear() || seasonYear > series.getYearOfEnding())
@@ -59,6 +93,53 @@ public class SeriesService extends CommonService<Series> {
         } //TODO: MUDAR ANO DA SERIE?
     }
 
+
+
+    /**
+     * Lança uma exceção para indicar que a avaliação de uma série não é suportada.
+     *
+     * @param series A série a ser avaliada.
+     * @param rating A nota atribuída à série.
+     * @return Nunca retorna, pois lança uma exceção.
+     * @throws UnsupportedOperationException Sempre que o método é chamado.
+     */
+    @Override
+    public IResult rate(Series series, double rating) {
+        throw new UnsupportedOperationException("Método não suportado para séries.");
+    }
+
+    /**
+     * Lança uma exceção para indicar que a escrita de uma review para uma série não é suportada.
+     *
+     * @param series A série para a qual a review seria escrita.
+     * @param review A review a ser escrita.
+     * @return Nunca retorna, pois lança uma exceção.
+     * @throws UnsupportedOperationException Sempre que o método é chamado.
+     */
+    @Override
+    public IResult writeReview(Series series, String review) {
+        throw new UnsupportedOperationException("Método não suportado para séries.");
+    }
+
+    /**
+     * Lança uma exceção para indicar que a leitura de uma review de uma série não é suportada.
+     *
+     * @param series A série cuja review seria lida.
+     * @return Nunca retorna, pois lança uma exceção.
+     * @throws UnsupportedOperationException Sempre que o método é chamado.
+     */
+    @Override
+    public String readReview(Series series) {
+        throw new UnsupportedOperationException("Método não suportado para séries.");
+    }
+
+    /**
+     * Marca uma temporada como vista.
+     *
+     * @param series A série que contém a temporada.
+     * @param seasonNumber O número da temporada a ser marcada como vista.
+     * @return Um resultado indicando sucesso ou falha na operação.
+     */
     public IResult markAsSeenSeason(Series series, int seasonNumber) {
         try{
             Season season = series.findSeason(seasonNumber);
@@ -68,13 +149,11 @@ public class SeriesService extends CommonService<Series> {
             season.setSeen(true);
             return new Success("Temporada", "Marcado como visto");
 
-    }catch (SeasonNotFoundException e){
-        return new Failure("Temporada",e.getMessage());
-    }
+        }catch (SeasonNotFoundException e){
+            return new Failure("Temporada",e.getMessage());
+        }
     }
 
-    //TODO: OVERRIDE EM RATE E REVIEW DO PAI. EXCECAO
-           /////////////////////////////////////////////
     public IResult rateSeason(Series series, int seasonNumber, double rating) {
         try {
 
@@ -91,6 +170,14 @@ public class SeriesService extends CommonService<Series> {
         }
     }
 
+    /**
+     * Escreve uma review para uma temporada de uma série.
+     *
+     * @param series A série que contém a temporada.
+     * @param seasonNumber O número da temporada.
+     * @param review A review a ser escrita.
+     * @return Um resultado indicando sucesso ou falha na operação.
+     */
     public IResult writeReviewSeason(Series series, int seasonNumber, String review) {
         try {
             Season season = series.findSeason(seasonNumber);
@@ -104,6 +191,13 @@ public class SeriesService extends CommonService<Series> {
         }
     }
 
+    /**
+     * Lê a review de uma temporada de uma série.
+     *
+     * @param series A série que contém a temporada.
+     * @param seasonNumber O número da temporada.
+     * @return A review da temporada ou uma mensagem indicando que não há review.
+     */
     public String readReviewSeason(Series series, int seasonNumber) {
 
         try {
@@ -116,14 +210,28 @@ public class SeriesService extends CommonService<Series> {
 
         }
     }
+
+    /**
+     * Exibe a nota geral de uma série.
+     *
+     * @param series A série cuja nota será exibida.
+     * @return A nota geral da série ou uma mensagem indicando que não há avaliações.
+     */
     @Override
     public String showRating(Series series) {
 
-            return "Nota geral: " + ((series.getRating() == 0.0) ?
-                    "Sem temporadas avaliadas" : series.getRating());
+        return "Nota geral: " + ((series.getRating() == 0.0) ?
+                "Sem temporadas avaliadas" : series.getRating());
 
     }
 
+    /**
+     * Exibe a nota de uma temporada específica de uma série.
+     *
+     * @param series A série que contém a temporada.
+     * @param seasonNumber O número da temporada.
+     * @return A nota da temporada ou uma mensagem indicando que não há avaliação.
+     */
     public String showRatingSeason(Series series, int seasonNumber) {
 
         try {
@@ -136,6 +244,12 @@ public class SeriesService extends CommonService<Series> {
         }
     }
 
+    /**
+     * Busca séries pelo nome de um ator.
+     *
+     * @param name O nome do ator a ser buscado.
+     * @return Uma lista de séries que possuem o ator no elenco.
+     */
     public List<Series> searchByActor(String name){
         String actorLower = name.toLowerCase().trim();
         List<Series> filteredSeries = journal.getSeriesList().stream().filter
@@ -145,6 +259,11 @@ public class SeriesService extends CommonService<Series> {
         return sortAscending(filteredSeries);
     }
 
+    /**
+     * Obtém todas as séries registradas na biblioteca.
+     *
+     * @return Uma lista contendo todas as séries.
+     */
     public ArrayList<Series> getAllSeries(){
         return journal.getSeriesList();
     }
