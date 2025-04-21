@@ -2,9 +2,20 @@ package View.Prompts;
 
 import java.util.Scanner;
 
+/**
+ * A classe Validate fornece métodos utilitários para validar entradas do usuário.
+ * Ela garante que os dados inseridos sejam do tipo esperado, como inteiros, doubles, strings ou booleanos.
+ */
 public class Validate {
 
-    public static int validateInt(Scanner scanner){
+    /**
+     * Valida a entrada do usuário como um número inteiro.
+     * Solicita repetidamente até que uma entrada válida seja fornecida.
+     *
+     * @param scanner O objeto Scanner para leitura da entrada do usuário.
+     * @return O número inteiro validado.
+     */
+    public static int validateInt(Scanner scanner) {
         boolean validInt;
         int num = 0;
         do {
@@ -20,7 +31,14 @@ public class Validate {
         return num;
     }
 
-    public static double validateDouble(Scanner scanner){
+    /**
+     * Valida a entrada do usuário como um número double.
+     * Solicita repetidamente até que uma entrada válida seja fornecida.
+     *
+     * @param scanner O objeto Scanner para leitura da entrada do usuário.
+     * @return O número double validado.
+     */
+    public static double validateDouble(Scanner scanner) {
         boolean validDouble;
         double dbl = 0;
         do {
@@ -36,33 +54,44 @@ public class Validate {
         return dbl;
     }
 
-    public static String validateString(Scanner scanner){
-
+    /**
+     * Valida a entrada do usuário como uma string não vazia.
+     * Solicita repetidamente até que uma entrada válida seja fornecida.
+     *
+     * @param scanner O objeto Scanner para leitura da entrada do usuário.
+     * @return A string validada, sem espaços em branco no início ou no final.
+     */
+    public static String validateString(Scanner scanner) {
         String str;
 
         str = scanner.nextLine();
-        while(str.isBlank()){
+        while (str.isBlank()) {
             System.out.println("Erro. Digite um texto valido"); //TODO: GRAM
             str = scanner.nextLine();
         }
         return str.trim();
     }
 
-    public static boolean validateBoolean(Scanner scanner){
-
+    /**
+     * Valida a entrada do usuário como um valor booleano.
+     * Aceita "s", "sim", "true" para true e "n", "nao", "false" para false.
+     * Solicita repetidamente até que uma entrada válida seja fornecida.
+     *
+     * @param scanner O objeto Scanner para leitura da entrada do usuário.
+     * @return O valor booleano validado.
+     */
+    public static boolean validateBoolean(Scanner scanner) {
         while (true) {
             String input = scanner.nextLine().trim().toLowerCase();
 
-            if (input.equals("s") || input.equals("sim") || input.equals("true")){
+            if (input.equals("s") || input.equals("sim") || input.equals("true")) {
                 return true;
 
-            } else if (input.equals("n") || input.equals("nao") || input.equals("false")){
+            } else if (input.equals("n") || input.equals("nao") || input.equals("false")) {
                 return false;
             }
 
             System.out.println("Erro: Digite apenas s/n ou sim/nao.");
         }
-
     }
-
 }
