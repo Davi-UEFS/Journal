@@ -95,12 +95,18 @@ public class Movie extends Media {
      */
     @Override
     public String toString() {
-        String string = "\n" + title + " (" + year + ")\nDuração: " + duration.toString() + " minutos\nDireção: " +
-                direction + "\nTítulo original: " + originalTitle + "\nElenco: " + cast;
+        String string =
+                "\n" + title + " (" + year + ")" +
+                "\nDuração: " + duration.toString() + " minutos" +
+                "\nDireção: " + direction +
+                "\nTítulo original: " + originalTitle +
+                "\nOnde assistir: " + whereToWatch;
         if(seenDate != null)
             string += "\nVisto em: " + seenDate;
         if(rating != 0)
             string += "\nAvaliação: " + "★".repeat(rating);
+        string += "\n\nSinopse: " + script +
+                "\nElenco: " + cast;
         return string;
     }
 }

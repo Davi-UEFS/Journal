@@ -8,7 +8,7 @@ public enum Months {
     JANEIRO,     // Mês de Janeiro
     FEVEREIRO,   // Mês de Fevereiro
     MARÇO,       // Mês de Março
-    APRIL,       // Mês de Abril
+    ABRIL,       // Mês de Abril
     MAIO,        // Mês de Maio
     JUNHO,       // Mês de Junho
     JULHO,       // Mês de Julho

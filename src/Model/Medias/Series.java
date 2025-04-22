@@ -138,8 +138,11 @@ public class Series extends Media {
     @Override
     public String toString() {
         String endingYear = (yearOfEnding == 9999) ? "Em andamento" : Integer.toString(yearOfEnding);
-        String string = "\n" + title + " (" + year + " - "  + endingYear + ")\nTítulo original: " + originalTitle +
-                "\nOnde assistir: " + whereToWatch + "\nElenco: " + cast;
+        String string =
+                "\n" + title + " (" + year + " - "  + endingYear + ")" +
+                "\nTítulo original: " + originalTitle +
+                "\nOnde assistir: " + whereToWatch +
+                "\nElenco: " + cast;
         if (rating != 0)
             string += "\nAvaliação: " + "★".repeat(rating);
         return string;

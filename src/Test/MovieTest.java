@@ -4,6 +4,7 @@ import Controller.MovieService;
 import Model.Enums.Genres;
 import Model.Library;
 
+import Model.Medias.Media;
 import Model.Medias.Movie;
 import Model.Enums.Months;
 import Model.Result.Failure;
@@ -14,10 +15,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class MovieTest {
     Library journal;
@@ -45,7 +43,7 @@ public class MovieTest {
     }
 
     @Test
-    public void addMovieTest() {
+    public void testRepeatedMovie() {
 
         IResult result1 = movieService.register(
                 "Aventuras no Espaço", 2021, Genres.AVENTURA, new String[]{"Carlos", "Mariana", "João"},
@@ -194,6 +192,40 @@ public class MovieTest {
         assertEquals(beta, movies2);
         assertEquals(alphaAndBeta, movies3);
         assertTrue(movies4.isEmpty());
+    }
+
+    @Test
+    public void testListByGenre() {
+
+        movieService.register("Alpha", 2000, Genres.OUTROS, new String[]{"One, Two"},
+                Duration.ofMinutes(125), "Plato", "Roteiro",
+                "Omega", new String[]{"One, Two"});
+        movieService.register("Beta", 1999, Genres.ROMANCE, new String[]{"One, Two, Three"},
+                Duration.ofMinutes(160), "Socrates", "Roteiro",
+                "Phi", new String[]{"One"});
+        movieService.register("Gamma", 2011, Genres.TERROR, new String[]{"One, Three"},
+                Duration.ofMinutes(125), "Aristotle", "Roteiro",
+                "Theta", new String[]{"Two"});
+        movieService.register("Delta", 2001, Genres.AÇÃO, new String[]{"Two, Three"},
+                Duration.ofMinutes(200), "Caesar", "Roteiro",
+                "Rho", new String[]{"Three"});
+
+        System.out.println("Por genero crescente");
+
+        printMapGenreMedia(movieService.mapByGenreRate(movieService.getAllMovies(), true));
+
+    }
+
+    private <T extends Media> void printMapGenreMedia(Map<Genres, List<T>> mapGenreMedia) {
+        for (Map.Entry<Genres, List<T>> thisGenreMedia : mapGenreMedia.entrySet()) {
+            if (!thisGenreMedia.getValue().isEmpty()) {
+                System.out.println(thisGenreMedia.getKey());
+                for (Media media : thisGenreMedia.getValue()) {
+                    System.out.println(media);
+                    System.out.println("------------------------");
+                }
+            }
+        }
     }
 
     private void printMovieList(ArrayList<Movie> movieList){

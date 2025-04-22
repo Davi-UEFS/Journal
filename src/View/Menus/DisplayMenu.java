@@ -252,8 +252,10 @@ public class DisplayMenu {
 
         for (Map.Entry<Genres, List<T>> thisGenreMedia : mapGenreMedia.entrySet()) {
             System.out.println(thisGenreMedia.getKey());
-            for (Media media : thisGenreMedia.getValue())
-                System.out.println(media + "\n");
+            for (Media media : thisGenreMedia.getValue()) {
+                System.out.println(media);
+                System.out.println("---------------------");
+            }
         }
     }
 
@@ -267,8 +269,10 @@ public class DisplayMenu {
         for (Map.Entry<Integer, List<T>> thisYearMedia : mapYearMedia.entrySet()) {
 
             System.out.println(thisYearMedia.getKey());
-            for (Media media : thisYearMedia.getValue())
-                System.out.println(media + "\n");
+            for (Media media : thisYearMedia.getValue()){
+                System.out.println(media);
+                System.out.println("------------------------");
+            }
         }
     }
 

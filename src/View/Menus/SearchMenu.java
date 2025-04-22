@@ -289,8 +289,10 @@ public class SearchMenu {
     private void printBookList(List<Book> bookList) {
         if (bookList.isEmpty())
             System.out.println(Colors.red + "Nenhum livro encontrado!" + Colors.rst);
-        for (Book book : bookList)
+        for (Book book : bookList) {
             System.out.println(book);
+            System.out.println("---------------------");
+        }
     }
 
     /**
@@ -301,8 +303,10 @@ public class SearchMenu {
     private void printMovieList(List<Movie> movieList) {
         if (movieList.isEmpty())
             System.out.println(Colors.red + "Nenhum filme encontrado!" + Colors.rst);
-        for (Movie movie : movieList)
+        for (Movie movie : movieList) {
             System.out.println(movie);
+            System.out.println("---------------------");
+        }
     }
 
     /**
@@ -319,6 +323,7 @@ public class SearchMenu {
                 System.out.print("\t");
                 System.out.println(season);
             }
+            System.out.println("---------------------");
         }
     }
 }

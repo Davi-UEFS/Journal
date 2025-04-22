@@ -176,8 +176,10 @@ public class BookTest {
 
         books = bookService.sortDescending(books);
 
-        for(Book i: books)
-            System.out.println(i.toString());
+        for(Book book: books) {
+            System.out.println(book);
+            System.out.println("------------------------");
+        }
     }
 
     private void printAllBooks(BookService bookService) {
@@ -195,19 +197,12 @@ public class BookTest {
         for (Map.Entry<Genres, List<T>> thisGenreMedia : mapGenreMedia.entrySet()) {
             if (!thisGenreMedia.getValue().isEmpty()) {
                 System.out.println(thisGenreMedia.getKey());
-                for (Media media : thisGenreMedia.getValue())
-                    System.out.println(media + "\n");
+                for (Media media : thisGenreMedia.getValue()) {
+                    System.out.println(media);
+                    System.out.println("---------------------");
+                }
             }
         }
     }
 
-    private <T extends Media> void printMapYearMedia(Map<Integer, List<T>> mapYearMedia) {
-        for (Map.Entry<Integer, List<T>> thisYearMedia : mapYearMedia.entrySet()) {
-            if (!thisYearMedia.getValue().isEmpty()) {
-                System.out.println(thisYearMedia.getKey());
-                for (Media media : thisYearMedia.getValue())
-                    System.out.println(media + "\n");
-            }
-        }
-    }
 }
