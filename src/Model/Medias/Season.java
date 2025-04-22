@@ -30,7 +30,9 @@ public class Season implements Comparable<Season> {
         this.seasonNumber = seasonNumber;
         this.episodeCount = episodeCount;
         this.year = year;
+        this.seen = false;
         this.rating = 0;
+        this.review = null;
     }
 
     /**
