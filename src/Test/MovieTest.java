@@ -22,10 +22,26 @@ import java.util.List;
 public class MovieTest {
     Library journal;
     MovieService movieService;
+
     @BeforeEach
     void setUp() {
         journal = new Library();
         movieService = new MovieService(journal);
+    }
+
+    @Test
+    public void testCreateMovie() {
+        List<String> cast = new ArrayList<String>(List.of(new String[]{"Carlos", "Mariana", "João"}));
+        List<String> screening = new ArrayList<String>(List.of(new String[]{"Netflix", "HBO Max"}));
+        Movie movie = new Movie(
+                "Alpha", 2000, Genres.OUTROS, cast,
+                Duration.ofMinutes(125), "Omega", "Roteiro",
+                "Omega", screening);
+
+        assertEquals(Genres.OUTROS, movie.getGenre());
+        assertEquals(cast, movie.getCast());
+        assertEquals("Alpha", movie.getTitle());
+        assertEquals(2000, movie.getYear());
     }
 
     @Test
@@ -45,6 +61,8 @@ public class MovieTest {
 
         assertEquals(Success.class, result1.getClass());
         assertEquals(Failure.class, result2.getClass());
+
+
         assertEquals(1, movieService.getAllMovies().size());
 
         printMovieList(movieService.getAllMovies());

@@ -117,4 +117,13 @@ public class Season implements Comparable<Season> {
     public int getSeasonNumber() {
         return seasonNumber;
     }
+
+    /**
+     * Obtém o número de episódios da temporada
+     *
+     * @return O número de episódios
+     */
+    public int getEpisodeCount() {
+        return episodeCount;
+    }
 }

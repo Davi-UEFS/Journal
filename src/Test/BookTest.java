@@ -32,6 +32,9 @@ public class BookTest {
         Book book = new Book("Alpha", 2025, Genres.AÇÃO, "12345", "Davi", "PBL Books", true);
 
         assertEquals("Alpha", book.getTitle());
+        assertEquals(2025, book.getYear());
+        assertEquals("12345", book.getIsbn());
+        assertEquals(Genres.AÇÃO, book.getGenre());
     }
 
     @Test
@@ -42,7 +45,7 @@ public class BookTest {
         IResult result2 = bookService.register("Alpha", 2025, Genres.FICÇÃO, "12345", "Davi", "PBL Books", true);
         System.out.println(result2.getMessage());
 
-        assertEquals(Failure.class, result2);
+        assertEquals(Failure.class, result2.getClass());
         printAllBooks(bookService);
     }
 
@@ -97,7 +100,6 @@ public class BookTest {
     
         printMapGenreMedia(bookService.mapByGenreRate(bookService.getAllBooks(), true));
 
-        //ADD assert
     }
 
     @Test

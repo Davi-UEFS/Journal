@@ -11,9 +11,7 @@ import Model.Result.Success;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,8 +24,31 @@ public class SeriesTest {
     }
 
     @Test
+    public void testCreateSeries() {
+        List<String> actors = new ArrayList<String>(List.of(new String[]{"Carlos", "Mariana", "João"}));
+        List<String> screening = new ArrayList<String>(List.of(new String[]{"Netflix", "HBO Max"}));
+
+        Series series = new Series(
+                "Série A", 2020, Genres.AÇÃO, 2022,
+                actors, "Original A", screening);
+
+        series.addSeason(new Season(1, 10, 2020));
+        series.addSeason(new Season(2, 12, 2022));
+
+        assertEquals("Série A", series.getTitle());
+        assertEquals(2020, series.getYear());
+        assertEquals(2022, series.getYearOfEnding());
+
+        assertEquals(2, series.getNumberOfSeasons());
+
+        TreeSet<Season> seasons = series.getSeasons();
+        assertEquals(10, seasons.getFirst().getEpisodeCount());
+    }
+
+    @Test
     public void testRegisterSeries() {
 
+        // Registra série Missão Explosiva, retorna Success
         IResult result1 = seriesService.register(
                 "Missão Explosiva", 2021, Genres.TERROR, 2024,
                 new String[]{"João", "Maria", "Lucas"},
@@ -35,6 +56,7 @@ public class SeriesTest {
                 new String[]{"Netflix", "HBO Max"},
                 1, 5, 2021);
 
+        // Registra série Amor em Paris, retorna Success
         IResult result2 = seriesService.register(
                 "Amor em Paris", 2019, Genres.AVENTURA, 2020,
                 new String[]{"Pedro", "Ana"},
@@ -42,6 +64,7 @@ public class SeriesTest {
                 new String[]{"Prime Video", "Disney+"},
                 1, 7, 2019);
 
+        // Tenta registrar série com mesmo título e mesmo ano, retorna Failure
         IResult result3 = seriesService.register(
                 "Amor em Paris", 2019, Genres.ROMANCE, 9999,
                 new String[]{"Guilherme"},
