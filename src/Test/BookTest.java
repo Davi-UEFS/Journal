@@ -28,14 +28,21 @@ public class BookTest {
     }
 
     @Test
-    public void testAddBook() {
+    public void testCreateBook(){
+        Book book = new Book("Alpha", 2025, Genres.AÇÃO, "12345", "Davi", "PBL Books", true);
+
+        assertEquals("Alpha", book.getTitle());
+    }
+
+    @Test
+    public void testRepeatedBook() {
         IResult result1 = bookService.register("Alpha", 2025, Genres.AÇÃO, "12345", "Davi", "PBL Books", true);
         System.out.println(result1.getMessage());
 
         IResult result2 = bookService.register("Alpha", 2025, Genres.FICÇÃO, "12345", "Davi", "PBL Books", true);
         System.out.println(result2.getMessage());
 
-        assertEquals("Alpha", journal.getBookList().getFirst().getTitle());
+        assertEquals(Failure.class, result2);
         printAllBooks(bookService);
     }
 
@@ -45,20 +52,29 @@ public class BookTest {
         bookService.register("Alpha", 1999, Genres.ROMANCE, "978-3161484100", "Carlos Drummond", "PBL Books", true);
         bookService.register("Beta", 2015, Genres.AÇÃO, "978-0451524935", "Clarice Lispector", "PBL Books", false);
         bookService.register("Gamma", 1980, Genres.MISTÉRIO, "978-0553103540", "Jorge Amado", "PBL Books", true);
-        bookService.register("Delta", 2022, Genres.OUTROS, "978-0743273565", "Machado de Assis", "PBL Books", false);
+        bookService.register("Delta", 2022, Genres.AÇÃO, "978-0743273565", "Machado de Assis", "PBL Books", false);
 
-        System.out.println("Livros com 'ta': ");
+        //Livros que contém as letras "ta" (Beta e Delta)
         List<Book> books = bookService.searchByTitle("ta", bookService.getAllBooks());
         assertEquals(2, books.size());
+
+        System.out.println("Livros com 'ta': ");
         printBookList(books);
 
-        System.out.println("Livros com 'Al'");
+        //Livros que contém as letras "Al" (Alpha)
         books = bookService.searchByTitle("Al", bookService.getAllBooks());
         assertEquals(1, books.size());
+
+        System.out.println("Livros com 'Al': ");
         printBookList(books);
 
-        System.out.println("Por genero crescente");
-        System.out.println(bookService.mapByGenreRate(bookService.getAllBooks(), true));
+        //Livros que contém as letras "Al" (Alpha)
+        books = bookService.searchByGenre(Genres.AÇÃO, bookService.getAllBooks());
+        assertEquals(2, books.size());
+
+        System.out.println("Livros de Ação: ");
+        printBookList(books);
+        
     }
 
     @Test
@@ -70,7 +86,7 @@ public class BookTest {
     }
 
     @Test
-    public void testBooksByGenre() {
+    public void testListByGenre() {
 
         bookService.register("Alpha", 1999, Genres.ROMANCE, "978-3161484100", "Carlos Drummond", "PBL Books", true);
         bookService.register("Beta", 2015, Genres.AÇÃO, "978-0451524935", "Clarice Lispector", "PBL Books", false);
@@ -78,7 +94,10 @@ public class BookTest {
         bookService.register("Delta", 2022, Genres.OUTROS, "978-0743273565", "Machado de Assis", "PBL Books", false);
 
         System.out.println("Por genero crescente");
+    
         printMapGenreMedia(bookService.mapByGenreRate(bookService.getAllBooks(), true));
+
+        //ADD assert
     }
 
     @Test
