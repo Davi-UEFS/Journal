@@ -154,6 +154,14 @@ public class SeriesService extends CommonService<Series> {
         }
     }
 
+    /**
+     * Avalia uma temporada específica de uma série.
+     *
+     * @param series A série que contém a temporada a ser avaliada.
+     * @param seasonNumber O número da temporada a ser avaliada.
+     * @param rating A nota atribuída à temporada.
+     * @return Um objeto IResult indicando o sucesso ou falha da operação:
+     */
     public IResult rateSeason(Series series, int seasonNumber, int rating) {
         try {
 

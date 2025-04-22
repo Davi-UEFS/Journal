@@ -31,7 +31,7 @@ public abstract class CommonService<T extends Media> implements IMediaService<T>
      * Avalia uma mídia com uma nota.
      *
      * @param media  A mídia a ser avaliada.
-     * @param rating A nota a ser atribuída (deve ser entre 0 e 5).
+     * @param rating A nota a ser atribuída (deve ser entre 1 e 5).
      * @return Um objeto IResult indicando sucesso ou falha da operação.
      */
     @Override
