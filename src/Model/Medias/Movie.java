@@ -13,7 +13,7 @@ public class Movie extends Media {
     // Lista com os nomes do elenco do filme
     private final List<String> cast;
     // Duração do filme
-    private final Duration duration; //TODO: TROCAR PRA DOUBLE
+    private final Duration duration;
     // Nome do diretor do filme
     private final String direction;
     // Roteiro do filme

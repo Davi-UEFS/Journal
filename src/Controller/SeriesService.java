@@ -90,7 +90,7 @@ public class SeriesService extends CommonService<Series> {
         } catch (SeasonNotFoundException e){
             series.addSeason(season);
             return new Success("Temporada", "Registrada com sucesso.");
-        } //TODO: MUDAR ANO DA SERIE?
+        }
     }
 
 
@@ -101,7 +101,7 @@ public class SeriesService extends CommonService<Series> {
      * @param series A série a ser avaliada.
      * @param rating A nota atribuída à série.
      * @return Nunca retorna, pois lança uma exceção.
-     * @throws UnsupportedOperationException Sempre que o método é chamado.
+     * @throws UnsupportedOperationException Sempre que o metodo é chamado.
      */
     @Override
     public IResult rate(Series series, int rating) {
@@ -114,7 +114,7 @@ public class SeriesService extends CommonService<Series> {
      * @param series A série para a qual a review seria escrita.
      * @param review A review a ser escrita.
      * @return Nunca retorna, pois lança uma exceção.
-     * @throws UnsupportedOperationException Sempre que o método é chamado.
+     * @throws UnsupportedOperationException Sempre que o metodo é chamado.
      */
     @Override
     public IResult writeReview(Series series, String review) {
@@ -126,7 +126,7 @@ public class SeriesService extends CommonService<Series> {
      *
      * @param series A série cuja review seria lida.
      * @return Nunca retorna, pois lança uma exceção.
-     * @throws UnsupportedOperationException Sempre que o método é chamado.
+     * @throws UnsupportedOperationException Sempre que o metodo é chamado.
      */
     @Override
     public String readReview(Series series) {

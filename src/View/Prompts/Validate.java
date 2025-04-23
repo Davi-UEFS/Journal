@@ -32,29 +32,6 @@ public class Validate {
     }
 
     /**
-     * Valida a entrada do usuário como um número double.
-     * Solicita repetidamente até que uma entrada válida seja fornecida.
-     *
-     * @param scanner O objeto Scanner para leitura da entrada do usuário.
-     * @return O número double validado.
-     */
-    public static double validateDouble(Scanner scanner) {
-        boolean validDouble;
-        double dbl = 0;
-        do {
-            validDouble = true;
-            try {
-                dbl = Double.parseDouble(scanner.nextLine());
-            } catch (NumberFormatException e) {
-                validDouble = false;
-                System.out.println("Erro. Digite um numero"); //TODO: GRAM
-            }
-        } while (!validDouble);
-
-        return dbl;
-    }
-
-    /**
      * Valida a entrada do usuário como uma string não vazia.
      * Solicita repetidamente até que uma entrada válida seja fornecida.
      *
@@ -66,7 +43,7 @@ public class Validate {
 
         str = scanner.nextLine();
         while (str.isBlank()) {
-            System.out.println("Erro. Digite um texto valido"); //TODO: GRAM
+            System.out.println("Erro. Digite um texto válido");
             str = scanner.nextLine();
         }
         return str.trim();
