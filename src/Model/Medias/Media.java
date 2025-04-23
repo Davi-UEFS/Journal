@@ -33,6 +33,8 @@ public abstract class Media {
         this.year = year;
         this.genre = genre;
         this.seen = false;
+        this.rating = 0;
+        this.review = null;
     }
 
     /**
