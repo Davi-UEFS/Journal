@@ -83,7 +83,7 @@ public abstract class CommonService<T extends Media> implements IMediaService<T>
     @Override
     public String showRating(T media) {
         return "Nota: " + ((media.getRating() == 0) ?
-                "Você ainda não avaliou a obra" : media.getRating());
+                "Você ainda não avaliou a obra" : "★".repeat(media.getRating()));
     }
 
     /**

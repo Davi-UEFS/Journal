@@ -153,7 +153,7 @@ public class AskInput {
      * @return O título original da obra como uma string.
      */
     public static String askForOriginalTitle(Scanner scanner) {
-        System.out.println("Digite o título original da obra: ");
+        System.out.print("Digite o título original da obra: ");
         return Validate.validateString(scanner);
     }
 
@@ -282,7 +282,7 @@ public class AskInput {
      * @return O ano como um inteiro.
      */
     public static int askForSeenYear(Scanner scanner) {
-        System.out.println("Digite o ano em que foi lido: ");
+        System.out.print("Digite o ano em que foi lido: ");
         return Validate.validateInt(scanner);
     }
 
@@ -293,10 +293,10 @@ public class AskInput {
      * @return O mês como um valor do enum Months.
      */
     public static Months askForSeenMonth(Scanner scanner) {
-        System.out.println("Digite o mes em que foi lido (número do mês): ");
+        System.out.print("Digite o mes em que foi lido (número do mês): ");
         int wantedValue = Validate.validateInt(scanner);
         if (wantedValue < 1 || wantedValue > 12) {
-            System.out.println("Mês inválido! Digite novamente: ");
+            System.out.print("Mês inválido! Digite novamente: ");
             wantedValue = Validate.validateInt(scanner);
         }
         return Months.values()[wantedValue - 1];

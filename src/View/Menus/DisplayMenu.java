@@ -191,14 +191,18 @@ public class DisplayMenu {
 
                 case 1:
                     List<T> listAsc = service.sortAscending(mediaList);
-                    for (Media media : listAsc)
+                    for (Media media : listAsc) {
                         System.out.println(media);
+                        System.out.println("---------------------");
+                    }
                     break;
 
                 case 2:
-                    List<T> listDesc = service.sortAscending(mediaList);
-                    for (Media media : listDesc)
+                    List<T> listDesc = service.sortDescending(mediaList);
+                    for (Media media : listDesc) {
                         System.out.println(media);
+                        System.out.println("---------------------");
+                    }
                     break;
 
                 case 3:
