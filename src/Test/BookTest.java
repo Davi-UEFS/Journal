@@ -46,7 +46,7 @@ public class BookTest {
         System.out.println(result2.getMessage());
 
         assertEquals(Failure.class, result2.getClass());
-        printAllBooks(bookService);
+        printBookList(bookService.getAllBooks());
     }
 
     @Test
@@ -71,7 +71,7 @@ public class BookTest {
         System.out.println("Livros com 'Al': ");
         printBookList(books);
 
-        //Livros que contém as letras "Al" (Alpha)
+        //Livros que são de Ação (Beta e Delta)
         books = bookService.searchByGenre(Genres.AÇÃO, bookService.getAllBooks());
         assertEquals(2, books.size());
 
@@ -83,9 +83,10 @@ public class BookTest {
     @Test
     public void checkHash() {
         String isbn = "978-3161484100";
-        IResult result = bookService.register("Alpha", 1999, Genres.FICÇÃO, isbn, "Carlos Drummond", "PBL Books", true);
-        System.out.println(result.getMessage());
-        assertEquals(isbn.hashCode(), journal.getBookList().getFirst().getId());
+        Book book =  new Book("Alpha", 1999, Genres.FICÇÃO, isbn, "Carlos Drummond",
+                "PBL Books", true);
+
+        assertEquals(isbn.hashCode(), book.getId());
     }
 
     @Test
@@ -180,12 +181,6 @@ public class BookTest {
             System.out.println(book);
             System.out.println("------------------------");
         }
-    }
-
-    private void printAllBooks(BookService bookService) {
-        ArrayList<Book> bookList = bookService.getAllBooks();
-        for(Book book: bookList)
-            System.out.printf("Titulo: %s (%d) \n ", book.getTitle(), book.getYear());
     }
 
     private void printBookList(List<Book> bookList) {
