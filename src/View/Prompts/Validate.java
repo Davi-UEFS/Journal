@@ -6,7 +6,7 @@ import java.util.Scanner;
  * A classe Validate fornece métodos utilitários para validar entradas do usuário.
  * Ela garante que os dados inseridos sejam do tipo esperado, como inteiros, doubles, strings ou booleanos.
  */
-public class Validate {
+public final class Validate {
 
     /**
      * Valida a entrada do usuário como um número inteiro.

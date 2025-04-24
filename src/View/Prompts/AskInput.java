@@ -13,7 +13,7 @@ import java.util.Scanner;
  * A classe AskInput fornece métodos utilitários para solicitar e validar entradas do usuário
  * relacionadas a diferentes atributos de mídias, como título, autor, gênero, elenco, entre outros.
  */
-public class AskInput {
+public final class AskInput {
 
     /**
      * Solicita ao usuário o título de uma obra.

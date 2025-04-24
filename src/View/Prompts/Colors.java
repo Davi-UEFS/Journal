@@ -1,6 +1,6 @@
 package View.Prompts;
 
-public class Colors{
+public final class Colors{
     public static final String rst = "\u001B[0m";
     public static final String green = "\u001B[32m";
     public static final String red = "\u001B[31m";
