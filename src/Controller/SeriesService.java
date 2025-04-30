@@ -253,7 +253,7 @@ public class SeriesService extends CommonService<Series> {
     }
 
     /**
-     * Busca séries pelo nome de um ator.
+     * Busca séries pelo nome de um ator. Filtra as séries que contêm o nome do ator, utilizando o metodo filter da biblioteca Stream.
      *
      * @param name O nome do ator a ser buscado.
      * @return Uma lista de séries que possuem o ator no elenco.

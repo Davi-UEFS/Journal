@@ -62,7 +62,7 @@ public class MovieService extends CommonService<Movie> {
     }
 
     /**
-     * Busca filmes pelo nome do diretor.
+     * Busca filmes pelo nome do diretor. Filtra os filmes que contêm o nome do diretor, utilizando o metodo filter da biblioteca Stream.
      *
      * @param director O nome do diretor a ser buscado.
      * @return Uma lista de filmes que possuem o diretor especificado.
@@ -76,7 +76,7 @@ public class MovieService extends CommonService<Movie> {
     }
 
     /**
-     * Busca filmes pelo nome de um ator.
+     * Busca filmes pelo nome de um ator. Filtra os filmes que contêm o nome do ator, utilizando o metodo filter da biblioteca Stream.
      *
      * @param name O nome do ator a ser buscado.
      * @return Uma lista de filmes que possuem o ator no elenco.

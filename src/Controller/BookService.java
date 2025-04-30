@@ -53,7 +53,7 @@ public class BookService extends CommonService<Book> {
     }
 
     /**
-     * Busca livros pelo ISBN.
+     * Busca livros pelo ISBN. Filtra os livros que contêm o ISBN, utilizando o metodo filter da biblioteca Stream.
      *
      * @param isbn O ISBN a ser buscado.
      * @return Uma lista de livros que correspondem ao ISBN.
@@ -67,7 +67,7 @@ public class BookService extends CommonService<Book> {
     }
 
     /**
-     * Busca livros pelo nome do autor.
+     * Busca livros pelo nome do autor. Filtra os livros que contêm o nome do autor, utilizando o metodo filter da biblioteca Stream.
      *
      * @param author O nome do autor a ser buscado.
      * @return Uma lista de livros que possuem o autor especificado.

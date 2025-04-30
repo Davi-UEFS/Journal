@@ -87,7 +87,7 @@ public abstract class CommonService<T extends Media> implements IMediaService<T>
     }
 
     /**
-     * Busca mídias por título.
+     * Busca mídias por título. Filtra as obras que contêm o título, utilizando o metodo filter da biblioteca Stream.
      *
      * @param title     O título a ser buscado.
      * @param mediaList A lista de mídias onde a busca será realizada.
@@ -103,7 +103,7 @@ public abstract class CommonService<T extends Media> implements IMediaService<T>
     }
 
     /**
-     * Busca mídias por ano.
+     * Busca mídias por ano. Filtra as obras que contêm o ano, utilizando o metodo filter da biblioteca Stream.
      *
      * @param year      O ano a ser buscado.
      * @param mediaList A lista de mídias onde a busca será realizada.
@@ -118,7 +118,7 @@ public abstract class CommonService<T extends Media> implements IMediaService<T>
     }
 
     /**
-     * Busca mídias por gênero.
+     * Busca mídias por gênero. Filtra as obras que contêm o gênero, utilizando o metodo filter da biblioteca Stream.
      *
      * @param genre     O gênero a ser buscado.
      * @param mediaList A lista de mídias onde a busca será realizada.
